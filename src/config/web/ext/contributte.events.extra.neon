@@ -1,0 +1,5 @@
+extensions:
+    # contributte.events.extra: Contributte\Events\Extra\DI\EventBridgesExtension
+    contributte.events.exatra.application: Contributte\Events\Extra\DI\EventApplicationBridgeExtension
+    contributte.events.exatra.latte: Contributte\Events\Extra\DI\EventLatteBridgeExtension
+    contributte.events.exatra.security: Contributte\Events\Extra\DI\EventSecurityBridgeExtension

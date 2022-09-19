@@ -1,0 +1,20 @@
+application:
+    errorPresenter: Front:Error
+    mapping:
+        *: VsPoint\Http\Web\*\*Presenter
+    catchExceptions: %productionMode%
+
+http:
+    proxy: %http.proxy%
+    cookieSecure: auto
+
+routing:
+    cache: false # %productionMode% # Can not be serialized due to dependencies
+
+session:
+    name: FB
+    debugger: %debugMode%
+    savePath: "%tempDir%/sessions"
+    autoStart: smart
+    expiration: '7 days'
+    cookieSamesite: Lax

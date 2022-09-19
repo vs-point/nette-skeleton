@@ -1,0 +1,13 @@
+includes:
+    - ../common/index.neon
+
+    - ./param/index.neon
+    - ./param/param.php
+
+    - ./ext/contributte.events.extra.neon
+    - ./ext/contributte.redis.neon
+    - ./ext/contributte.translation.neon
+    - ./ext/contributte.webpack.neon
+    - ./ext/nette.neon
+
+    - ./services.neon

@@ -1,0 +1,18 @@
+di:
+    debugger: %debugMode%
+    export:
+        parameters: no
+        tags: yes
+        types: yes
+
+latte:
+    strictTypes: true
+    debugger: all # %debugMode%
+
+tracy:
+    logSeverity: E_ALL
+    strictMode: true
+    dumpTheme: dark
+    editor: "phpstorm://open?file=%file&line=%line"
+    editorMapping:
+        'srv': "~/dev/vspoint/skeleton"

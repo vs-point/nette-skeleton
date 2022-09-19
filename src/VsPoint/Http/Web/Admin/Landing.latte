@@ -1,0 +1,19 @@
+{templateType VsPoint\Http\Web\Admin\LandingTemplate}
+{var $T = 'admin.' . VsPoint\Http\Web\Admin\LandingPresenter::class}
+
+{block title}
+    {_"$T.heading.h1"}
+{/block}
+
+{block h1}
+    {_"$T.heading.h1"}
+{/block}
+
+{block toolbar}
+{/block}
+
+{block content}
+    <div class="alert alert-warning" role="alert">
+        {_"$T.text.content"}
+    </div>
+{/block}

@@ -1,0 +1,20 @@
+includes:
+    - ./param/index.neon
+    - ./param/param.php
+
+    - ./ext/contributte.events.neon
+    - ./ext/contributte.flysystem.neon
+    - ./ext/contributte.guzzle.neon
+    - ./ext/contributte.monolog.neon
+    - ./ext/contributte.psr11.neon
+    - ./ext/contributte.redis.neon
+    - ./ext/contributte.translation.neon
+    - ./ext/nette.neon
+    - ./ext/nettrine.annotations.neon
+    - ./ext/nettrine.cache.neon
+    - ./ext/nettrine.dbal.neon
+    - ./ext/nettrine.orm.neon
+    - ./ext/php.neon
+    - ./ext/solcik.doctrine.fixtures.neon
+
+    - ./services.neon

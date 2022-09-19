@@ -1,0 +1,14 @@
+search:
+    -
+        in: %appDir%/Console
+        extends:
+            - Symfony\Component\Console\Command\Command
+
+    -
+        in: %appDir%/Domain
+        extends:
+            - Symfony\Component\Console\Command\Command
+
+services:
+    - Solcik\Doctrine\DBAL\Command\CreateCommand
+    - Solcik\Doctrine\DBAL\Command\DropCommand

@@ -1,0 +1,23 @@
+search:
+    -
+        in: %appDir%/UI
+        exclude:
+            extends:
+                - Nette\Application\UI\Control
+            implements:
+                - Nette\Application\UI\ITemplate
+
+services:
+    security.authenticator: VsPoint\Infrastructure\Nette\Security\UserAuthenticator
+    security.authorizator: VsPoint\Infrastructure\Nette\Security\AuthorizatorFactory::create
+
+    routerFactory: VsPoint\Infrastructure\Nette\Routing\RouterFactory(%languages%)
+    routing.router: @routerFactory::createRouter
+
+    - VsPoint\Exception\ErrorLoggerSubscriber
+
+    - VsPoint\Infrastructure\Nette\Bridges\ApplicationLatte\BaseTemplateSubscriber
+    - VsPoint\Infrastructure\Nette\Security\CheckAuth
+    - VsPoint\Infrastructure\Nette\Security\GetLoggedInUserQ
+
+    - Solcik\Nette\Security\AclHelper

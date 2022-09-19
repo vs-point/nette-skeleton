@@ -1,0 +1,5 @@
+contributte.redis:
+    connection:
+        default:
+            sessions:
+                ttl: 2592000 # seconds (30 days) after which is session invalidated

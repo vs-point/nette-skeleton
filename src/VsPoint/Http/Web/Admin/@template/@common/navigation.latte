@@ -1,0 +1,58 @@
+{templateType VsPoint\Http\Web\Front\BaseTemplate}
+
+{var $T = 'admin.navigation'}
+{var $isLoggedIn = $_user->isLoggedIn()}
+
+<div class="container-fluid">
+    <a n:href="VsPoint\Http\Web\Admin\HomepagePresenter::LINK, q: null" class="navbar-brand"><i class="fas fa-fw fa-home"></i> {_"$T.Admin:Homepage:"}</a>
+
+    <button class="navbar-toggler ms-auto"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarToggle"
+            aria-controls="navbarToggle"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+    >
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarToggle">
+        <ul n:if="!$isLoggedIn" class="navbar-nav ms-auto">
+            <li n:class="nav-item, isModuleCurrent('Admin:Acl:SignIn:') ? active">
+                <a n:href="VsPoint\Http\Web\Admin\Acl\SignInPresenter::LINK" class="nav-link">{_"$T.Admin:Acl:SignIn:"}</a>
+            </li>
+            <li n:class="nav-item, isModuleCurrent('Admin:Acl:UserCreate:') ? active">
+                <a n:href="VsPoint\Http\Web\Admin\Acl\UserCreatePresenter::LINK" class="nav-link">{_"$T.Admin:Acl:UserCreate:"}</a>
+            </li>
+        </ul>
+        <ul n:if="$isLoggedIn" class="navbar-nav me-auto mx-1">
+            <li n:if="$_user->isAllowed(VsPoint\Http\Web\Admin\Acl\UserOverviewPresenter::class)" n:class="nav-item, isModuleCurrent('Admin:Acl:UserOverview:') ? active">
+                <a n:href="VsPoint\Http\Web\Admin\Acl\UserOverviewPresenter::LINK" class="nav-link">{_"$T.Admin:Acl:UserOverview:"}</a>
+            </li>
+        </ul>
+        <ul n:if="$isLoggedIn" class="navbar-nav ms-auto mx-1">
+            <li class="nav-item dropdown mt-2 mt-lg-0">
+                <a class="nav-link dropdown-toggle btn btn-warning text-dark" href="#" id="ddmUser" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-fw fa-user"></i> {$aclUser->getEmail()}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="ddmUser">
+                    <li>
+                        <a n:href="VsPoint\Http\Web\Admin\Acl\ChangePasswordPresenter::LINK" class="dropdown-item">
+                            <i class="fas fa-fw fa-cog"></i> {_"$T.Admin:Acl:ChangePassword:"}
+                        </a>
+                    </li>
+                    <li>
+                        <a n:href="out" class="dropdown-item">
+                            <i class="fas fa-fw fa-sign-out"></i> {_"$T.Base:Base:out"}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <button id="global-spinner" class="btn btn-warning d-none ms-2">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" data-spinner></span>
+    </button>
+</div>

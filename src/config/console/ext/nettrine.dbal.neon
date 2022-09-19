@@ -1,0 +1,2 @@
+extensions:
+    nettrine.dbal.console: Nettrine\DBAL\DI\DbalConsoleExtension(%consoleMode%)

@@ -1,0 +1,49 @@
+{define paginator}
+    {varType Nette\Utils\Paginator $paginator}
+    {varType array $items}
+    <div class="d-flex flex-row justify-content-center">
+        <nav>
+            <ul class="pagination">
+                {var $start = $paginator->getPage() - $paginator->getFirstPage()}
+                <li n:if="$start > 1" class="page-item">
+                    <a n:href="this, page => $paginator->getFirstPage()" class="page-link">
+                        {$paginator->getFirstPage()}
+                    </a>
+                </li>
+                <li n:if="$start > 2" class="page-item disabled">
+                    <span class="page-link">...</span>
+                </li>
+                <li n:if="!$paginator->isFirst()" class="page-item">
+                    {var $prevPage = $paginator->getPage() - 1}
+                    <a n:href="this, page => $prevPage" class="page-link">
+                        {$prevPage}
+                    </a>
+                </li>
+                <li class="page-item active">
+                    <span class="page-link">
+                        {$paginator->getPage()}
+                    </span>
+                </li>
+                <li n:if="($paginator->getItemCount() !== NULL && !$paginator->isLast()) || ($paginator->getItemCount() === NULL && isset($items) && count($items) === $paginator->getItemsPerPage())"
+                        class="page-item"
+                >
+                    {var $nextPage = $paginator->getPage() + 1}
+                    <a n:href="this, page => $nextPage" class="page-link">
+                        {$nextPage}
+                    </a>
+                </li>
+                {if $paginator->getItemCount() !== NULL}
+                    {var $end = $paginator->getPageCount() - $paginator->getPage()}
+                    <li n:if="$end > 2" class="page-item disabled">
+                        <span class="page-link">...</span>
+                    </li>
+                    <li n:if="$end > 1" class="page-item">
+                        <a n:href="this, page => $paginator->getLastPage()" class="page-link">
+                            {$paginator->getLastPage()}
+                        </a>
+                    </li>
+                {/if}
+            </ul>
+        </nav>
+    </div>
+{/define}

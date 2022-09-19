@@ -1,0 +1,19 @@
+{define search, string $formName, string $queryParamName = 'q', bool $cancelSearch = false, bool $ajax = false, bool $autocomplete = false}
+    {var $classList = 'form-inline d-flex justify-content-center'}
+    {php $classList = $ajax ? $classList . ' ajax' : $classList}
+
+    {form $formName, class => $classList, style => 'width: 100%;'}
+        <input n:name="query" class="form-control mr-1" style="width: 80%;" autofocus autocomplete="{$autocomplete ? on : off}">
+
+        <button n:name="submit" class="btn btn-primary">
+            {*<span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" data-spinner></span>*}
+            <span class="visually-hidden">Loading...</span>
+            <span>{_$form[submit]->caption}</span>
+        </button>
+
+        <a n:if="$cancelSearch" n:href="this, $queryParamName => null, page => null" class="btn btn-link ajax" role="button">
+            {*<i class="fas fa-times"></i> {_"front.VsPoint\UI\Form\Common\SearchFormFactory.cancelSearch.label"}*}
+            <button type="button" class="btn-close" aria-label="Close"></button>
+        </a>
+    {/form}
+{/define}

@@ -1,0 +1,2 @@
+extensions:
+    contributte.psr11: Contributte\Psr11\DI\Psr11ContainerExtension

@@ -1,0 +1,6 @@
+extensions:
+    solcik.doctrine.fixtures: Solcik\Doctrine\Fixtures\DI\FixturesExtension
+
+solcik.doctrine.fixtures:
+    paths:
+        - %appDir%/Database/Fixture

@@ -1,0 +1,5 @@
+search:
+    -
+        in: %appDir%/Http/Api
+        implements:
+            - Psr\Http\Server\MiddlewareInterface

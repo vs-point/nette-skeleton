@@ -1,0 +1,26 @@
+{templateType VsPoint\Http\Web\Front\BaseTemplate}
+
+{var $T = 'front.navigation'}
+{var $isLoggedIn = $_user->isLoggedIn()}
+
+<div class="container-fluid">
+    <a n:href="VsPoint\Http\Web\Front\HomepagePresenter::LINK, q: null" class="navbar-brand"><i class="fas fa-fw fa-home"></i> {_"$T.Front:Homepage:"}</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" n:href="VsPoint\Http\Web\Admin\HomepagePresenter::LINK">
+                    <i class="fa-solid fa-user-crown"></i> Admin
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <button id="global-spinner" class="btn btn-warning d-none">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" data-spinner></span>
+    </button>
+</div>

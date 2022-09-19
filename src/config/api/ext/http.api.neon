@@ -1,0 +1,30 @@
+services:
+    api.middleware.responseTime: Middlewares\ResponseTime
+    api.middleware.trailingSlash: Middlewares\TrailingSlash
+    api.middleware.contentType: Middlewares\ContentType
+    api.middleware.contentLanguage: Middlewares\ContentLanguage(['cs'])
+    api.middleware.contentEncoding: Middlewares\ContentEncoding(['gzip'])
+    api.middleware.payload: Middlewares\JsonPayload
+    api.middleware.userProvider: VsPoint\Infrastructure\Http\Middleware\UserProvider
+    api.middleware.expires: VsPoint\Infrastructure\Http\Middleware\Expires(minutes: 10)
+    api.middleware.fastRoute: Middlewares\FastRoute
+    api.middleware.requestHandler: Middlewares\RequestHandler
+
+    api.routeParser: FastRoute\RouteParser\Std
+    api.dataGenerator: FastRoute\DataGenerator\GroupCountBased
+    api.routeCollector: FastRoute\RouteCollector
+    api.dispatcherFactory: VsPoint\Infrastructure\Http\DispatcherFactory(debugMode: %debugMode%)
+    api.dispatcher: @api.dispatcherFactory::create(..., %http.api.routes%)
+    api.emmiter: Laminas\HttpHandlerRunner\Emitter\SapiEmitter
+    api.relay: Relay\Relay([
+        @api.middleware.responseTime,
+        @api.middleware.trailingSlash,
+        @api.middleware.contentType,
+        @api.middleware.contentLanguage,
+        @api.middleware.contentEncoding,
+        @api.middleware.payload,
+        @api.middleware.userProvider,
+        # @api.middleware.expires,
+        @api.middleware.fastRoute,
+        @api.middleware.requestHandler,
+    ])

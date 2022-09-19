@@ -1,0 +1,38 @@
+search:
+    -
+        in: %appDir%/Domain
+        exclude:
+            extends:
+                - Symfony\Contracts\EventDispatcher\Event
+                - Symfony\Component\Console\Command\Command
+            classes:
+                - VsPoint\Domain\Web\**
+
+    -
+        in: %appDir%/Database/Fixture
+
+decorator:
+    Doctrine\Common\EventSubscriber:
+        tags: [nettrine.subscriber]
+
+services:
+    security.passwords: Nette\Security\Passwords
+
+    - Solcik\Brick\DateTime\SystemClock('Europe/Prague')
+    - Solcik\Intl\IntlFormatter
+
+    solcik.latte.filter.percentage: Solcik\Latte\Runtime\Filter\PercentageFilter
+    solcik.latte.filter.number: Solcik\Latte\Runtime\Filter\NumberFilter
+    solcik.latte.filter.zdt: Solcik\Latte\Runtime\Filter\ZonedDateTimeFilter
+    solcik.latte.filter.ld: Solcik\Latte\Runtime\Filter\LocalDateFilter
+    solcik.latte.filter.jsonEncode: Solcik\Latte\Runtime\Filter\JsonEncodeFilter
+
+    nette.latteFactory:
+        setup:
+            - addFilter('percentage', @solcik.latte.filter.percentage)
+            - addFilter('number', @solcik.latte.filter.number)
+            - addFilter('zdt', @solcik.latte.filter.zdt)
+            - addFilter('ld', @solcik.latte.filter.ld)
+            - addFilter('json', @solcik.latte.filter.jsonEncode)
+
+    - VsPoint\Infrastructure\Common\DirectoryProvider(appDir: %appDir%, tempDir: %tempDir%, vendorDir: %vendorDir%)

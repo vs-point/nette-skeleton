@@ -1,0 +1,14 @@
+extensions:
+    contributte.redis: Contributte\Redis\DI\RedisExtension
+
+contributte.redis:
+    debug: %debugMode%
+    connection:
+        default:
+            uri: %redis.uri%
+            # Options passed directly to Predis\Client
+            # https://github.com/predis/predis#client-configuration
+            options: %redis.options%
+
+            storage: false
+            sessions: false

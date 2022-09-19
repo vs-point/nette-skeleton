@@ -1,0 +1,43 @@
+navigation:
+    Front:Homepage:: "Homepage"
+    Admin:Homepage:: "Admin"
+
+# ---------------------------------------------------------------------------------------
+
+VsPoint\Http\Web\Front\ErrorPresenter:4xx:
+    heading:
+        h1: "Chyba"
+    message: "Váš prohlížeč zaslal neplatný požadavek, který neumíme zpracovat."
+
+VsPoint\Http\Web\Front\ErrorPresenter:403:
+    heading:
+        h1: "Přístup odmítnut"
+    message: "Pro tuto akci nemáte dostatečná oprávnění."
+
+VsPoint\Http\Web\Front\ErrorPresenter:404:
+    heading:
+        h1: "Stránka nenalezena"
+    message: "Stránka na této URL adrese nebyla nalezena."
+
+VsPoint\Http\Web\Front\ErrorPresenter:405:
+    heading:
+        h1: "Nepovolená metoda"
+    message: "Tento typ požadavku není na této stránce povolen."
+
+VsPoint\Http\Web\Front\ErrorPresenter:410:
+    heading:
+        h1: "Stránka nenalezena"
+    message: "Stránka na této URL adrese již není dostupná."
+
+VsPoint\Http\Web\Front\ErrorPresenter:500:
+    heading:
+        h1: "Chyba"
+    message: "Omlouváme se, ale nastala neočekávaná chyba. Vývojáři se odeslalo hlášení o problému."
+
+# ---------------------------------------------------------------------------------------
+
+VsPoint\Http\Web\Front\HomepagePresenter:
+    heading:
+        h1: "Hlavní stránka"
+
+# ---------------------------------------------------------------------------------------

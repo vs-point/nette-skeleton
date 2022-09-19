@@ -1,0 +1,13 @@
+extensions:
+    contributte.translation: Contributte\Translation\DI\TranslationExtension
+
+contributte.translation:
+    debug: %debugMode%
+    locales:
+        whitelist: %languages%
+        default: %languages.0%
+        fallback!:
+            - cs_CZ
+    dirs:
+        - %rootDir%/src/resources/lang
+    localeResolvers: []

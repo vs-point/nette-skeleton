@@ -1,0 +1,198 @@
+navigation:
+    Base:Base:out: "Odhlásit"
+    Admin:Homepage:: "Nabídky"
+    Admin:Acl:SignIn:: "Přihlášení"
+    Admin:Acl:UserCreate:: "Registrace"
+    Admin:Acl:UserOverview:: "Přehled uživatelů"
+    Admin:Acl:ChangePassword:: "Změna hesla"
+
+# ---------------------------------------------------------------------------------------
+
+action:
+    backToOverview: "Zpět na přehled"
+    backToDetail: "Zpět na detail"
+    create: "Vytvořit"
+    search: "Vyhledat"
+    detail: "Detail"
+    edit: "Editovat"
+    delete: "Smazat"
+
+table:
+    th:
+        actions: "Akce"
+
+form:
+    label:
+        create: "Vytvořit"
+        submit: "Uložit"
+        edit: "Upravit"
+        search: "Vyhledat"
+        add: "Přidat"
+        send: "Odeslat"
+        try: "Zkusit"
+    rule:
+        required: "Prosím vyplňte toto pole."
+
+# ---------------------------------------------------------------------------------------
+
+VsPoint\Http\Web\Admin\ErrorPresenter:4xx:
+    heading:
+        h1: "Chyba"
+    message: "Váš prohlížeč zaslal neplatný požadavek, který neumíme zpracovat."
+
+VsPoint\Http\Web\Admin\ErrorPresenter:403:
+    heading:
+        h1: "Přístup odmítnut"
+    message: "Pro tuto akci nemáte dostatečná oprávnění."
+
+VsPoint\Http\Web\Admin\ErrorPresenter:404:
+    heading:
+        h1: "Stránka nenalezena"
+    message: "Stránka na této URL adrese nebyla nalezena."
+
+VsPoint\Http\Web\Admin\ErrorPresenter:405:
+    heading:
+        h1: "Nepovolená metoda"
+    message: "Tento typ požadavku není na této stránce povolen."
+
+VsPoint\Http\Web\Admin\ErrorPresenter:410:
+    heading:
+        h1: "Stránka nenalezena"
+    message: "Stránka na této URL adrese již není dostupná."
+
+VsPoint\Http\Web\Admin\ErrorPresenter:500:
+    heading:
+        h1: "Chyba"
+    message: "Omlouváme se, ale nastala neočekávaná chyba. Vývojáři se odeslalo hlášení o problému."
+
+# ---------------------------------------------------------------------------------------
+
+VsPoint\Http\Web\Admin\BasePresenter:
+    flash:
+        acl:
+            loggedOut: "Odhlášení proběhlo úspěšně."
+
+VsPoint\Http\Web\Admin\BaseTemplate:
+    title: "VS-point - administrace"
+
+# ---------------------------------------------------------------------------------------
+
+VsPoint\Http\Web\Admin\Acl\SignInPresenter:
+    heading:
+        h1: "Přihlášení"
+    link:
+        resetPassword: "Zapomenuté heslo"
+
+VsPoint\Http\Web\Admin\Acl\UserCreatePresenter:
+    heading:
+        h1: "Registrace"
+    link:
+        resetPassword: "Zapomenuté heslo"
+    flash:
+        userCreated: "Váš účet byl úspěšně vytvořen. Nyní se můžete přihlásit."
+
+VsPoint\Http\Web\Admin\Acl\ChangePasswordPresenter:
+    heading:
+        h1: "Změna hesla"
+    flash:
+        passwordChanged: "Vaše heslo bylo úspěšně změněno."
+
+VsPoint\Http\Web\Admin\Acl\UserOverviewPresenter:
+    heading:
+        h1: "Přehled uživatelů"
+    table:
+        th:
+            email: "Email"
+            expiration: "Expirace"
+            gdpr: "GDPR"
+            createdAt: "Vytvořen"
+            roles: "Role"
+        tr:
+            edit: "Upravit"
+            editPassword: "Změnit heslo"
+            editRoles: "Změnit role"
+
+VsPoint\Http\Web\Admin\Acl\UserEditPresenter:
+    heading:
+        h1: "Editace uživatele"
+    toolbar:
+        backToOverview: "Zpět na přehled uživatelů"
+
+VsPoint\Http\Web\Admin\Acl\UserEditPasswordPresenter:
+    heading:
+        h1: "Změna hesla uživatele"
+    toolbar:
+        backToOverview: "Zpět na přehled uživatelů"
+    flash:
+        passwordChanged: "Heslo uživatele úspěšně změněno."
+
+VsPoint\Http\Web\Admin\Acl\UserRolesEditPresenter:
+    heading:
+        h1: "Změna rolí uživatele"
+    toolbar:
+        backToOverview: "Zpět na přehled uživatelů"
+    flash:
+        userRolesEdited: "Role uživatele úspěšně nastaveny."
+
+# ---------------------------------------------------------------------------------------
+
+VsPoint\Http\Web\Admin\LandingPresenter:
+    heading:
+        h1: "Vítejte"
+    text:
+        content: "Pokud nevidíte v menu žádné položky, musíte si požádat administrátora o přidělení práv."
+
+VsPoint\Http\Web\Admin\HomepagePresenter:
+    heading:
+        h1: "Dashboard"
+    search:
+        placeholder: "..."
+
+# ---------------------------------------------------------------------------------------
+
+VsPoint\Entity\Acl\User:
+
+VsPoint\Entity\Acl\UserRole:
+    roles:
+        values:
+            POWER_USER: "Power user"
+
+# ---------------------------------------------------------------------------------------
+
+VsPoint\Exception\Runtime\Video\VideoNotFoundById:
+    MESSAGE: "Video nebylo nalezeno."
+
+# ---------------------------------------------------------------------------------------
+
+VsPoint\UI\Form\Acl\SignInFormFactory:
+    email:
+        label: "Email"
+    password:
+        label: "Heslo"
+    submit:
+        caption: "Přihlásit se"
+    error:
+        authenticationMismatch: "Email nebo heslo nejsou správné. Zkuste to znovu."
+        userInactive: "Uživatel je neaktivní."
+
+VsPoint\UI\Form\Acl\UserFormFactory:
+    email:
+        label: "Email"
+        error:
+            alreadyExists: "Uživatel s daným emailem již existuje. Prosím přihlašte se."
+    password:
+        label: "Heslo"
+    passwordCheck:
+        label: "Heslo znovu"
+    currentPassword:
+        label: "Aktuální heslo"
+    expiration:
+        label: "Expirace"
+    submit:
+        caption: "Registrovat se"
+    submitChange:
+        caption: "Změnit heslo"
+
+VsPoint\UI\Form\Acl\UserRolesFormFactory:
+    roles:
+        label: "Role"

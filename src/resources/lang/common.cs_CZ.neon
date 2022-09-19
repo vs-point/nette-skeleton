@@ -1,0 +1,42 @@
+minute: "{1} %count% minuta|{2,3,4} %count% minuty|[5,Inf[ %count% minut"
+
+# ---------------------------------------------------------------------------------------
+
+form:
+    flash:
+        invalidCsrf: "Prosím odešlete formulář znovu (bezpečnostní token vypršel)."
+    label:
+        create: "Vytvořit"
+        submit: "Uložit"
+        edit: "Upravit"
+        search: "Vyhledat"
+        add: "Přidat"
+        send: "Odeslat"
+        try: "Zkusit"
+    rule:
+        required: "Prosím vyplňte toto pole."
+
+# ---------------------------------------------------------------------------------------
+
+VsPoint\Http\Web\BasePresenter:
+    flash:
+        acl:
+            inactivity: "Byli jste odhlášeni z důvodu neaktivity. Prosíme, přihlašte se znovu."
+            notLoggedIn: "Nejste přihlášeni. Prosíme, přihlašte se"
+            notEnoughPermissions: "Pro tuto akci nemáte dostatečná oprávnění."
+            userNotFound: "Pro tuto akci nemáte oprávnění - uživatel nenalezen, byli jste odhlášeni."
+            loggedOut: "Byli jste odhlášeni."
+
+# ---------------------------------------------------------------------------------------
+
+VsPoint\Infrastructure\Nette\Security\CheckAuth:
+    flash:
+        inactivity: "Byli jste odhlášeni z důvodu neaktivity."
+        notLoggedIn: "Prosím přihlašte se."
+        notEnoughPermissions: "Pro tuto akci nemáte dostatečná práva."
+
+# ---------------------------------------------------------------------------------------
+
+VsPoint\UI\Form\Common\SearchFormFactory:
+    cancelSearch:
+        label: "reset"

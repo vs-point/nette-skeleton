@@ -1,0 +1,6 @@
+extensions:
+    nettrine.cache: Nettrine\Cache\DI\CacheExtension
+
+nettrine.cache:
+    driver: Doctrine\Common\Cache\PhpFileCache(%tempDir%/cache/nettrine.cache)
+    # driver: Doctrine\Common\Cache\PredisCache

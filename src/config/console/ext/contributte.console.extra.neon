@@ -1,0 +1,23 @@
+extensions:
+    contributte.console.extra: Contributte\Console\Extra\DI\ConsoleBridgesExtension(%consoleMode%)
+
+contributte.console.extra:
+    advancedCache:
+        cleaners:
+            # localFs: Contributte\Console\Extra\Cache\Cleaners\LocalFilesystemCleaner([%tempDir%])
+            opcode: Contributte\Console\Extra\Cache\Cleaners\OpcodeCleaner()
+    cache:
+        purge:
+            - %tempDir%/cache
+    caching: false
+    di:
+        purge:
+            - %tempDir%/cache/nette.configurator
+    latte:
+        warmup:
+            - %appDir%
+        purge:
+            - %tempDir%/cache/latte
+    router: false
+    security: false
+    utils: false

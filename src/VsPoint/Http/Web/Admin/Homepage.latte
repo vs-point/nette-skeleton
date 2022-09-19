@@ -1,0 +1,66 @@
+{templateType VsPoint\Http\Web\Admin\HomepageTemplate}
+{var $T = 'admin.' . VsPoint\Http\Web\Admin\HomepagePresenter::class}
+
+{block title}
+    {_"$T.heading.h1"}
+{/block}
+
+{block h1}
+    {_"$T.heading.h1"}
+{/block}
+
+{block toolbar}
+{/block}
+
+{block content}
+    <div class="col-sm-12 offset-sm-0 col-md-8 offset-md-2 col-lg-6 offset-lg-3 mb-4">
+        <div class="row">
+            <div class="col table-responsive mb-2">
+                <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th class="text-start">StopWatch</th>
+                        <th class="text-end" style="width: 150px;"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Controller</td>
+                        <td class="text-end">{$stopwatch->getEvent('Presenter')->getDuration() |number} ms</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 offset-sm-0 col-md-8 offset-md-2 col-lg-6 offset-lg-3 mb-4">
+        <form class="row g-3 ajax" n:name="searchForm">
+            <div class="col-3">
+                <label n:name="query" class="form-label">Query</label>
+                <input n:name="query" class="form-control" autofocus autocomplete="off">
+            </div>
+            <div class="col-12">
+                <button n:name="submit" class="btn btn-primary">
+                    {*<span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" data-spinner></span>*}
+                    <span class="visually-hidden">Loading...</span>
+                    <span>{_$form[submit]->caption}</span>
+                </button>
+
+                <a n:if="$q !== null" n:href="this, q => ''" class="btn btn-link ajax" role="button">
+                    {*<i class="fas fa-times"></i> {_"front.VsPoint\UI\Form\Common\SearchFormFactory.cancelSearch.label"}*}
+                    <button type="button" class="btn-close" aria-label="Close"></button>
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-sm-12 offset-sm-0 col-md-8 offset-md-2 col-lg-6 offset-lg-3 mb-2">
+      <ul class="list-group">
+        <li class="list-group-item">
+          {$q}
+        </li>
+      </ul>
+    </div>
+
+{/block}

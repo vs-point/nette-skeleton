@@ -1,0 +1,6 @@
+extensions:
+    contributte.events: Contributte\EventDispatcher\DI\EventDispatcherExtension
+
+contributte.events:
+    autoload: true
+    lazy: true

@@ -1,0 +1,55 @@
+version: '3.8'
+
+volumes:
+  db:
+  redis:
+
+services:
+  nginx:
+    image: nginx:1.21.6-alpine
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - .:/srv
+      - ./.k8s/base/configmap/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+
+  php:
+    image: davidsolc/php:8.1-fpm-dev
+    restart: always
+    volumes:
+      - .:/srv
+      - ./.k8s/overlays/dev/configmap/php/conf.d/99-extra.ini:/usr/local/etc/php/conf.d/99-extra.ini
+    working_dir: /srv
+    user: 1000:1000
+    depends_on:
+      - redis
+
+  db:
+    image: postgres:14.2-alpine
+    restart: always
+    volumes:
+      - db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+
+  redis:
+    image: redis:6.2.6-alpine
+    ports:
+      - 6379:6379
+    volumes:
+      - redis:/data
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.24.0.1/16

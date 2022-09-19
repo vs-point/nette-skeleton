@@ -1,0 +1,9 @@
+extensions:
+    contributte.flysystem: Contributte\Flysystem\DI\FlysystemExtension
+
+contributte.flysystem:
+    filesystem:
+        default:
+            adapter: League\Flysystem\Local\LocalFilesystemAdapter(%rootDir%/storage)
+        public:
+            adapter: League\Flysystem\Local\LocalFilesystemAdapter(%rootDir%/storage/public)

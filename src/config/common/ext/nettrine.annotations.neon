@@ -1,0 +1,5 @@
+extensions:
+    nettrine.annotations: Nettrine\Annotations\DI\AnnotationsExtension
+
+nettrine.annotations:
+    debug: %debugMode%

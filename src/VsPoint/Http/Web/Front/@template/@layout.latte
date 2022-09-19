@@ -1,0 +1,75 @@
+{templateType VsPoint\Http\Web\Front\BaseTemplate}
+{import './@blocks/index.latte'}
+
+<!DOCTYPE html>
+<html lang="{$_lang}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{$meta->getMetadata()->getDescription()}">
+    <meta name="keywords" content="{$meta->getMetadata()->getKeywordsString()}">
+
+    {if $meta->getMetadata()->hasOg()}
+        {var $og = $meta->getMetadata()->getOg()}
+        <meta property="og:site_name" content="{$og->getSiteName()}"/>
+        <meta property="og:type" content="{$og->getType()}"/>
+        <meta property="og:locale" content="{$og->getLocale()}"/>
+        <meta property="og:title" content="{$og->getTitleFull()}"/>
+        <meta property="og:description" content="{$og->getDescription()}"/>
+        <meta property="og:url" content="{$_request->getUrl()}"/>
+        <meta property="og:image" content="{$baseUrl}{$og->getImageUrl()}"/>
+    {/if}
+
+    <title n:snippet="title">{$meta->getMetadata()->getTitleFull()}</title>
+
+    <meta name="msapplication-config" content="none"/>
+
+    <!-- styles - start -->
+    <link rel="stylesheet" href="{webpack front.css}">
+    <!-- styles - end -->
+</head>
+
+<body>
+    <nav n:snippet="navigation" class="navbar navbar-expand-lg navbar-dark sticky-top bg-dark mb-3" role="navigation">
+        {include './@common/navigation.latte'}
+    </nav>
+
+    <div n:snippet="flashes" class="container-fluid">
+        <div n:foreach="$flashes as $flash" n:class="alert, 'alert-' . ($flash->type === 'error' ? 'danger' : $flash->type), alert-dismissible, fade, show"
+                role="alert"
+        >
+            {_$flash->message}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+
+    <main n:snippet="main" role="main" class="container-fluid fa-waiting-for-icons">
+        <div class="row">
+            <div class="col">
+                <div class="d-flex flex-row justify-content-between align-items-center border-bottom mb-3">
+                    {block heading}
+                    <div>
+                        <h1>{block h1 |trim}{/block}</h1>
+                    </div>
+                    {/block}
+
+                    <div>
+                        {block toolbar}{/block}
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column">
+                    {block content}{/block}
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- javascript - start -->
+    <script src="{webpack front.js}"></script>
+    {ifset #bottomContent}{block bottomContent}{/block}{/ifset}
+    <!-- javascript - end -->
+</body>
+</html>

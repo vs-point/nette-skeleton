@@ -1,0 +1,8 @@
+extensions:
+    contributte.guzzle: Contributte\Guzzlette\DI\GuzzleExtension
+
+contributte.guzzle:
+    debug: %debugMode%
+    # config for GuzzleHttp\Client
+    client:
+        verify: \Composer\CaBundle\CaBundle::getSystemCaRootBundlePath(null)
