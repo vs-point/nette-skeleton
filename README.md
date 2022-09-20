@@ -74,6 +74,9 @@ pnpm install
 # build javascript + css
 pnpm run production
 
+# start containers via Docker
+docker-compose up
+
 # install php dependencies
 composer install
 
