@@ -13,6 +13,7 @@ nettrine.dbal:
         user: %database.username%
         password: %database.password%
         dbname: %database.dbname%
+        serverVersion: '14.2'
         charset: UTF8
         types:
             uuid:
