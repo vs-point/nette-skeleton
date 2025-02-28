@@ -34,6 +34,7 @@ final class GetUserByIdQTest extends TestCase
 
   /**
    * @group unit
+   *
    * @throws UserNotFound
    */
   public function testInvoke(): void
@@ -46,5 +47,22 @@ final class GetUserByIdQTest extends TestCase
     $user = $getUserByIdQ->__invoke($id);
 
     self::assertEquals($id, $user->getId());
+  }
+
+  /**
+   * @group unit
+   *
+   * @throws UserNotFound
+   */
+  public function testInvokeNotFound(): void
+  {
+    $this->expectException(UserNotFound::class);
+
+    $container = $this->createContainer();
+
+    $getUserByIdQ = $container->getByType(GetUserByIdQ::class);
+
+    $id = Uuid::fromString('7cbe6689-c240-4a7e-864c-877626636ffc');
+    $getUserByIdQ->__invoke($id);
   }
 }
