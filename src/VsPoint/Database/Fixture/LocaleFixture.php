@@ -16,6 +16,8 @@ final class LocaleFixture extends AbstractFixture implements DependentFixtureInt
 
   public const CZE = 'cze';
 
+  public const SLO = 'slo';
+
   public function __construct(
     private readonly LocaleCreated $localeCreated,
   ) {
