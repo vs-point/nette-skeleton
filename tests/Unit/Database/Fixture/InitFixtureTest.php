@@ -24,6 +24,8 @@ final class InitFixtureTest extends TestCase
    */
   public function testInvoke(): void
   {
+    $this->expectException(UserAlreadyExistsException::class);
+
     $container = $this->createContainer();
 
     $fixture = $container->getByType(InitFixture::class);

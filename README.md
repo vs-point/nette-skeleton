@@ -91,7 +91,7 @@ docker-compose exec php ./console doctrine:fixtures:load -n
 docker-compose exec php vendor/bin/phpunit
 
 # show code cavarage
-docker-compose exec php vendor/bin/phpunit --coverage-text
+docker-compose exec php php -d xdebug.mode=coverage ./vendor/bin/phpunit --coverage-text
 
 # go to http://localhost
 ```
