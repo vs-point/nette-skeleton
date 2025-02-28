@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Unit\Domain\Locale\Locale;
 
 use Doctrine\ORM\AbstractQuery;
@@ -8,7 +10,6 @@ use Doctrine\ORM\NonUniqueResultException as ORMNonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use VsPoint\Database\Fixture\LocaleFixture;
-use VsPoint\Domain\Locale\Locale\GetLocaleById;
 use VsPoint\Domain\Locale\Locale\GetLocaleByIdQ;
 use VsPoint\Entity\Locale\Locale;
 use VsPoint\Exception\Logic\NonUniqueResultException;
@@ -21,8 +22,11 @@ use VsPoint\Test\TestCase;
 class GetLocaleByIdQTest extends TestCase
 {
   use MockeryPHPUnitIntegration;
+
   /**
    * @group unit
+   *
+   * @throws LocaleNotFoundById
    */
   public function testGet(): void
   {
@@ -31,12 +35,12 @@ class GetLocaleByIdQTest extends TestCase
     $getLocaleById = $container->getByType(GetLocaleByIdQ::class);
     $locale = $getLocaleById->__invoke(LocaleFixture::ENG);
 
-    self::assertInstanceOf(Locale::class, $locale);
     self::assertSame(Locale::ENG, $locale->getId());
   }
 
   /**
    * @group unit
+   * @throws LocaleNotFoundById
    */
   public function testNonUniqueResult(): void
   {
@@ -50,6 +54,7 @@ class GetLocaleByIdQTest extends TestCase
 
   /**
    * @group unit
+   * @throws LocaleNotFoundById
    */
   public function testNoResult(): void
   {
