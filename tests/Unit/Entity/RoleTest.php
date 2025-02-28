@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace VsPoint\Test\Unit\Entity;
 
 use VsPoint\Entity\Acl\Role;
+use VsPoint\Exception\Logic\InvalidStateException;
 use VsPoint\Test\TestCase;
 
 /**
@@ -21,5 +22,15 @@ final class RoleTest extends TestCase
     $role = Role::create($roleTitle);
 
     self::assertSame($roleTitle, $role->getTitle());
+  }
+
+  /**
+   * @group unit
+   */
+  public function testInvalidRoleThrowsException(): void
+  {
+    $this->expectException(InvalidStateException::class);
+
+    Role::create('NON_EXISTENT_ROLE');
   }
 }
