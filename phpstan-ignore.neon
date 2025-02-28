@@ -27,3 +27,4 @@ parameters:
         - '#Property .* type has no value type specified in iterable type (array|iterable).*#'
         - '#.* has parameter \$\w+ with no value type specified in iterable type (array|iterable).*#'
         - '#.* return type has no value type specified in iterable type (array|Traversable).*#'
+        - '#VsPoint\\Infrastructure\\Kdyby\\FakeSession\\Session::__construct\(\) does not call parent constructor from Nette\\Http\\Session.#'

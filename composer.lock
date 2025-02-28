@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3329df6dd8776eb242b6c78db5b0e3b1",
+    "content-hash": "7fd131b3820b3380a0314c19037b158b",
     "packages": [
         {
             "name": "brick/brick",
@@ -3368,65 +3368,6 @@
                 "source": "https://github.com/Jean85/pretty-package-versions/tree/1.6.0"
             },
             "time": "2021-02-04T16:20:16+00:00"
-        },
-        {
-            "name": "kdyby/fake-session",
-            "version": "v3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Kdyby/FakeSession.git",
-                "reference": "34a3a0fabdce619fc906d2b8144effcab97b9201"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/FakeSession/zipball/34a3a0fabdce619fc906d2b8144effcab97b9201",
-                "reference": "34a3a0fabdce619fc906d2b8144effcab97b9201",
-                "shasum": ""
-            },
-            "require": {
-                "nette/di": "^3.0-RC1@dev",
-                "nette/http": "^3.0@dev",
-                "php": ">=7.1"
-            },
-            "require-dev": {
-                "nette/bootstrap": "^3.0@dev",
-                "nette/caching": "^3.0@dev",
-                "nette/tester": "^2.1",
-                "nette/utils": "^3.0@dev"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Kdyby\\FakeSession\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause",
-                "GPL-2.0",
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Filip Procházka",
-                    "email": "filip@prochazka.su",
-                    "homepage": "http://filip-prochazka.com"
-                }
-            ],
-            "description": "FakeSession class for Nette Framework",
-            "homepage": "http://kdyby.org",
-            "keywords": [
-                "http",
-                "kdyby",
-                "nette",
-                "session"
-            ],
-            "support": {
-                "email": "filip@prochazka.su",
-                "issues": "https://github.com/Kdyby/FakeSession/issues",
-                "source": "https://github.com/Kdyby/FakeSession/tree/master"
-            },
-            "time": "2019-04-04T18:34:37+00:00"
         },
         {
             "name": "laminas/laminas-code",

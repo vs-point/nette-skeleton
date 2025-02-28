@@ -39,7 +39,6 @@
     "guzzlehttp/psr7": "^2.2.1",
     "http-interop/http-factory-guzzle": "^1.2.0",
     "jean85/pretty-package-versions": "^1.6.0",
-    "kdyby/fake-session": "^3.0",
     "laminas/laminas-code": "^4.5.1",
     "laminas/laminas-diactoros": "^2.10.0",
     "laminas/laminas-eventmanager": "^3.5.0",

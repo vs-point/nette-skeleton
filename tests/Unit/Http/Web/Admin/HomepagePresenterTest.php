@@ -8,8 +8,6 @@ use Nette\Application\IPresenterFactory;
 use Nette\Application\Request;
 use Nette\Application\Responses\TextResponse;
 use Nette\Bridges\ApplicationLatte\Template;
-use Nette\Security\User;
-use VsPoint\Database\Fixture\InitFixture;
 use VsPoint\Http\Web\Admin\HomepagePresenter;
 use VsPoint\Test\TestCase;
 
@@ -23,17 +21,13 @@ final class HomepagePresenterTest extends TestCase
    */
   public function testConstructor(): void
   {
-    self::markTestSkipped('ToDo');
-
     $container = $this->createContainerForWeb();
 
-    $securityUser = $container->getByType(User::class);
     $presenterFactory = $container->getByType(IPresenterFactory::class);
 
     $presenterName = trim(HomepagePresenter::LINK, ':');
 
     $presenter = $presenterFactory->createPresenter($presenterName);
-//    $securityUser->login(InitFixture::USER_EMAIL_DAVID_SOLC_VS_POINT_CZ);
 
     self::assertInstanceOf(HomepagePresenter::class, $presenter);
 

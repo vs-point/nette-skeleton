@@ -22,8 +22,6 @@ final class UserRolesEditPresenterTest extends TestCase
    */
   public function testConstructor(): void
   {
-    self::markTestSkipped('ToDo');
-
     $container = $this->createContainerForWeb();
 
     $presenterFactory = $container->getByType(IPresenterFactory::class);
@@ -38,7 +36,7 @@ final class UserRolesEditPresenterTest extends TestCase
 
     $request = new Request($presenterName, 'GET', [
       'action' => 'default',
-      'id' => InitFixture::USER_ROLE_POWER_USER,
+      'id' => InitFixture::USER_01,
     ]);
     $response = $presenter->run($request);
 

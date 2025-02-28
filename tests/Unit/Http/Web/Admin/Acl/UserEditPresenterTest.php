@@ -22,8 +22,6 @@ final class UserEditPresenterTest extends TestCase
    */
   public function testConstructor(): void
   {
-    self::markTestSkipped('ToDo');
-
     $container = $this->createContainerForWeb();
 
     $presenterFactory = $container->getByType(IPresenterFactory::class);
