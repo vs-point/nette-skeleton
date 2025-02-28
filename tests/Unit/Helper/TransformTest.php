@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\Helper;
+namespace VsPoint\Test\Unit\Helper;
 
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -85,7 +85,8 @@ final class TransformTest extends TestCase
     $transform = Transform::fromStringsToUuids($uuids);
 
     self::assertCount(3, $transform);
-    self::assertEquals([Uuid::fromString($user01Uuid), Uuid::fromString($user02Uuid), Uuid::fromString($user03Uuid)],
+    self::assertEquals(
+      [Uuid::fromString($user01Uuid), Uuid::fromString($user02Uuid), Uuid::fromString($user03Uuid)],
       $transform
     );
   }
