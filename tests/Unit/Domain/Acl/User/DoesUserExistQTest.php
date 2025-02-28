@@ -4,11 +4,17 @@ declare(strict_types=1);
 
 namespace Unit\Domain\Acl\User;
 
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException as DoctrineNonUniqueResultException;
+use Doctrine\ORM\QueryBuilder;
+use Mockery;
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use VsPoint\Database\Fixture\InitFixture;
 use VsPoint\Domain\Acl\User\DoesUserExist;
 use VsPoint\Domain\Acl\User\DoesUserExistQ;
 use VsPoint\Entity\Acl\User;
+use VsPoint\Exception\Logic\NonUniqueResultException;
 use VsPoint\Test\TestCase;
 
 /**
@@ -16,6 +22,8 @@ use VsPoint\Test\TestCase;
  */
 final class DoesUserExistQTest extends TestCase
 {
+  use MockeryPHPUnitIntegration;
+
   /**
    * @group unit
    */
@@ -69,5 +77,51 @@ final class DoesUserExistQTest extends TestCase
     $doesUserExist = $container->getByType(DoesUserExistQ::class);
 
     self::assertFalse($doesUserExist->__invoke('random@email.com'));
+  }
+
+  /**
+   * @group unit
+   */
+  public function testNonUniqueResult(): void
+  {
+    $this->expectException(NonUniqueResultException::class);
+
+    $emMock = Mockery::mock(EntityManagerInterface::class);
+
+    $exception = new DoctrineNonUniqueResultException('Non unique mock exception.');
+
+    $queryMock = Mockery::mock(AbstractQuery::class);
+    $queryMock
+      ->allows('getOneOrNullResult')
+      ->andThrows($exception)
+    ;
+
+    $qbMock = Mockery::mock(QueryBuilder::class);
+    $qbMock
+      ->allows('select')->andReturnSelf()
+    ;
+    $qbMock
+      ->allows('from')->andReturnSelf()
+    ;
+    $qbMock
+      ->allows('where')->andReturnSelf()
+    ;
+    $qbMock
+      ->allows('setParameter')->andReturnSelf()
+    ;
+    $qbMock
+      ->allows('andWhere')->andReturnSelf()
+    ;
+    $qbMock
+      ->allows('getQuery')->andReturn($queryMock)
+    ;
+
+    $emMock
+      ->allows('createQueryBuilder')
+      ->andReturns($qbMock)
+    ;
+
+    $doesUserExist = new DoesUserExistQ($emMock);
+    $doesUserExist->__invoke('test@email.com');
   }
 }

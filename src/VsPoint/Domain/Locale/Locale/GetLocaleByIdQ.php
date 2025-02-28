@@ -19,6 +19,7 @@ final class GetLocaleByIdQ implements GetLocaleById
   }
 
   /**
+   * @throws NonUniqueResultException
    * @throws LocaleNotFoundById
    */
   public function __invoke(string $id): Locale
