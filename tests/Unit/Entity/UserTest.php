@@ -46,8 +46,8 @@ final class UserTest extends TestCase
 
     $user = User::create($uuid, $userEmail, $pass, null, $now, $now, $doesUserExist, $passwords, $userCreated);
 
-    self::assertSame( $userEmail, $user->getEmail());
-    self::assertTrue($passwords->verify($pass,$user->getPassword()));
+    self::assertSame($userEmail, $user->getEmail());
+    self::assertTrue($passwords->verify($pass, $user->getPassword()));
     self::assertEquals($now, $user->getCreatedAt());
     self::assertTrue($uuid->equals($user->getId()));
     self::assertEquals($now, $user->getGdpr());
@@ -176,7 +176,14 @@ final class UserTest extends TestCase
     $user = User::create(
       $uuid,
       'initial@example.com',
-      'password', null, $now, $now, $doesUserExist, $passwords, $userCreated);
+      'password',
+      null,
+      $now,
+      $now,
+      $doesUserExist,
+      $passwords,
+      $userCreated
+    );
 
     $newEmail = 'updated@example.com';
     $newExpiration = $now->plusDays(60);
