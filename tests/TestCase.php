@@ -14,4 +14,9 @@ abstract class TestCase extends BaseTestCase
   {
     return Bootstrap::bootForCli()->createContainer();
   }
+
+  protected function createContainerForWeb(): Container
+  {
+    return Bootstrap::bootForWeb()->createContainer();
+  }
 }
