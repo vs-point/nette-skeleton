@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\Entity;
+namespace VsPoint\Test\Unit\Entity;
 
 use Nette\Security\Passwords;
 use Ramsey\Uuid\Uuid;
