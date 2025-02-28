@@ -16,7 +16,7 @@ use VsPoint\Exception\Runtime\Acl\UserAlreadyExistsException;
 use VsPoint\Test\TestCase;
 
 /**
- * @covers \VsPoint\Entity\Acl\Role
+ * @covers \VsPoint\Entity\Acl\User
  */
 final class UserTest extends TestCase
 {
