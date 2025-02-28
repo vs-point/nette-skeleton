@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Unit\Entity;
 
-use Contributte\Console\Application;
 use Nette\Security\Passwords;
 use Ramsey\Uuid\Uuid;
 use Solcik\Brick\DateTime\Clock;
@@ -12,8 +11,8 @@ use VsPoint\Database\Fixture\InitFixture;
 use VsPoint\Domain\Acl\User\DoesUserExist;
 use VsPoint\Domain\Acl\User\UserCreated;
 use VsPoint\Domain\Acl\UserRole\UserRoleCreated;
-use VsPoint\Entity\Acl\Role;
 use VsPoint\Entity\Acl\User;
+use VsPoint\Exception\Runtime\Acl\UserAlreadyExistsException;
 use VsPoint\Test\TestCase;
 
 /**
@@ -23,6 +22,8 @@ final class UserTest extends TestCase
 {
   /**
    * @group unit
+   *
+   * @throws UserAlreadyExistsException
    */
   public function testCreate(): void
   {
@@ -37,13 +38,14 @@ final class UserTest extends TestCase
     $now = $clock->createZonedDateTime();
     $uuid = Uuid::fromString(InitFixture::USER_01);
     $pass = 'MFD_mpb3vjw8wcb.tvqa';
+
     $user = User::create(
-      Uuid::uuid4(),
+      $uuid,
       'test@test.test',
       $pass,
       null,
       $now,
-      null,
+      $now,
       $doesUserExist,
       $passwords,
       $userCreated
@@ -51,9 +53,8 @@ final class UserTest extends TestCase
 
     self::assertSame('test@test.test', $user->getEmail());
     self::assertTrue($passwords->verify($pass, $user->getPassword()));
-    self::assertTrue($now->isEqualTo($user->getCreatedAt()));
+    self::assertEquals($now, $user->getCreatedAt());
     self::assertTrue($uuid->equals($user->getId()));
-    self::assertNull($user->getGdpr());
-    self::assertNull($user->getGdpr());
+    self::assertEquals($now, $user->getGdpr());
   }
 }
