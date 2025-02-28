@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\UI\Form\Acl;
+namespace VsPoint\Test\Unit\UI\Form\Acl;
 
 use VsPoint\Test\TestCase;
 use VsPoint\UI\Form\Acl\UserFormFactory;

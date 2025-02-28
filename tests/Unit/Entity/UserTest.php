@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\Entity;
+namespace VsPoint\Test\Unit\Entity;
 
 use Nette\Security\Passwords;
 use Ramsey\Uuid\Uuid;
@@ -37,17 +37,7 @@ final class UserTest extends TestCase
     $pass = 'MFD_mpb3vjw8wcb.tvqa';
     $userEmail = 'test@email.com';
 
-    $user = User::create(
-      $uuid,
-      $userEmail,
-      $pass,
-      null,
-      $now,
-      $now,
-      $doesUserExist,
-      $passwords,
-      $userCreated
-    );
+    $user = User::create($uuid, $userEmail, $pass, null, $now, $now, $doesUserExist, $passwords, $userCreated);
 
     self::assertSame($userEmail, $user->getEmail());
     self::assertTrue($passwords->verify($pass, $user->getPassword()));

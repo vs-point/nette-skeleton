@@ -25,6 +25,8 @@ final class InitFixture extends AbstractFixture
 
   public const USER_EMAIL_DAVID_SOLC_VS_POINT_CZ = 'david.solc@vs-point.cz';
 
+  public const USER_PASS = 'MFD_mpb3vjw8wcb.tvq';
+
   public function __construct(
     private readonly Clock $clock,
     private readonly DoesUserExist $doesUserExist,
@@ -42,7 +44,7 @@ final class InitFixture extends AbstractFixture
     $user01 = User::create(
       Uuid::fromString(self::USER_01),
       self::USER_EMAIL_DAVID_SOLC_VS_POINT_CZ,
-      'MFD_mpb3vjw8wcb.tvq',
+      self::USER_PASS,
       null,
       $this->clock->createZonedDateTime(),
       null,

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\Command;
+namespace VsPoint\Test\Unit\Command;
 
 use Contributte\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;

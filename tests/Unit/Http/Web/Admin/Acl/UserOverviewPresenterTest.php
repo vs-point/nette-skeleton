@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Unit\Http\Web\Admin\Acl;
+namespace VsPoint\Test\Unit\Http\Web\Admin\Acl;
 
 use Nette\Application\IPresenterFactory;
 use Nette\Application\Request;
 use Nette\Application\Responses\TextResponse;
 use Nette\Bridges\ApplicationLatte\Template;
 use VsPoint\Http\Web\Admin\Acl\UserOverviewPresenter;
-use VsPoint\Http\Web\Admin\Acl\UserRolesEditPresenter;
 use VsPoint\Test\TestCase;
 
 /**

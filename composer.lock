@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "05ac10831b34b60eaf265b1f290f37db",
+    "content-hash": "3329df6dd8776eb242b6c78db5b0e3b1",
     "packages": [
         {
             "name": "brick/brick",
@@ -3368,6 +3368,65 @@
                 "source": "https://github.com/Jean85/pretty-package-versions/tree/1.6.0"
             },
             "time": "2021-02-04T16:20:16+00:00"
+        },
+        {
+            "name": "kdyby/fake-session",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Kdyby/FakeSession.git",
+                "reference": "34a3a0fabdce619fc906d2b8144effcab97b9201"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Kdyby/FakeSession/zipball/34a3a0fabdce619fc906d2b8144effcab97b9201",
+                "reference": "34a3a0fabdce619fc906d2b8144effcab97b9201",
+                "shasum": ""
+            },
+            "require": {
+                "nette/di": "^3.0-RC1@dev",
+                "nette/http": "^3.0@dev",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "nette/bootstrap": "^3.0@dev",
+                "nette/caching": "^3.0@dev",
+                "nette/tester": "^2.1",
+                "nette/utils": "^3.0@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Kdyby\\FakeSession\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Filip Procházka",
+                    "email": "filip@prochazka.su",
+                    "homepage": "http://filip-prochazka.com"
+                }
+            ],
+            "description": "FakeSession class for Nette Framework",
+            "homepage": "http://kdyby.org",
+            "keywords": [
+                "http",
+                "kdyby",
+                "nette",
+                "session"
+            ],
+            "support": {
+                "email": "filip@prochazka.su",
+                "issues": "https://github.com/Kdyby/FakeSession/issues",
+                "source": "https://github.com/Kdyby/FakeSession/tree/master"
+            },
+            "time": "2019-04-04T18:34:37+00:00"
         },
         {
             "name": "laminas/laminas-code",
@@ -12684,6 +12743,53 @@
             "time": "2022-05-01T15:50:16+00:00"
         },
         {
+            "name": "rector/swiss-knife",
+            "version": "2.1.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rectorphp/swiss-knife.git",
+                "reference": "871f3cfa431821144ee6f6fb6883a3a4523892cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rectorphp/swiss-knife/zipball/871f3cfa431821144ee6f6fb6883a3a4523892cc",
+                "reference": "871f3cfa431821144ee6f6fb6883a3a4523892cc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "bin": [
+                "bin/swiss-knife"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rector\\SwissKnife\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Swiss knife in pocket of every upgrade architect",
+            "support": {
+                "issues": "https://github.com/rectorphp/swiss-knife/issues",
+                "source": "https://github.com/rectorphp/swiss-knife/tree/2.1.15"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/rectorphp",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/tomasvotruba",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-02-19T09:51:24+00:00"
+        },
+        {
             "name": "roave/security-advisories",
             "version": "dev-master",
             "source": {
@@ -14948,6 +15054,7 @@
         "contributte/psr11-container-interface": 20,
         "contributte/redis": 20,
         "contributte/translation": 20,
+        "jetbrains/phpstorm-stubs": 20,
         "nettrine/annotations": 20,
         "nettrine/cache": 20,
         "nettrine/dbal": 20,
@@ -14955,17 +15062,16 @@
         "nettrine/migrations": 20,
         "nettrine/orm": 20,
         "php-ds/php-ds": 20,
-        "solcik/extras": 20,
-        "jetbrains/phpstorm-stubs": 20,
         "rector/rector": 20,
         "roave/security-advisories": 20,
-        "slevomat/coding-standard": 20
+        "slevomat/coding-standard": 20,
+        "solcik/extras": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.1"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }

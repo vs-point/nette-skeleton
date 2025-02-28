@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\Http\Web\Admin;
+namespace VsPoint\Test\Unit\Http\Web\Admin;
 
 use Nette\Application\IPresenterFactory;
 use Nette\Application\Request;

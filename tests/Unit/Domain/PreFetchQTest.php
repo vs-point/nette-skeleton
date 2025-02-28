@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\Domain;
+namespace VsPoint\Test\Unit\Domain;
 
 use Ds\Vector;
 use VsPoint\Domain\PreFetch;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\Domain\Locale\Locale;
+namespace VsPoint\Test\Unit\Domain\Locale\Locale;
 
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use VsPoint\Domain\Locale\Locale\FindLocalesQ;

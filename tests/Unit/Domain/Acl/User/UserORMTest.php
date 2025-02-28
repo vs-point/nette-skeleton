@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\Domain\Acl\User;
+namespace VsPoint\Test\Unit\Domain\Acl\User;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Mockery;

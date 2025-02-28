@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\UI\VO\PreFetch;
+namespace VsPoint\Test\Unit\UI\VO\PreFetch;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Ds\Set;

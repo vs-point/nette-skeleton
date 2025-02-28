@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\Domain\Locale\Locale;
+namespace VsPoint\Test\Unit\Domain\Locale\Locale;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Mockery;

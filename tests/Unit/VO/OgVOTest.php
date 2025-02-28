@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\VO;
+namespace VsPoint\Test\Unit\VO;
 
 use VsPoint\Test\TestCase;
 use VsPoint\VO\Html\OgVO;
