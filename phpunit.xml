@@ -19,4 +19,7 @@
         <ini name="memory_limit" value="256M"/>
         <server name="BCRYPT_ROUNDS" value="4"/>
     </php>
+    <listeners>
+        <listener class="\Mockery\Adapter\Phpunit\TestListener"></listener>
+    </listeners>
 </phpunit>
