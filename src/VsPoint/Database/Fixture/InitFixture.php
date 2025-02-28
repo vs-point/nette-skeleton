@@ -19,6 +19,10 @@ use VsPoint\Exception\Runtime\Acl\UserAlreadyExistsException;
 
 final class InitFixture extends AbstractFixture
 {
+  public const USER_01 = '0d0a760f-501f-467c-9d92-cf2e47726d8e';
+
+  public const USER_ROLE_POWER_USER = '5b271a91-cee2-41f4-85c5-7cb67146358e';
+
   public function __construct(
     private readonly Clock $clock,
     private readonly DoesUserExist $doesUserExist,
@@ -34,7 +38,7 @@ final class InitFixture extends AbstractFixture
   public function load(ObjectManager $manager): void
   {
     $user01 = User::create(
-      Uuid::fromString('0d0a760f-501f-467c-9d92-cf2e47726d8e'),
+      Uuid::fromString(self::USER_01),
       'david.solc@vs-point.cz',
       'MFD_mpb3vjw8wcb.tvq',
       null,
@@ -44,7 +48,9 @@ final class InitFixture extends AbstractFixture
       $this->passwords,
       $this->userCreated
     );
-    UserRole::create(Uuid::uuid4(), $user01, Role::create(Role::POWER_USER), $this->userRoleCreated);
+
+    $powerUserRole = Role::create(Role::POWER_USER);
+    UserRole::create(Uuid::fromString(self::USER_ROLE_POWER_USER), $user01, $powerUserRole, $this->userRoleCreated);
 
     $manager->flush();
   }

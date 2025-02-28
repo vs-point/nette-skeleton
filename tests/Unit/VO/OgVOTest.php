@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Unit\VO;
 
 use VsPoint\Test\TestCase;
-use VsPoint\VO\Html\GtmVO;
 use VsPoint\VO\Html\OgVO;
 
 /**
- * @covers \VsPoint\VO\Html\HtmlVO
+ * @covers \VsPoint\VO\Html\OgVO
  */
 final class OgVOTest extends TestCase
 {
@@ -22,12 +21,7 @@ final class OgVOTest extends TestCase
     $ogVoDescription = 'Lorem ipsum';
     $ogVoImageUrl = '/img/og/vs-point.png';
 
-    $ogVo =  new OgVO(
-      $ogVoTitle,
-      $ogVoDescription,
-      $ogVoImageUrl,
-      'website',
-    );
+    $ogVo = new OgVO($ogVoTitle, $ogVoDescription, $ogVoImageUrl, 'website',);
 
     self::assertSame($ogVo->getTitle(), $ogVoTitle);
     self::assertSame($ogVo->getSiteName(), 'VS-point');

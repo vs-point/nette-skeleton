@@ -8,7 +8,7 @@ use VsPoint\Test\TestCase;
 use VsPoint\VO\Html\GtmVO;
 
 /**
- * @covers \VsPoint\VO\Html\HtmlVO
+ * @covers \VsPoint\VO\Html\GtmVO
  */
 final class GtmVOTest extends TestCase
 {
@@ -18,13 +18,10 @@ final class GtmVOTest extends TestCase
   public function testInvoke(): void
   {
     $gtmVoPage = 'test page';
-    $gtmVo =  new GtmVO(
-      $gtmVoPage,
-      ['event 1', 'event 2'],
-    );
+    $gtmVo = new GtmVO($gtmVoPage, ['event 1', 'event 2'],);
 
     self::assertSame($gtmVo->getPage(), $gtmVoPage);
     self::assertTrue($gtmVo->hasEvents());
-    self::assertIsArray($gtmVo->getEvents());
+    self::assertCount(2, $gtmVo->getEvents());
   }
 }

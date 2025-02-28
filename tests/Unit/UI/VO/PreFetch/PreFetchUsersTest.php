@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Unit\VO\PreFetch;
+namespace Unit\UI\VO\PreFetch;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Ds\Set;
 use Ds\Vector;
+use Ramsey\Uuid\Uuid;
+use VsPoint\Database\Fixture\InitFixture;
 use VsPoint\Test\TestCase;
 use VsPoint\VO\PreFetch\PreFetchUsers;
 
@@ -43,14 +45,15 @@ final class PreFetchUsersTest extends TestCase
 
     $em = $container->getByType(EntityManagerInterface::class);
 
-    $userIds = new Set();
+    $userId01 = Uuid::fromString(InitFixture::USER_01);
+    $userIds = new Set([$userId01]);
     $preFetchUsers = PreFetchUsers::byIds($em, $userIds);
 
-    self::assertCount(0, $preFetchUsers->toArray());
+    self::assertCount(1, $preFetchUsers->toArray());
 
     $sequence = $preFetchUsers->toSequence();
 
-    self::assertCount(0, $sequence);
+    self::assertCount(1, $sequence);
   }
 
   /**
@@ -62,11 +65,12 @@ final class PreFetchUsersTest extends TestCase
 
     $em = $container->getByType(EntityManagerInterface::class);
 
-    $userIds = new Set();
+    $userId01 = Uuid::fromString(InitFixture::USER_01);
+    $userIds = new Set([$userId01]);
     $preFetchUsers = PreFetchUsers::byIds($em, $userIds);
 
     $preFetchUserRoles = $preFetchUsers->withUserRoles();
 
-    self::assertCount(0, $preFetchUserRoles->toArray());
+    self::assertCount(1, $preFetchUserRoles->toArray());
   }
 }

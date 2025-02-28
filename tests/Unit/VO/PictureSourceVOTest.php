@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Unit\VO;
 
 use VsPoint\Test\TestCase;
-use VsPoint\VO\Html\GtmVO;
 use VsPoint\VO\Html\PictureSourceVO;
 
 /**
- * @covers \VsPoint\VO\Html\HtmlVO
+ * @covers \VsPoint\VO\Html\PictureSourceVO
  */
 final class PictureSourceVOTest extends TestCase
 {
@@ -18,10 +17,7 @@ final class PictureSourceVOTest extends TestCase
    */
   public function testInvoke(): void
   {
-    $pictureSourceVO = new PictureSourceVO(
-      'srcSet',
-      'image'
-    );
+    $pictureSourceVO = new PictureSourceVO('srcSet', 'image');
 
     self::assertSame($pictureSourceVO->getSrcset(), 'srcSet');
     self::assertSame($pictureSourceVO->getMedia(), 'image');

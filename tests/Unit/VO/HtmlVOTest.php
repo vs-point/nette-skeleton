@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Unit\VO;
 
 use VsPoint\Test\TestCase;
-use VsPoint\VO\Html\GtmVO;
 use VsPoint\VO\Html\HtmlVO;
-use VsPoint\VO\Html\MetadataVO;
 
 /**
  * @covers \VsPoint\VO\Html\HtmlVO
@@ -31,7 +29,7 @@ final class HtmlVOTest extends TestCase
     );
 
     self::assertSame($htmlVOTitle, $htmlVO->getTitle());
-    self::assertInstanceOf(GtmVO::class, $htmlVO->getGtm());
-    self::assertInstanceOf(MetadataVO::class, $htmlVO->getMetadata());
+    self::assertCount(2, $htmlVO->getGtm()->getEvents());
+    self::assertCount(3, $htmlVO->getMetadata()->getKeywords());
   }
 }

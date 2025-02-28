@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace Unit\VO;
 
 use VsPoint\Test\TestCase;
-use VsPoint\VO\Html\GtmVO;
 use VsPoint\VO\Html\PictureSourceVO;
 use VsPoint\VO\Html\PictureVO;
 
 /**
- * @covers \VsPoint\VO\Html\HtmlVO
+ * @covers \VsPoint\VO\Html\PictureVO
  */
 final class PictureVOTest extends TestCase
 {
@@ -19,23 +18,15 @@ final class PictureVOTest extends TestCase
    */
   public function testInvoke(): void
   {
-    $pictureSourceVO1 = new PictureSourceVO(
-      'srcSet1',
-      'image'
-    );
-    $pictureSourceVO2 = new PictureSourceVO(
-      'srcSet1',
-      'image'
-    );
+    $pictureSourceVO1 = new PictureSourceVO('srcSet1', 'image');
+    $pictureSourceVO2 = new PictureSourceVO('srcSet1', 'image');
 
-    $pictureVO = new PictureVO(
-      'image-url',
-      'alt of image',
-      [$pictureSourceVO1, $pictureSourceVO2]
-    );
+    $imgUrl = 'image-url';
+    $imgAlt = 'alt of image';
+    $pictureVO = new PictureVO($imgUrl, $imgAlt, [$pictureSourceVO1, $pictureSourceVO2]);
 
-    self::assertSame($pictureVO->getUrl(), 'srcSet');
-    self::assertSame($pictureVO->getAlt(), 'image');
-    self::assertIsArray($pictureVO->getSources());
+    self::assertSame($pictureVO->getUrl(), $imgUrl);
+    self::assertSame($pictureVO->getAlt(), $imgAlt);
+    self::assertCount(2, $pictureVO->getSources());
   }
 }
