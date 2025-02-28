@@ -44,6 +44,6 @@ final class GetUserByEmailQTest extends TestCase
     $email = InitFixture::USER_EMAIL_DAVID_SOLC_VS_POINT_CZ;
     $user = $getUserByEmailQ->__invoke($email);
 
-    self::assertEquals($email, $user->getEmail());
+    self::assertSame($email, $user->getEmail());
   }
 }
