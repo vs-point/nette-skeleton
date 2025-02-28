@@ -78,7 +78,7 @@ pnpm run production
 docker-compose up
 
 # install php dependencies
-composer install
+docker-compose exec php composer install
 
 docker-compose exec php ./console nette:cache:purge
 docker-compose exec php ./console dbal:database:drop --force
