@@ -20,10 +20,12 @@ final class OgVOTest extends TestCase
     $ogVoTitle = 'Og title';
     $ogVoDescription = 'Lorem ipsum';
     $ogVoImageUrl = '/img/og/vs-point.png';
+    $ogVoType = 'website';
 
-    $ogVo = new OgVO($ogVoTitle, $ogVoDescription, $ogVoImageUrl, 'website',);
+    $ogVo = new OgVO($ogVoTitle, $ogVoDescription, $ogVoImageUrl, $ogVoType);
 
     self::assertSame($ogVo->getTitle(), $ogVoTitle);
+    self::assertSame($ogVo->getType(), $ogVoType);
     self::assertSame($ogVo->getSiteName(), 'VS-point');
     self::assertSame($ogVo->getLocale(), 'cs_CZ');
     self::assertSame($ogVo->getTitleFull(), 'Og title - VS-point');
