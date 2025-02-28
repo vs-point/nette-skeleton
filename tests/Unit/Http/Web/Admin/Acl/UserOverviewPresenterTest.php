@@ -9,7 +9,6 @@ use Nette\Application\Request;
 use Nette\Application\Responses\TextResponse;
 use Nette\Bridges\ApplicationLatte\Template;
 use VsPoint\Http\Web\Admin\Acl\UserOverviewPresenter;
-use VsPoint\Http\Web\Admin\Acl\UserRolesEditPresenter;
 use VsPoint\Test\TestCase;
 
 /**

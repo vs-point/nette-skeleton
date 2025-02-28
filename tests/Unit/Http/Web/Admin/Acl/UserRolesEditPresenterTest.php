@@ -36,7 +36,7 @@ final class UserRolesEditPresenterTest extends TestCase
 
     $request = new Request($presenterName, 'GET', [
       'action' => 'default',
-      'id' =>  InitFixture::USER_ROLE_POWER_USER
+      'id' => InitFixture::USER_ROLE_POWER_USER,
     ]);
     $response = $presenter->run($request);
 
