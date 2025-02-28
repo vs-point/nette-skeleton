@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\Entity\Locale\Locale;
+namespace VsPoint\Test\Unit\Entity\Locale\Locale;
 
 use VsPoint\Database\Fixture\LocaleFixture;
 use VsPoint\Domain\Locale\Locale\LocaleORM;

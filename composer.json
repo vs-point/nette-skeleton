@@ -142,7 +142,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "VsPoint\\Test\\": "tests/"
+      "VsPoint\\Test\\": "tests"
     }
   },
   "minimum-stability": "dev",
