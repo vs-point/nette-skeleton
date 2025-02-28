@@ -16,6 +16,9 @@ final class FormFactory
   ) {
   }
 
+  /**
+   * @param class-string $dataTransferObjectClass
+   */
   public function create(string $dataTransferObjectClass): Form
   {
     $form = new BootstrapForm();
