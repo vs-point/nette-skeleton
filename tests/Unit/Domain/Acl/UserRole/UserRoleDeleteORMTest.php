@@ -5,14 +5,10 @@ declare(strict_types=1);
 namespace VsPoint\Test\Unit\Domain\Acl\UserRole;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Ramsey\Uuid\Uuid;
-use VsPoint\Database\Fixture\InitFixture;
-use VsPoint\Domain\Acl\User\GetUserByIdQ;
+use Mockery;
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use VsPoint\Domain\Acl\UserRole\UserRoleDeleteORM;
-use VsPoint\Domain\Acl\UserRole\UserRoleORM;
-use VsPoint\Entity\Acl\Role;
 use VsPoint\Entity\Acl\UserRole;
-use VsPoint\Exception\Runtime\Acl\UserNotFound;
 use VsPoint\Test\TestCase;
 
 /**
@@ -20,43 +16,31 @@ use VsPoint\Test\TestCase;
  */
 final class UserRoleDeleteORMTest extends TestCase
 {
+  use MockeryPHPUnitIntegration;
+
   /**
    * @group unit
    */
   public function testConstructor(): void
   {
-    $container = $this->createContainer();
+    $this->expectNotToPerformAssertions();
 
-    $em = $container->getByType(EntityManagerInterface::class);
+    $emMock = Mockery::mock(EntityManagerInterface::class);
 
-    $userRoleORM = new UserRoleDeleteORM($em);
-
-    self::assertInstanceOf(UserRoleDeleteORM::class, $userRoleORM);
+    $userRoleDeleteORM = new UserRoleDeleteORM($emMock);
   }
 
   /**
    * @group unit
-   * @throws UserNotFound
    */
   public function testInvoke(): void
   {
-    $container = $this->createContainer();
-    $em = $container->getByType(EntityManagerInterface::class);
+    $emMock = Mockery::mock(EntityManagerInterface::class);
+    $emMock->allows('remove')->once();
 
-    $userRoleDeleteORM = new UserRoleDeleteORM($em);
-    $userRoleORM = new UserRoleORM($em);
+    $userRoleMock = Mockery::mock(UserRole::class);
 
-    $getUserByIdQ = $container->getByType(GetUserByIdQ::class);
-    $userId = Uuid::fromString(InitFixture::USER_01);
-    $user = $getUserByIdQ->__invoke($userId);
-
-    $userRoleUuid = Uuid::fromString(InitFixture::USER_ROLE_POWER_USER);
-    $role = Role::create(Role::POWER_USER);
-
-    $userRole = UserRole::create($userRoleUuid, $user, $role, $userRoleORM);
-
-    $userRoleDeleteORM->__invoke($userRole);
-
-    self::assertEquals($userRoleUuid, $userRole->getId());
+    $userRoleORM = new UserRoleDeleteORM($emMock);
+    $userRoleORM->__invoke($userRoleMock);
   }
 }
