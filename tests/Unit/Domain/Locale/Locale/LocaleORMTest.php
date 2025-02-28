@@ -2,21 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Unit\Domain\Acl\User;
+namespace Unit\Domain\Locale\Locale;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-use VsPoint\Database\Fixture\InitFixture;
 use VsPoint\Database\Fixture\LocaleFixture;
-use VsPoint\Domain\Acl\User\UserORM;
 use VsPoint\Domain\Locale\Locale\LocaleORM;
-use VsPoint\Entity\Acl\User;
 use VsPoint\Entity\Locale\Locale;
 use VsPoint\Test\TestCase;
 
 /**
- * @covers \VsPoint\Domain\Acl\User\UserORM
+ * @covers \VsPoint\Domain\Locale\Locale\LocaleORM
  */
 final class LocaleORMTest extends TestCase
 {
