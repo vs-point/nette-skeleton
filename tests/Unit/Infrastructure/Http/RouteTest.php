@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Infrastructure\Http;
 
-use PHPUnit\Framework\TestCase;
 use VsPoint\Infrastructure\Http\Route;
+use VsPoint\Test\TestCase;
 
 /**
  * @covers \VsPoint\Infrastructure\Http\Route

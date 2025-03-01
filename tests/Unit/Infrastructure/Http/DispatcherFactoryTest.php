@@ -8,9 +8,9 @@ use FastRoute\Dispatcher;
 use FastRoute\Dispatcher\GroupCountBased;
 use FastRoute\RouteCollector;
 use Nette\Caching\Storages\MemoryStorage;
-use PHPUnit\Framework\TestCase;
 use VsPoint\Infrastructure\Http\DispatcherFactory;
 use VsPoint\Infrastructure\Http\Route;
+use VsPoint\Test\TestCase;
 
 /**
  * @covers \VsPoint\Infrastructure\Http\DispatcherFactory
