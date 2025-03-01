@@ -8,7 +8,7 @@ use Contributte\Events\Extra\Event\Application\ErrorEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Tracy\ILogger;
 
-final class ErrorLoggerSubscriber implements EventSubscriberInterface
+final readonly class ErrorLoggerSubscriber implements EventSubscriberInterface
 {
   private ILogger $logger;
 

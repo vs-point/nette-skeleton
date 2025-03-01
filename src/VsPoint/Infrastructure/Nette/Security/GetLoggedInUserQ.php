@@ -11,7 +11,7 @@ use VsPoint\Entity\Acl\User;
 use VsPoint\Exception\Runtime\Acl\UserNotFound;
 use VsPoint\Exception\Runtime\Acl\UserNotLoggedInException;
 
-final class GetLoggedInUserQ implements GetLoggedInUser
+final readonly class GetLoggedInUserQ implements GetLoggedInUser
 {
   public function __construct(
     private GetUserById $getUserById,

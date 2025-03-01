@@ -10,7 +10,7 @@ use VsPoint\VO\Html\HtmlVO;
 
 final class ErrorPresenter extends BasePresenter
 {
-  public const LINK = ':Front:Error:';
+  public const string LINK = ':Front:Error:';
 
   public function __construct()
   {

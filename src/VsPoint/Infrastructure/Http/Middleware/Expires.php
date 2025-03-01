@@ -12,9 +12,9 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Solcik\Brick\DateTime\Clock;
 
-final class Expires implements MiddlewareInterface
+final readonly class Expires implements MiddlewareInterface
 {
-  public const HEADER = 'Expires';
+  public const string HEADER = 'Expires';
 
   private Clock $clock;
 

@@ -9,10 +9,10 @@ use Ramsey\Uuid\UuidInterface;
 use VsPoint\Entity\Acl\User;
 use VsPoint\Exception\Runtime\Acl\UserNotFound;
 
-final class GetUserByIdQ implements GetUserById
+final readonly class GetUserByIdQ implements GetUserById
 {
   public function __construct(
-    private readonly EntityManagerInterface $em,
+    private EntityManagerInterface $em,
   ) {
   }
 

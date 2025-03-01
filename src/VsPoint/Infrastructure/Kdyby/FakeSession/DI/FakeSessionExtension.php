@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Infrastructure\Kdyby\FakeSession\DI;
 
+use Override;
 use Nette\Schema\Schema;
 use Nette\DI\Definitions\ServiceDefinition;
 use Nette\DI\CompilerExtension;
@@ -21,6 +22,7 @@ class FakeSessionExtension extends CompilerExtension
   {
   }
 
+  #[Override]
   public function getConfigSchema(): Schema
   {
     return Expect::structure(

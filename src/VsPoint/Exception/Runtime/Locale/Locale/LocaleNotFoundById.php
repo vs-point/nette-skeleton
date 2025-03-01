@@ -10,7 +10,7 @@ use VsPoint\Exception\Runtime\EntityNotFoundException;
 final class LocaleNotFoundById extends EntityNotFoundException
 {
   public function __construct(
-    private string $id,
+    private readonly string $id,
     Throwable $e,
   ) {
     parent::__construct(

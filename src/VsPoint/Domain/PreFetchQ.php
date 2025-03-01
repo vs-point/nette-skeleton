@@ -11,10 +11,10 @@ use VsPoint\Entity\Acl\UserRole;
 use VsPoint\VO\PreFetch\PreFetchUserRoles;
 use VsPoint\VO\PreFetch\PreFetchUsers;
 
-final class PreFetchQ implements PreFetch
+final readonly class PreFetchQ implements PreFetch
 {
   public function __construct(
-    private readonly EntityManagerInterface $em,
+    private EntityManagerInterface $em,
   ) {
   }
 

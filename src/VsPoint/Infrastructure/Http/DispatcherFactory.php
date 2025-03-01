@@ -10,7 +10,7 @@ use FastRoute\RouteCollector;
 use Nette\Caching\Cache;
 use Nette\Caching\Storage;
 
-final class DispatcherFactory
+final readonly class DispatcherFactory
 {
   private Cache $cache;
 

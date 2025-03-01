@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\VO\Html;
 
-final class GtmVO
+final readonly class GtmVO
 {
   private string $page;
 

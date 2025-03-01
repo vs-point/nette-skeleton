@@ -19,13 +19,13 @@ use VsPoint\Exception\Runtime\Acl\UserAlreadyExistsException;
 
 final class InitFixture extends AbstractFixture
 {
-  public const USER_01 = '0d0a760f-501f-467c-9d92-cf2e47726d8e';
+  public const string USER_01 = '0d0a760f-501f-467c-9d92-cf2e47726d8e';
 
-  public const USER_ROLE_POWER_USER = '5b271a91-cee2-41f4-85c5-7cb67146358e';
+  public const string USER_ROLE_POWER_USER = '5b271a91-cee2-41f4-85c5-7cb67146358e';
 
-  public const USER_EMAIL_DAVID_SOLC_VS_POINT_CZ = 'david.solc@vs-point.cz';
+  public const string USER_EMAIL_DAVID_SOLC_VS_POINT_CZ = 'david.solc@vs-point.cz';
 
-  public const USER_PASS = 'MFD_mpb3vjw8wcb.tvq';
+  public const string USER_PASS = 'MFD_mpb3vjw8wcb.tvq';
 
   public function __construct(
     private readonly Clock $clock,

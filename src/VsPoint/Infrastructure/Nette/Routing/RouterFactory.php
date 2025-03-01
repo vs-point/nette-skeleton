@@ -16,7 +16,7 @@ final class RouterFactory
    */
   private array $languages;
 
-  private RouteList $router;
+  private readonly RouteList $router;
 
   /**
    * @param string[] $languages
@@ -63,7 +63,7 @@ final class RouterFactory
       ];
     }
 
-    $metadata['presenter'] = trim($metadata['presenter'], ':');
+    $metadata['presenter'] = trim((string) $metadata['presenter'], ':');
     $metadata['action'] ??= 'default';
 
     $this->router->addRoute($mask, $metadata, $flags);

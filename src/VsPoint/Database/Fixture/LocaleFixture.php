@@ -12,11 +12,11 @@ use VsPoint\Entity\Locale\Locale;
 
 final class LocaleFixture extends AbstractFixture implements DependentFixtureInterface
 {
-  public const ENG = 'eng';
+  public const string ENG = 'eng';
 
-  public const CZE = 'cze';
+  public const string CZE = 'cze';
 
-  public const SLO = 'slo';
+  public const string SLO = 'slo';
 
   public function __construct(
     private readonly LocaleCreated $localeCreated,

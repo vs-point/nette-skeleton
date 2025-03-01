@@ -10,7 +10,7 @@ use VsPoint\Http\Web\Admin\BasePresenter;
 
 final class UserOverviewPresenter extends BasePresenter
 {
-  public const LINK = ':Admin:Acl:UserOverview:';
+  public const string LINK = ':Admin:Acl:UserOverview:';
 
   public function __construct(
     private readonly FindUsers $findUsers,

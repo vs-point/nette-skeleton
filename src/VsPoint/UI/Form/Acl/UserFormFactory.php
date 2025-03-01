@@ -14,17 +14,17 @@ use VsPoint\DTO\Acl\UserFormDTO;
 use VsPoint\Entity\Acl\User;
 use VsPoint\UI\Form\FormFactory;
 
-final class UserFormFactory
+final readonly class UserFormFactory
 {
   use SmartObject;
 
   /**
    * @var int
    */
-  private const PASSWORD_MIN_LENGTH = 8;
+  private const int PASSWORD_MIN_LENGTH = 8;
 
   public function __construct(
-    private readonly FormFactory $formFactory,
+    private FormFactory $formFactory,
   ) {
   }
 
@@ -34,7 +34,7 @@ final class UserFormFactory
     $t = 'admin.' . self::class;
 
     $form
-      ->addEmail($f = 'email', "${t}.${f}.label")
+      ->addEmail($f = 'email', "{$t}.{$f}.label")
       ->setRequired('admin.form.rule.required')
       ->setDefaultValue('@')
         ;
@@ -44,11 +44,11 @@ final class UserFormFactory
     }
 
     $f = 'expiration';
-    $control = new LocalDateInput("${t}.${f}.label");
+    $control = new LocalDateInput("{$t}.{$f}.label");
     $form->addComponent($control, $f);
 
     $form
-      ->addSubmit($f = 'submit', "${t}.${f}.caption");
+      ->addSubmit($f = 'submit', "{$t}.{$f}.caption");
 
     return $form;
   }
@@ -65,7 +65,7 @@ final class UserFormFactory
     $this->addPasswordElements($form);
 
     $form
-      ->addSubmit($f = 'submitChange', "${t}.${f}.caption");
+      ->addSubmit($f = 'submitChange', "{$t}.{$f}.caption");
 
     return $form;
   }
@@ -80,14 +80,14 @@ final class UserFormFactory
     $t = 'admin.' . self::class;
 
     $form
-      ->addPassword($f = 'currentPassword', "${t}.${f}.label")
+      ->addPassword($f = 'currentPassword', "{$t}.{$f}.label")
       ->setRequired('admin.form.rule.required')
         ;
 
     $this->addPasswordElements($form);
 
     $form
-      ->addSubmit($f = 'submitChange', "${t}.${f}.caption");
+      ->addSubmit($f = 'submitChange', "{$t}.{$f}.caption");
 
     return $form;
   }
@@ -97,15 +97,15 @@ final class UserFormFactory
     $t = 'admin.' . self::class;
 
     $form
-      ->addPassword($f = 'password', "${t}.${f}.label")
+      ->addPassword($f = 'password', "{$t}.{$f}.label")
       ->setRequired('admin.form.rule.required')
-      ->setOption('description', new Message("${t}.${f}.length", [
+      ->setOption('description', new Message("{$t}.{$f}.length", [
         'length' => self::PASSWORD_MIN_LENGTH,
       ]))
       ->addRule(
         $form::MIN_LENGTH,
         new Message(
-          "${t}.${f}.length",
+          "{$t}.{$f}.length",
           [
             'length' => self::PASSWORD_MIN_LENGTH,
           ]
@@ -115,16 +115,16 @@ final class UserFormFactory
         ;
 
     $form
-      ->addPassword($f = 'passwordCheck', "${t}.${f}.label")
-      ->addRule(Form::EQUAL, "${t}.${f}.error.passwordEqualCheck", $form['password'])
+      ->addPassword($f = 'passwordCheck', "{$t}.{$f}.label")
+      ->addRule(Form::EQUAL, "{$t}.{$f}.error.passwordEqualCheck", $form['password'])
       ->setRequired('admin.form.rule.required')
-      ->setOption('description', new Message("${t}.${f}.length", [
+      ->setOption('description', new Message("{$t}.{$f}.length", [
         'length' => self::PASSWORD_MIN_LENGTH,
       ]))
       ->addRule(
         $form::MIN_LENGTH,
         new Message(
-          "${t}.${f}.length",
+          "{$t}.{$f}.length",
           [
             'length' => self::PASSWORD_MIN_LENGTH,
           ]

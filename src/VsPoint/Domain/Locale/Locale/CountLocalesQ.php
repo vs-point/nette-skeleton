@@ -8,9 +8,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 
-final class CountLocalesQ implements CountLocales
+final readonly class CountLocalesQ implements CountLocales
 {
-  public function __construct(private readonly EntityManagerInterface $em)
+  public function __construct(private EntityManagerInterface $em)
   {
   }
 

@@ -13,12 +13,12 @@ use Ramsey\Uuid\Uuid;
 use VsPoint\Domain\Acl\User\GetUserById;
 use VsPoint\Exception\Runtime\Acl\UserNotFound;
 
-final class UserProvider implements MiddlewareInterface
+final readonly class UserProvider implements MiddlewareInterface
 {
   /**
    * @var string
    */
-  public const ATTR_USER = 'user';
+  public const string ATTR_USER = 'user';
 
   private GetUserById $getUserById;
 

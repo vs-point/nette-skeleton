@@ -7,9 +7,9 @@ namespace VsPoint\Entity\Acl;
 use ReflectionClass;
 use VsPoint\Exception\Logic\InvalidStateException;
 
-final class Role
+final readonly class Role
 {
-  public const POWER_USER = 'POWER_USER';
+  public const string POWER_USER = 'POWER_USER';
 
   private string $title;
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\VO\Html;
 
-final class OgVO
+final readonly class OgVO
 {
   private string $title;
 

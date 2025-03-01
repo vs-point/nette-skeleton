@@ -11,10 +11,10 @@ use VsPoint\Entity\Locale\Locale;
 use VsPoint\Exception\Logic\NonUniqueResultException;
 use VsPoint\Exception\Runtime\Locale\Locale\LocaleNotFoundById;
 
-final class GetLocaleByIdQ implements GetLocaleById
+final readonly class GetLocaleByIdQ implements GetLocaleById
 {
   public function __construct(
-    private readonly EntityManagerInterface $em,
+    private EntityManagerInterface $em,
   ) {
   }
 

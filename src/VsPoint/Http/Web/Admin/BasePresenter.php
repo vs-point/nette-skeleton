@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Http\Web\Admin;
 
+use Override;
 use Nette\DI\Attributes\Inject;
 use VsPoint\Domain\Acl\User\GetUserById;
 use VsPoint\Entity\Acl\User;
@@ -20,11 +21,13 @@ abstract class BasePresenter extends BBasePresenter
 
   protected ?User $loggedUser = null;
 
+  #[Override]
   public function findLayoutTemplateFile(): ?string
   {
     return __DIR__ . '/@template/@layout.latte';
   }
 
+  #[Override]
   public function actionOut(): void
   {
     $this->getUser()->logout(true);
@@ -34,6 +37,7 @@ abstract class BasePresenter extends BBasePresenter
     $this->redirect(SignInPresenter::LINK);
   }
 
+  #[Override]
   protected function getLoggedUser(): User
   {
     if (!$this->getUser()->isLoggedIn()) {

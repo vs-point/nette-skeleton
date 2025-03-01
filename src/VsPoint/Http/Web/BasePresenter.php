@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Http\Web;
 
+use Override;
 use Nette\Application\Attributes\Persistent;
 use Nette\Application\Helpers;
 use Nette\Application\UI\Presenter;
@@ -31,6 +32,7 @@ abstract class BasePresenter extends Presenter
   /**
    * @return string[]
    */
+  #[Override]
   public function formatTemplateFiles(): array
   {
     /** @var string $name */
@@ -44,9 +46,10 @@ abstract class BasePresenter extends Presenter
     return [sprintf('%s/%s.latte', $dir, $presenter)];
   }
 
+  #[Override]
   public function isModuleCurrent(string $module): bool
   {
-    return strpos($this->getAction(true), $module) !== false;
+    return str_contains($this->getAction(true), $module);
   }
 
   public function actionOut(): void

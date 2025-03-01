@@ -13,7 +13,6 @@ use Laminas\HttpHandlerRunner\RequestHandlerRunner;
 use Laminas\Stratigility\Middleware\ErrorResponseGenerator;
 use Nette\Application\Application;
 use Nette\Bootstrap\Configurator;
-use Nette\Utils\Strings;
 use Psr\Http\Message\ResponseInterface;
 use Relay\Relay;
 use Solcik\Doctrine\DBAL\Type\ZonedDateTimeType;
@@ -23,14 +22,14 @@ use Throwable;
 
 final class Bootstrap
 {
-  public const TIMEZONE = 'Europe/Prague';
+  public const string TIMEZONE = 'Europe/Prague';
 
   public static function start(): void
   {
     $request = SymfonyRequest::createFromGlobals();
     $uri = $request->getRequestUri();
 
-    if (Strings::startsWith($uri, '/api')) {
+    if (\str_starts_with($uri, '/api')) {
       self::startApi();
 
       return;
@@ -55,7 +54,7 @@ final class Bootstrap
     $relay = $container->getByType(Relay::class);
     $emitter = $container->getByType(EmitterInterface::class);
 
-    $serverRequestFactory = [ServerRequestFactory::class, 'fromGlobals'];
+    $serverRequestFactory = ServerRequestFactory::fromGlobals(...);
 
     $errorResponseGenerator = static function (Throwable $e): ResponseInterface {
       $generator = new ErrorResponseGenerator();
@@ -133,9 +132,7 @@ final class Bootstrap
   ): Configurator {
     $configurator->defaultExtensions = array_filter(
       $configurator->defaultExtensions,
-      static function (string $key) use ($extensions): bool {
-        return in_array($key, $extensions, true);
-      },
+      static fn(string $key): bool => in_array($key, $extensions, true),
       ARRAY_FILTER_USE_KEY
     );
 

@@ -14,14 +14,14 @@ use VsPoint\Entity\Acl\User;
 use VsPoint\Entity\Acl\UserRole;
 use VsPoint\Helper\Transform;
 
-final class PreFetchUsers
+final readonly class PreFetchUsers
 {
   /**
    * @param Sequence<User> $users
    */
   public function __construct(
-    private readonly EntityManagerInterface $em,
-    private readonly Sequence $users,
+    private EntityManagerInterface $em,
+    private Sequence $users,
   ) {
   }
 
@@ -81,19 +81,16 @@ final class PreFetchUsers
     $userRoles = $this
       ->toSequence()
       ->reduce(
-        static function (Map $acc, User $user): Map {
-          return $user
-            ->getUserRoles()
-            ->reduce(
-              static function (Map $acc, UserRole $userRole): Map {
-                $acc->put($userRole->getId(), $userRole);
+        static fn(Map $acc, User $user): Map => $user
+          ->getUserRoles()
+          ->reduce(
+            static function (Map $acc, UserRole $userRole): Map {
+              $acc->put($userRole->getId(), $userRole);
 
-                return $acc;
-              },
-              $acc
-            )
-          ;
-        },
+              return $acc;
+            },
+            $acc
+          ),
         new Map()
       )
     ;

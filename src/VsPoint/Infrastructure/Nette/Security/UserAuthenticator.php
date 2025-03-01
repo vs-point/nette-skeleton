@@ -20,7 +20,7 @@ use VsPoint\Exception\Runtime\Acl\UserNotFoundByEmail;
 use VsPoint\Exception\Runtime\Authentication\InvalidPasswordException;
 use VsPoint\Exception\Runtime\Authentication\UserInactiveException;
 
-final class UserAuthenticator implements Authenticator, IdentityHandler
+final readonly class UserAuthenticator implements Authenticator, IdentityHandler
 {
   public function __construct(
     private Passwords $passwords,

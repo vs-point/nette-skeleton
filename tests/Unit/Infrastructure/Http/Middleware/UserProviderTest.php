@@ -50,9 +50,7 @@ final class UserProviderTest extends TestCase
 
     $handlerMock = Mockery::mock(RequestHandlerInterface::class);
     $handlerMock->shouldReceive('handle')
-      ->withArgs(function ($req) use ($userMock) {
-        return $req->getAttribute(UserProvider::ATTR_USER) === $userMock;
-      })
+      ->withArgs(fn($req): bool => $req->getAttribute(UserProvider::ATTR_USER) === $userMock)
       ->andReturn(new Response());
 
     $response = $middleware->process($request, $handlerMock);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Database\Migration;
 
+use Override;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
@@ -12,6 +13,7 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20220919203502 extends AbstractMigration
 {
+  #[Override]
   public function getDescription(): string
   {
     return '';
@@ -40,6 +42,7 @@ final class Version20220919203502 extends AbstractMigration
     );
   }
 
+  #[Override]
   public function down(Schema $schema): void
   {
     // this down() migration is auto-generated, please modify it to your needs

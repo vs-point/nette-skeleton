@@ -11,9 +11,9 @@ use VsPoint\Http\Web\Admin\Acl\SignInPresenter;
 use VsPoint\Http\Web\Admin\LandingPresenter;
 use VsPoint\Http\Web\BasePresenter;
 
-final class CheckAuth implements EventSubscriberInterface
+final readonly class CheckAuth implements EventSubscriberInterface
 {
-  public function __construct(private readonly AclHelper $aclHelper)
+  public function __construct(private AclHelper $aclHelper)
   {
   }
 

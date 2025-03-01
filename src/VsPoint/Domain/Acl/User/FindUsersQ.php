@@ -7,10 +7,10 @@ namespace VsPoint\Domain\Acl\User;
 use Doctrine\ORM\EntityManagerInterface;
 use VsPoint\Entity\Acl\User;
 
-final class FindUsersQ implements FindUsers
+final readonly class FindUsersQ implements FindUsers
 {
   public function __construct(
-    private readonly EntityManagerInterface $em,
+    private EntityManagerInterface $em,
   ) {
   }
 

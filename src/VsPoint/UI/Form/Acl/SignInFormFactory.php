@@ -10,12 +10,12 @@ use Nette\SmartObject;
 use VsPoint\DTO\Acl\SignInFormDTO;
 use VsPoint\UI\Form\FormFactory;
 
-final class SignInFormFactory
+final readonly class SignInFormFactory
 {
   use SmartObject;
 
   public function __construct(
-    private readonly FormFactory $formFactory,
+    private FormFactory $formFactory,
   ) {
   }
 
@@ -29,17 +29,17 @@ final class SignInFormFactory
     $t = 'admin.' . self::class;
 
     $form
-      ->addText($f = 'email', "${t}.${f}.label")
+      ->addText($f = 'email', "{$t}.{$f}.label")
       ->setRequired('admin.form.rule.required')
         ;
 
     $form
-      ->addPassword($f = 'password', "${t}.${f}.label")
+      ->addPassword($f = 'password', "{$t}.{$f}.label")
       ->setRequired('admin.form.rule.required')
         ;
 
     $form
-      ->addSubmit($f = 'submit', "${t}.${f}.caption");
+      ->addSubmit($f = 'submit', "{$t}.{$f}.caption");
 
     return $form;
   }

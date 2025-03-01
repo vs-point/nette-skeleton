@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Infrastructure\Kdyby\FakeSession;
 
+use Override;
 use LogicException;
 use ArrayIterator;
 use Iterator;
@@ -24,7 +25,7 @@ class Session extends NetteSession
 
   private string $id = '';
 
-  private NetteSession $originalSession;
+  private readonly NetteSession $originalSession;
 
   private bool $fakeMode = false;
 
@@ -52,6 +53,7 @@ class Session extends NetteSession
     return !$this->fakeMode;
   }
 
+  #[Override]
   public function start(): void
   {
     if (!$this->fakeMode) {
@@ -59,6 +61,7 @@ class Session extends NetteSession
     }
   }
 
+  #[Override]
   public function isStarted(): bool
   {
     if (!$this->fakeMode) {
@@ -73,6 +76,7 @@ class Session extends NetteSession
     $this->started = $started;
   }
 
+  #[Override]
   public function close(): void
   {
     if (!$this->fakeMode) {
@@ -80,6 +84,7 @@ class Session extends NetteSession
     }
   }
 
+  #[Override]
   public function destroy(): void
   {
     if (!$this->fakeMode) {
@@ -87,6 +92,7 @@ class Session extends NetteSession
     }
   }
 
+  #[Override]
   public function exists(): bool
   {
     if (!$this->fakeMode) {
@@ -101,6 +107,7 @@ class Session extends NetteSession
     $this->exists = $exists;
   }
 
+  #[Override]
   public function regenerateId(): void
   {
     if (!$this->fakeMode) {
@@ -108,6 +115,7 @@ class Session extends NetteSession
     }
   }
 
+  #[Override]
   public function getId(): string
   {
     if (!$this->fakeMode) {
@@ -122,22 +130,20 @@ class Session extends NetteSession
     $this->id = $id;
   }
 
+  #[Override]
   public function getSection(string $section, string $class = NetteSessionSection::class): NetteSessionSection
   {
     if (!$this->fakeMode) {
       return $this->originalSession->getSection($section, $class);
     }
 
-    if (isset($this->sections[$section])) {
-      return $this->sections[$section];
-    }
-
-    return $this->sections[$section] = parent::getSection(
+    return $this->sections[$section] ?? $this->sections[$section] = parent::getSection(
       $section,
       $class !== NetteSessionSection::class ? $class : SessionSection::class
     );
   }
 
+  #[Override]
   public function hasSection(string $section): bool
   {
     if (!$this->fakeMode) {
@@ -163,6 +169,7 @@ class Session extends NetteSession
 //    }
   }
 
+  #[Override]
   public function setName(string $name): static
   {
     $this->originalSession->setName($name);
@@ -170,6 +177,7 @@ class Session extends NetteSession
     return $this;
   }
 
+  #[Override]
   public function getName(): string
   {
     return $this->originalSession->getName();
@@ -178,6 +186,7 @@ class Session extends NetteSession
   /**
    * @param mixed[] $options
    */
+  #[Override]
   public function setOptions(array $options): static
   {
     $this->originalSession->setOptions($options);
@@ -188,11 +197,13 @@ class Session extends NetteSession
   /**
    * @return mixed[]
    */
+  #[Override]
   public function getOptions(): array
   {
     return $this->originalSession->getOptions();
   }
 
+  #[Override]
   public function setExpiration(?string $time): static
   {
     $this->originalSession->setExpiration($time);
@@ -200,6 +211,7 @@ class Session extends NetteSession
     return $this;
   }
 
+  #[Override]
   public function setCookieParameters(
     string $path,
     ?string $domain = null,
@@ -219,6 +231,7 @@ class Session extends NetteSession
     return $this->originalSession->getCookieParameters();
   }
 
+  #[Override]
   public function setSavePath(string $path): static
   {
     $this->originalSession->setSavePath($path);
@@ -226,6 +239,7 @@ class Session extends NetteSession
     return $this;
   }
 
+  #[Override]
   public function setHandler(SessionHandlerInterface $handler): static
   {
     $this->originalSession->setHandler($handler);

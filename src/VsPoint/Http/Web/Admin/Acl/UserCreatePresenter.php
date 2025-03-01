@@ -23,7 +23,7 @@ use VsPoint\UI\Form\Acl\UserFormFactory;
 
 final class UserCreatePresenter extends BasePresenter
 {
-  public const LINK = ':Admin:Acl:UserCreate:';
+  public const string LINK = ':Admin:Acl:UserCreate:';
 
   public function __construct(
     private readonly UserFormFactory $userFormFactory,
@@ -74,7 +74,7 @@ final class UserCreatePresenter extends BasePresenter
       } catch (UserAlreadyExistsException) {
         /** @var BaseControl $formEmail */
         $formEmail = $form['email'];
-        $formEmail->addError($this->trans->translate("${t}.email.error.alreadyExists"));
+        $formEmail->addError($this->trans->translate("{$t}.email.error.alreadyExists"));
 
         return;
       }

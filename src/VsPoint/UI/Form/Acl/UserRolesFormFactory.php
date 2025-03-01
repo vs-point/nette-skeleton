@@ -12,13 +12,13 @@ use VsPoint\Entity\Acl\Role;
 use VsPoint\Entity\Acl\UserRole;
 use VsPoint\UI\Form\FormFactory;
 
-final class UserRolesFormFactory
+final readonly class UserRolesFormFactory
 {
   use SmartObject;
 
   public function __construct(
-    private readonly FormFactory $formFactory,
-    private readonly Translator $trans,
+    private FormFactory $formFactory,
+    private Translator $trans,
   ) {
   }
 
@@ -35,7 +35,7 @@ final class UserRolesFormFactory
     );
 
     $form
-      ->addCheckboxList($f = 'roles', "${t}.${f}.label", $roles)
+      ->addCheckboxList($f = 'roles', "{$t}.{$f}.label", $roles)
       ->setTranslator(null)
         ;
 

@@ -12,14 +12,14 @@ use Ramsey\Uuid\UuidInterface;
 use VsPoint\Entity\Acl\UserRole;
 use VsPoint\Helper\Transform;
 
-final class PreFetchUserRoles
+final readonly class PreFetchUserRoles
 {
   /**
    * @param Sequence<UserRole> $userRoles
    */
   public function __construct(
-    private readonly EntityManagerInterface $em,
-    private readonly Sequence $userRoles,
+    private EntityManagerInterface $em,
+    private Sequence $userRoles,
   ) {
   }
 

@@ -9,7 +9,7 @@ use Contributte\FormsBootstrap\Enums\RenderMode;
 use Nette\Application\UI\Form;
 use Nette\Localization\Translator;
 
-final class FormFactory
+final readonly class FormFactory
 {
   public function __construct(
     private Translator $translator,

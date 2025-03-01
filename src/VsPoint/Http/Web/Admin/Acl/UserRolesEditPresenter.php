@@ -21,7 +21,7 @@ use function sprintf;
 
 final class UserRolesEditPresenter extends BasePresenter
 {
-  public const LINK = ':Admin:Acl:UserRolesEdit:';
+  public const string LINK = ':Admin:Acl:UserRolesEdit:';
 
   private User $aclUser;
 

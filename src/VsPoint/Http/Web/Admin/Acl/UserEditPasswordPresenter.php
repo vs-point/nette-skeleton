@@ -21,7 +21,7 @@ use function sprintf;
 
 final class UserEditPasswordPresenter extends BasePresenter
 {
-  public const LINK = ':Admin:Acl:UserEditPassword:';
+  public const string LINK = ':Admin:Acl:UserEditPassword:';
 
   private User $aclUser;
 

@@ -9,9 +9,9 @@ use Ds\Sequence;
 use Ds\Vector;
 use VsPoint\Entity\Locale\Locale;
 
-final class FindLocalesQ implements FindLocales
+final readonly class FindLocalesQ implements FindLocales
 {
-  public function __construct(private readonly EntityManagerInterface $em)
+  public function __construct(private EntityManagerInterface $em)
   {
   }
 

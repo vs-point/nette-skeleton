@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
+use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
 
 /**
  * https://getrector.com/find-rule
@@ -25,9 +26,9 @@ return RectorConfig
     importShortClasses:  true,
     removeUnusedImports: true,
   )
-//  ->withPhpSets(
-//    php84: true,
-//  )
+  ->withPhpSets(
+    php84: true,
+  )
 //  ->withAttributesSets(
 //    symfony:  true,
 //    doctrine: true,
@@ -58,8 +59,8 @@ return RectorConfig
   )
   ->withSkip(
     [
+      ClassPropertyAssignToConstructorPromotionRector::class,
       //            AddOverrideAttributeToOverriddenMethodsRector::class,
-      //            ClassPropertyAssignToConstructorPromotionRector::class,
       //            ClosureToArrowFunctionRector::class,
       //            StringableForToStringRector::class,
       //            NullToStrictStringFuncCallArgRector::class,

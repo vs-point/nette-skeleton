@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\VO\Html;
 
-final class HtmlVO
+final readonly class HtmlVO
 {
   private string $title;
 

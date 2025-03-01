@@ -7,10 +7,10 @@ namespace VsPoint\Domain\Acl\UserRole;
 use Doctrine\ORM\EntityManagerInterface;
 use VsPoint\Entity\Acl\UserRole;
 
-final class UserRoleDeleteORM implements UserRoleDeleted
+final readonly class UserRoleDeleteORM implements UserRoleDeleted
 {
   public function __construct(
-    private readonly EntityManagerInterface $em,
+    private EntityManagerInterface $em,
   ) {
   }
 

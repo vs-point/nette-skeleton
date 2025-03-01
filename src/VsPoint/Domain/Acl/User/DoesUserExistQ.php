@@ -9,10 +9,10 @@ use Doctrine\ORM\NonUniqueResultException as DoctrineNonUniqueResultException;
 use VsPoint\Entity\Acl\User;
 use VsPoint\Exception\Logic\NonUniqueResultException;
 
-final class DoesUserExistQ implements DoesUserExist
+final readonly class DoesUserExistQ implements DoesUserExist
 {
   public function __construct(
-    private readonly EntityManagerInterface $em,
+    private EntityManagerInterface $em,
   ) {
   }
 
