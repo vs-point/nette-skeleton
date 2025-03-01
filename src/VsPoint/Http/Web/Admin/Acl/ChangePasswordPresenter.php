@@ -53,7 +53,7 @@ final class ChangePasswordPresenter extends BasePresenter
         return;
       }
 
-      $this->em->wrapInTransaction(function () use ($user, $data) {
+      $this->em->wrapInTransaction(function () use ($user, $data): void {
         $user->editPassword($data->password, $this->passwords, $this->userEdited);
       });
 

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Domain\Locale\Locale;
 
+use Exception;
+use Mockery;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException as ORMNonUniqueResultException;
@@ -66,11 +68,11 @@ class GetLocaleByIdQTest extends TestCase
     $getLocaleById->__invoke(LocaleFixture::ENG);
   }
 
-  private function setMockery(\Exception $exception): EntityManagerInterface
+  private function setMockery(Exception $exception): EntityManagerInterface
   {
-    $emMock = \Mockery::mock(EntityManagerInterface::class);
+    $emMock = Mockery::mock(EntityManagerInterface::class);
 
-    $queryMock = \Mockery::mock(AbstractQuery::class);
+    $queryMock = Mockery::mock(AbstractQuery::class);
     $queryMock
       ->allows('setParameter')->andReturnSelf()
     ;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Infrastructure\Http\Middleware;
 
+use function Safe\json_decode;
 use Laminas\Diactoros\Response;
 use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\Diactoros\ServerRequest;
@@ -81,7 +82,7 @@ final class UserProviderTest extends TestCase
     self::assertInstanceOf(JsonResponse::class, $response);
     self::assertSame(401, $response->getStatusCode());
 
-    $data = \Safe\json_decode((string) $response->getBody(), true);
+    $data = json_decode((string) $response->getBody(), true);
     self::assertStringStartsWith('User was not found for id: ', $data['error']['message']);
   }
 

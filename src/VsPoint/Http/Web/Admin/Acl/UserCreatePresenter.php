@@ -55,7 +55,7 @@ final class UserCreatePresenter extends BasePresenter
       $t = 'admin.' . UserFormFactory::class;
 
       try {
-        $this->em->wrapInTransaction(function () use ($data) {
+        $this->em->wrapInTransaction(function () use ($data): void {
           $timestamp = $this->clock->createZonedDateTime();
           $expiration = $data->expiration?->atTime(LocalTime::max())->atTimeZone($timestamp->getTimeZone());
 

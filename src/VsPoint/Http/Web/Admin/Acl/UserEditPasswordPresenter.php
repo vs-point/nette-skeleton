@@ -60,7 +60,7 @@ final class UserEditPasswordPresenter extends BasePresenter
     $form = $this->userFormFactory->createEditPassword();
 
     $form->onSuccess[] = function (Form $form, PasswordFormDTO $data): void {
-      $this->em->wrapInTransaction(function () use ($data) {
+      $this->em->wrapInTransaction(function () use ($data): void {
         $this->aclUser->editPassword($data->password, $this->passwords, $this->userEdited);
       });
 

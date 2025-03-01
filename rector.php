@@ -3,8 +3,6 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
-use Rector\Doctrine\Set\DoctrineSetList;
-use Rector\Set\ValueObject\LevelSetList;
 
 /**
  * https://getrector.com/find-rule
@@ -27,9 +25,9 @@ return RectorConfig
     importShortClasses:  true,
     removeUnusedImports: true,
   )
-  ->withPhpSets(
-    php84: true,
-  )
+//  ->withPhpSets(
+//    php84: true,
+//  )
 //  ->withAttributesSets(
 //    symfony:  true,
 //    doctrine: true,
@@ -73,8 +71,8 @@ return RectorConfig
       //            SymfonySetList::SYMFONY_72,
       //            SymfonySetList::SYMFONY_CODE_QUALITY,
       //            SymfonySetList::SYMFONY_CONSTRUCTOR_INJECTION,
-      DoctrineSetList::GEDMO_ANNOTATIONS_TO_ATTRIBUTES,
-      DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
+//      DoctrineSetList::GEDMO_ANNOTATIONS_TO_ATTRIBUTES,
+//      DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
 //      LevelSetList::UP_TO_PHP_84,
     ]
   )

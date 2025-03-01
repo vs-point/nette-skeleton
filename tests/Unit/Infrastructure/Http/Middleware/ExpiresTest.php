@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Infrastructure\Http\Middleware;
 
+use DateTimeInterface;
 use Brick\DateTime\TimeZone;
 use Brick\DateTime\ZonedDateTime;
 use Laminas\Diactoros\Response;
@@ -44,7 +45,7 @@ final class ExpiresTest extends TestCase
     $response = $middleware->process($request, $handlerMock);
 
     $expectedExpires = $futureTime->withTimeZoneSameInstant($timezone)->toNativeDateTimeImmutable()->format(
-      \DateTimeInterface::RFC7231
+      DateTimeInterface::RFC7231
     );
     self::assertSame($expectedExpires, $response->getHeaderLine(Expires::HEADER));
   }

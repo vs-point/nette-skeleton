@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Exception\Runtime\Acl;
 
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery;
 use VsPoint\Entity\Acl\User;
 use VsPoint\Exception\Runtime\Acl\UserInactiveException;
@@ -14,7 +15,7 @@ use VsPoint\Test\TestCase;
  */
 final class UserInactiveExceptionTest extends TestCase
 {
-  use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+  use MockeryPHPUnitIntegration;
 
   /**
    * @group unit

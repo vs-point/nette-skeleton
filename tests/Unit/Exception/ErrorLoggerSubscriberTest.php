@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Exception;
 
+use Exception;
 use Contributte\Events\Extra\Event\Application\ErrorEvent;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -41,7 +42,7 @@ final class ErrorLoggerSubscriberTest extends TestCase
 
     $eCode = 500;
     $eMessage = 'exception';
-    $exception = new \Exception($eMessage, $eCode);
+    $exception = new Exception($eMessage, $eCode);
 
     $event = Mockery::mock(ErrorEvent::class);
     $event->allows('getThrowable')->andReturn($exception);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Exception\Runtime\Locale\Locale;
 
+use Exception;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use VsPoint\Exception\Runtime\Locale\Locale\LocaleNotFoundById;
 use VsPoint\Test\TestCase;
@@ -22,7 +23,7 @@ final class LocaleNotFoundByIdTest extends TestCase
   {
     $id = 'cze';
 
-    $exceptionPrevious = new \Exception();
+    $exceptionPrevious = new Exception();
 
     $exception = new LocaleNotFoundById($id, $exceptionPrevious);
 

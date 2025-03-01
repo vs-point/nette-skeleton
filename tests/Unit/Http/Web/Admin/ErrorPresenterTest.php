@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Http\Web\Admin;
 
+use Exception;
 use Nette\Application\BadRequestException;
 use Nette\Application\IPresenterFactory;
 use Nette\Application\Request;
@@ -63,7 +64,7 @@ final class ErrorPresenterTest extends TestCase
 
     $request = new Request($presenterName, Request::FORWARD, [
       'action' => 'default',
-      'exception' => new \Exception('New exception', 500),
+      'exception' => new Exception('New exception', 500),
     ]);
     $response = $presenter->run($request);
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Exception\Runtime\Acl;
 
+use Exception;
 use VsPoint\Exception\Runtime\Acl\UserNotFoundByEmail;
 use VsPoint\Test\TestCase;
 
@@ -19,7 +20,7 @@ final class UserNotFoundByEmailTest extends TestCase
   {
     $email = 'test@email.com';
 
-    $exceptionPrevious = new \Exception();
+    $exceptionPrevious = new Exception();
 
     $exception = new UserNotFoundByEmail($email, $exceptionPrevious);
 

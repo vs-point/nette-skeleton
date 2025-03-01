@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Infrastructure\Http;
 
+use FastRoute\RouteParser\Std;
 use FastRoute\Dispatcher;
 use FastRoute\Dispatcher\GroupCountBased;
 use FastRoute\RouteCollector;
@@ -30,7 +31,7 @@ final class DispatcherFactoryTest extends TestCase
   public function testCreateDispatcherWithoutCache(): void
   {
     $collector = new RouteCollector(
-      new \FastRoute\RouteParser\Std(),
+      new Std(),
       new \FastRoute\DataGenerator\GroupCountBased(),
     );
 
