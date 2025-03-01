@@ -95,3 +95,82 @@ docker-compose exec php php -d xdebug.mode=coverage ./vendor/bin/phpunit --cover
 
 # go to http://localhost
 ```
+
+# VsPoint
+
+## Init
+
+```shell
+docker compose up
+docker container exec -i $(docker compose ps -q database) mariadb --user=$DB_USER --database=$DB_NAME --password=$DB_PASSWORD < ./.data/db_backup_dev.sql
+docker compose exec php composer install
+
+npm install
+npm run build
+```
+
+## Tools
+
+### PHP Parallel Lint
+
+- https://github.com/php-parallel-lint/PHP-Parallel-Lint
+
+```shell
+docker compose exec php ./vendor/bin/parallel-lint --exclude ./.git --exclude ./vendor --exclude ./var .
+```
+
+### ECS
+
+- https://github.com/easy-coding-standard/easy-coding-standard
+
+```shell
+docker compose exec php ./vendor/bin/ecs
+docker compose exec php ./vendor/bin/ecs --fix
+```
+
+### PHPStan
+
+- https://phpstan.org/
+
+```shell
+docker compose exec php ./vendor/bin/phpstan
+```
+
+### Rector
+
+- https://getrector.com/find-rule
+
+```shell
+docker compose exec php ./vendor/bin/rector --dry-run
+docker compose exec php ./vendor/bin/rector
+```
+
+### Class leak
+
+- https://github.com/TomasVotruba/class-leak
+
+```shell
+docker compose exec php ./vendor/bin/class-leak check src
+```
+
+### Swiss knife
+
+- https://github.com/rectorphp/swiss-knife
+
+```shell
+docker compose exec php ./vendor/bin/swiss-knife check-conflicts ./src
+docker compose exec php ./vendor/bin/swiss-knife check-commented-code ./src --line-limit 10
+docker compose exec php ./vendor/bin/swiss-knife find-multi-classes ./src
+docker compose exec php ./vendor/bin/swiss-knife namespace-to-psr-4 ./src/VsPoint --namespace-root "VsPoint\\"
+docker compose exec php ./vendor/bin/swiss-knife namespace-to-psr-4 ./tests --namespace-root "VsPoint\\Test\\"
+docker compose exec php ./vendor/bin/swiss-knife finalize-classes ./src ./tests
+docker compose exec php ./vendor/bin/swiss-knife privatize-constants ./src ./test
+```
+
+### Config transformer
+
+- https://github.com/symplify/config-transformer
+
+```shell
+docker compose exec php ./vendor/bin/config-transformer convert config/parameters.yml
+```
