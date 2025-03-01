@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Infrastructure\Http\Nette\Security;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use Doctrine\ORM\EntityManagerInterface;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -21,9 +22,7 @@ use VsPoint\Exception\Runtime\Acl\UserNotLoggedInException;
 use VsPoint\Infrastructure\Nette\Security\GetLoggedInUserQ;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Infrastructure\Nette\Security\GetLoggedInUserQ
- */
+#[CoversClass(GetLoggedInUserQ::class)]
 final class GetLoggedInUserQTest extends TestCase
 {
   use MockeryPHPUnitIntegration;

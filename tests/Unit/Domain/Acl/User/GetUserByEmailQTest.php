@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Domain\Acl\User;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException as DoctrineNonUniqueResultException;
@@ -16,16 +18,12 @@ use VsPoint\Exception\Logic\NonUniqueResultException;
 use VsPoint\Exception\Runtime\Acl\UserNotFoundByEmail;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Domain\Acl\User\GetUserByEmailQ
- */
+#[CoversClass(GetUserByEmailQ::class)]
 final class GetUserByEmailQTest extends TestCase
 {
   use MockeryPHPUnitIntegration;
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testConstructor(): void
   {
     $container = $this->createContainer();
@@ -39,9 +37,9 @@ final class GetUserByEmailQTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserNotFoundByEmail
    */
+  #[Group('unit')]
   public function testInvoke(): void
   {
     $container = $this->createContainer();
@@ -55,10 +53,9 @@ final class GetUserByEmailQTest extends TestCase
   }
 
   /**
-   * @group unit
-   *
    * @throws UserNotFoundByEmail
    */
+  #[Group('unit')]
   public function testInvokeNotFound(): void
   {
     $this->expectException(UserNotFoundByEmail::class);
@@ -71,10 +68,9 @@ final class GetUserByEmailQTest extends TestCase
   }
 
   /**
-   * @group unit
-   *
    * @throws UserNotFoundByEmail
    */
+  #[Group('unit')]
   public function testNonUniqueResult(): void
   {
     $this->expectException(NonUniqueResultException::class);

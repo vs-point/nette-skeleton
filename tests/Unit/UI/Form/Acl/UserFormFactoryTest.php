@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\UI\Form\Acl;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Test\TestCase;
 use VsPoint\UI\Form\Acl\UserFormFactory;
 
-/**
- * @covers \VsPoint\UI\Form\Acl\UserFormFactory
- */
+#[CoversClass(UserFormFactory::class)]
 final class UserFormFactoryTest extends TestCase
 {
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testFactoryCreate(): void
   {
     $container = $this->createContainerForWeb();
@@ -25,9 +23,7 @@ final class UserFormFactoryTest extends TestCase
     self::assertCount(6, $form->getComponents());
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testFactoryCreateEditPassword(): void
   {
     $container = $this->createContainerForWeb();
@@ -38,9 +34,7 @@ final class UserFormFactoryTest extends TestCase
     self::assertCount(4, $form->getComponents());
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testFactoryCreatePasswordChange(): void
   {
     $container = $this->createContainerForWeb();

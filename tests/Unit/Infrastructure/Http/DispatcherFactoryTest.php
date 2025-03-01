@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Infrastructure\Http;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use FastRoute\RouteParser\Std;
 use FastRoute\Dispatcher;
 use FastRoute\Dispatcher\GroupCountBased;
@@ -13,9 +14,7 @@ use VsPoint\Infrastructure\Http\DispatcherFactory;
 use VsPoint\Infrastructure\Http\Route;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Infrastructure\Http\DispatcherFactory
- */
+#[CoversClass(DispatcherFactory::class)]
 final class DispatcherFactoryTest extends TestCase
 {
   private DispatcherFactory $dispatcherFactory;

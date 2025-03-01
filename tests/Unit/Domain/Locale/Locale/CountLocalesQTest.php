@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Domain\Locale\Locale;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use Exception;
 use Mockery;
 use Doctrine\ORM\AbstractQuery;
@@ -14,16 +16,12 @@ use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use VsPoint\Domain\Locale\Locale\CountLocalesQ;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Domain\Locale\Locale\CountLocalesQ
- */
+#[CoversClass(CountLocalesQ::class)]
 class CountLocalesQTest extends TestCase
 {
   use MockeryPHPUnitIntegration;
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testGet(): void
   {
     $container = $this->createContainer();
@@ -33,9 +31,7 @@ class CountLocalesQTest extends TestCase
     self::assertEquals(2, $countLocalesQ->__invoke());
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testCatchNoResultException(): void
   {
     $emMock = $this->setMockery(new NoResultException());
@@ -45,9 +41,7 @@ class CountLocalesQTest extends TestCase
     self::assertEquals(0, $countLocalesQ->__invoke());
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testCatchNonUniqueResultException(): void
   {
     $emMock = $this->setMockery(new NonUniqueResultException());

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Http\Web\Front;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use Nette\Application\IPresenterFactory;
 use Nette\Application\Request;
 use Nette\Application\Responses\TextResponse;
@@ -11,14 +13,10 @@ use Nette\Bridges\ApplicationLatte\Template;
 use VsPoint\Http\Web\Front\HomepagePresenter;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Http\Web\Front\HomepagePresenter
- */
+#[CoversClass(HomepagePresenter::class)]
 final class HomepagePresenterTest extends TestCase
 {
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testConstructor(): void
   {
     $container = $this->createContainerForWeb();

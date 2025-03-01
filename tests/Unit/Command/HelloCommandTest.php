@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Command;
 
+use VsPoint\Console\HelloCommand;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use Contributte\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use VsPoint\Test\TestCase;
 
 /**
- * @covers \VsPoint\Console\HelloCommand
- *
  * @internal
  */
+#[CoversClass(HelloCommand::class)]
 final class HelloCommandTest extends TestCase
 {
-  /**
-   * @group command
-   */
+  #[Group('command')]
   public function testExecute(): void
   {
     $container = $this->createContainer();

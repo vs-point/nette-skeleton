@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Entity;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use Nette\Security\Passwords;
 use Ramsey\Uuid\Uuid;
 use Solcik\Brick\DateTime\Clock;
@@ -17,15 +19,13 @@ use VsPoint\Entity\Acl\UserRole;
 use VsPoint\Exception\Runtime\Acl\UserAlreadyExistsException;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Entity\Acl\UserRole
- */
+#[CoversClass(UserRole::class)]
 final class UserRoleTest extends TestCase
 {
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testCreate(): void
   {
     $container = $this->createContainer();
@@ -68,9 +68,9 @@ final class UserRoleTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testDelete(): void
   {
     $container = $this->createContainer();
@@ -123,9 +123,9 @@ final class UserRoleTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testGetters(): void
   {
     $container = $this->createContainer();
@@ -173,9 +173,9 @@ final class UserRoleTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testUserRoleCreatedEventIsCalled(): void
   {
     // Create mock for UserRoleCreated to verify it's called

@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\DTO;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\DTO\Common\SearchFormDTO;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\DTO\Common\SearchFormDTO
- */
+#[CoversClass(SearchFormDTO::class)]
 final class SearchFormDTOTest extends TestCase
 {
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testConstructor(): void
   {
     $query = 'search';

@@ -4,18 +4,16 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\VO;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Test\TestCase;
 use VsPoint\VO\Html\MetadataVO;
 use VsPoint\VO\Html\OgVO;
 
-/**
- * @covers \VsPoint\VO\Html\MetadataVO
- */
+#[CoversClass(MetadataVO::class)]
 final class MetadataVOTest extends TestCase
 {
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testInvoke(): void
   {
     $ogVo = new OgVO('Og title', 'Lorem ipsum', '/img/og/vs-point.png', 'website',);

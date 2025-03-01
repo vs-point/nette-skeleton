@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Domain\Acl\UserRole;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use Doctrine\ORM\EntityManagerInterface;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -11,16 +13,12 @@ use VsPoint\Domain\Acl\UserRole\UserRoleORM;
 use VsPoint\Entity\Acl\UserRole;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Domain\Acl\UserRole\UserRoleORM
- */
+#[CoversClass(UserRoleORM::class)]
 final class UserRoleORMTest extends TestCase
 {
   use MockeryPHPUnitIntegration;
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testConstructor(): void
   {
     $this->expectNotToPerformAssertions();
@@ -30,9 +28,7 @@ final class UserRoleORMTest extends TestCase
     $userRoleORM = new UserRoleORM($emMock);
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testInvoke(): void
   {
     $emMock = Mockery::mock(EntityManagerInterface::class);

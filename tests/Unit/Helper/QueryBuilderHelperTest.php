@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Helper;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Andx;
 use Doctrine\ORM\Query\Expr\Join;
@@ -15,9 +16,7 @@ use VsPoint\Entity\Acl\User;
 use VsPoint\Helper\QueryBuilderHelper;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Helper\QueryBuilderHelper
- */
+#[CoversClass(QueryBuilderHelper::class)]
 final class QueryBuilderHelperTest extends TestCase
 {
   use MockeryPHPUnitIntegration;

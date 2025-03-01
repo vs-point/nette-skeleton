@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\UI\VO\PreFetch;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use Doctrine\ORM\EntityManagerInterface;
 use Ds\Set;
 use Ds\Vector;
@@ -12,14 +14,10 @@ use VsPoint\Database\Fixture\InitFixture;
 use VsPoint\Test\TestCase;
 use VsPoint\VO\PreFetch\PreFetchUserRoles;
 
-/**
- * @covers \VsPoint\VO\PreFetch\PreFetchUserRoles
- */
+#[CoversClass(PreFetchUserRoles::class)]
 final class PreFetchUserRolesTest extends TestCase
 {
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testConstructor(): void
   {
     $container = $this->createContainer();
@@ -36,9 +34,7 @@ final class PreFetchUserRolesTest extends TestCase
     self::assertCount(0, $sequence);
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testByIds(): void
   {
     $container = $this->createContainer();
@@ -56,9 +52,7 @@ final class PreFetchUserRolesTest extends TestCase
     self::assertCount(1, $sequence);
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testWithUser(): void
   {
     $container = $this->createContainer();

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Entity;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use Nette\Security\Passwords;
 use Ramsey\Uuid\Uuid;
 use Solcik\Brick\DateTime\Clock;
@@ -20,16 +22,13 @@ use VsPoint\Exception\Runtime\Authentication\InvalidPasswordException;
 use VsPoint\Exception\Runtime\Authentication\UserInactiveException;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Entity\Acl\User
- */
+#[CoversClass(User::class)]
 final class UserTest extends TestCase
 {
   /**
-   * @group unit
-   *
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testCreate(): void
   {
     $container = $this->createContainer();
@@ -54,9 +53,9 @@ final class UserTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testGetters(): void
   {
     $container = $this->createContainer();
@@ -121,9 +120,9 @@ final class UserTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testRolesGetters(): void
   {
     $container = $this->createContainer();
@@ -158,9 +157,9 @@ final class UserTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testEdit(): void
   {
     $container = $this->createContainer();
@@ -195,9 +194,9 @@ final class UserTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testEditPassword(): void
   {
     $container = $this->createContainer();
@@ -237,9 +236,9 @@ final class UserTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testEditUserRolesRemovesOldRoles(): void
   {
     $container = $this->createContainer();
@@ -279,11 +278,11 @@ final class UserTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    * @throws InvalidPasswordException
    * @throws UserInactiveException
    */
+  #[Group('unit')]
   public function testLogIn(): void
   {
     $this->expectNotToPerformAssertions();
@@ -317,11 +316,11 @@ final class UserTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    * @throws UserInactiveException
    * @throws InvalidPasswordException
    */
+  #[Group('unit')]
   public function testLogInInvalidPassword(): void
   {
     $container = $this->createContainer();
@@ -354,11 +353,11 @@ final class UserTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    * @throws UserInactiveException
    * @throws InvalidPasswordException
    */
+  #[Group('unit')]
   public function testLogInInactiveUser(): void
   {
     $container = $this->createContainer();
@@ -392,11 +391,11 @@ final class UserTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    * @throws UserInactiveException
    *@throws InvalidPasswordException
    */
+  #[Group('unit')]
   public function testLogInCallsUserLoggedInEvent(): void
   {
     $container = $this->createContainer();
@@ -435,9 +434,9 @@ final class UserTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testToString(): void
   {
     $container = $this->createContainer();
@@ -458,9 +457,9 @@ final class UserTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testCreateThrowsExceptionWhenUserExists(): void
   {
     $container = $this->createContainer();
@@ -493,9 +492,9 @@ final class UserTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testEditThrowsExceptionWhenEmailExists(): void
   {
     $container = $this->createContainer();

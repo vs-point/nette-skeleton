@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Infrastructure\Doctrine\ORM\Query\AST\Functions;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
@@ -12,9 +13,7 @@ use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use VsPoint\Infrastructure\Doctrine\ORM\Query\AST\Functions\RandomFunction;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Infrastructure\Doctrine\ORM\Query\AST\Functions\RandomFunction
- */
+#[CoversClass(RandomFunction::class)]
 final class RandomFunctionTest extends TestCase
 {
   use MockeryPHPUnitIntegration;

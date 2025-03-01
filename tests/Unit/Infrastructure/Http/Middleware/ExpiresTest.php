@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Infrastructure\Http\Middleware;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use DateTimeInterface;
 use Brick\DateTime\TimeZone;
 use Brick\DateTime\ZonedDateTime;
@@ -16,9 +17,7 @@ use Solcik\Brick\DateTime\Clock;
 use VsPoint\Infrastructure\Http\Middleware\Expires;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Infrastructure\Http\Middleware\Expires
- */
+#[CoversClass(Expires::class)]
 final class ExpiresTest extends TestCase
 {
   use MockeryPHPUnitIntegration;

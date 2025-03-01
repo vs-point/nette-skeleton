@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Infrastructure\Http\Middleware;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use function Safe\json_decode;
 use Laminas\Diactoros\Response;
 use Laminas\Diactoros\Response\JsonResponse;
@@ -24,13 +25,13 @@ use VsPoint\Exception\Runtime\Acl\UserNotFound;
 use VsPoint\Infrastructure\Http\Middleware\UserProvider;
 use VsPoint\Test\TestCase;
 
+#[CoversClass(UserProvider::class)]
 final class UserProviderTest extends TestCase
 {
   use MockeryPHPUnitIntegration;
 
   /**
    * @throws UserAlreadyExistsException
-   * @covers \VsPoint\Infrastructure\Http\Middleware\UserProvider
    */
   public function testProcessWithValidUser(): void
   {

@@ -3,7 +3,9 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
+use Rector\Doctrine\Set\DoctrineSetList;
 use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
+use Rector\Set\ValueObject\LevelSetList;
 
 /**
  * https://getrector.com/find-rule
@@ -29,11 +31,11 @@ return RectorConfig
   ->withPhpSets(
     php84: true,
   )
-//  ->withAttributesSets(
-//    symfony:  true,
-//    doctrine: true,
-//    phpunit:  true,
-//  )
+  ->withAttributesSets(
+    symfony:  true,
+    doctrine: true,
+    phpunit:  true,
+  )
   ->withPreparedSets(
   //        deadCode:         false,
   //        codeQuality:      false,
@@ -45,10 +47,10 @@ return RectorConfig
   //        earlyReturn:      false,
   //        strictBooleans:   false,
   )
-//  ->withComposerBased(
-//    doctrine: true,
-//    phpunit:  true,
-//  )
+  ->withComposerBased(
+    doctrine: true,
+    phpunit:  true,
+  )
   ->withRules(
     [
       //            AddVoidReturnTypeWhereNoReturnRector::class,
@@ -72,12 +74,12 @@ return RectorConfig
       //            SymfonySetList::SYMFONY_72,
       //            SymfonySetList::SYMFONY_CODE_QUALITY,
       //            SymfonySetList::SYMFONY_CONSTRUCTOR_INJECTION,
-//      DoctrineSetList::GEDMO_ANNOTATIONS_TO_ATTRIBUTES,
-//      DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
-//      LevelSetList::UP_TO_PHP_84,
+      DoctrineSetList::GEDMO_ANNOTATIONS_TO_ATTRIBUTES,
+      DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
+      LevelSetList::UP_TO_PHP_84,
     ]
   )
-  ->withTypeCoverageLevel(22)
+  ->withTypeCoverageLevel(0)
   //    ->withDeadCodeLevel(0)
   //    ->withCodeQualityLevel(0)
   ;

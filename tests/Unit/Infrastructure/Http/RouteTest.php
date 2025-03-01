@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Infrastructure\Http;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Infrastructure\Http\Route;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Infrastructure\Http\Route
- */
+#[CoversClass(Route::class)]
 final class RouteTest extends TestCase
 {
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testRouteInitialization(): void
   {
     $method = 'GET';
@@ -29,9 +27,7 @@ final class RouteTest extends TestCase
     self::assertSame($handler, $route->getHandler());
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testDifferentRouteValues(): void
   {
     $route = new Route('POST', '/login', 'AuthController@login');

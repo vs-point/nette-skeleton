@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\VO;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Test\TestCase;
 use VsPoint\VO\Html\OgVO;
 
-/**
- * @covers \VsPoint\VO\Html\OgVO
- */
+#[CoversClass(OgVO::class)]
 final class OgVOTest extends TestCase
 {
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testInvoke(): void
   {
     $ogVoTitle = 'Og title';

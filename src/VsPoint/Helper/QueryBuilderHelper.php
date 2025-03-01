@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Helper;
 
-use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
@@ -89,7 +89,7 @@ final class QueryBuilderHelper
       ->select("partial {$alias}.{id}")
       ->from($class, $alias, "{$alias}.id")
       ->andWhere($qb->expr()->in("{$alias}.id", ':ids'))
-      ->setParameter('ids', $ids, Connection::PARAM_STR_ARRAY)
+      ->setParameter('ids', $ids, ArrayParameterType::STRING)
         ;
 
     return $qb;

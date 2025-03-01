@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Domain;
 
+use VsPoint\Domain\PreFetchQ;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use Ds\Vector;
 use VsPoint\Domain\PreFetch;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Domain\PreFetchQ
- */
+#[CoversClass(PreFetchQ::class)]
 final class PreFetchQTest extends TestCase
 {
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testForUsers(): void
   {
     $container = $this->createContainer();
@@ -26,9 +25,7 @@ final class PreFetchQTest extends TestCase
     self::assertCount(0, $preFetchUsers->toArray());
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testForUserRoles(): void
   {
     $container = $this->createContainer();

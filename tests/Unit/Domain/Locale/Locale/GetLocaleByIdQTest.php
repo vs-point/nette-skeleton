@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Domain\Locale\Locale;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use Exception;
 use Mockery;
 use Doctrine\ORM\AbstractQuery;
@@ -18,18 +20,15 @@ use VsPoint\Exception\Logic\NonUniqueResultException;
 use VsPoint\Exception\Runtime\Locale\Locale\LocaleNotFoundById;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Domain\Locale\Locale\GetLocaleByIdQ
- */
+#[CoversClass(GetLocaleByIdQ::class)]
 class GetLocaleByIdQTest extends TestCase
 {
   use MockeryPHPUnitIntegration;
 
   /**
-   * @group unit
-   *
    * @throws LocaleNotFoundById
    */
+  #[Group('unit')]
   public function testGet(): void
   {
     $container = $this->createContainer();
@@ -41,9 +40,9 @@ class GetLocaleByIdQTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws LocaleNotFoundById
    */
+  #[Group('unit')]
   public function testNonUniqueResult(): void
   {
     $this->expectException(NonUniqueResultException::class);
@@ -55,9 +54,9 @@ class GetLocaleByIdQTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws LocaleNotFoundById
    */
+  #[Group('unit')]
   public function testNoResult(): void
   {
     $this->expectException(LocaleNotFoundById::class);

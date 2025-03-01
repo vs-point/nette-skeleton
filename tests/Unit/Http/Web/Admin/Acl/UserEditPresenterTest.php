@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Http\Web\Admin\Acl;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use Nette\Application\IPresenterFactory;
 use Nette\Application\Request;
 use Nette\Application\Responses\TextResponse;
@@ -12,14 +14,10 @@ use VsPoint\Database\Fixture\InitFixture;
 use VsPoint\Http\Web\Admin\Acl\UserEditPresenter;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Http\Web\Admin\Acl\UserEditPresenter
- */
+#[CoversClass(UserEditPresenter::class)]
 final class UserEditPresenterTest extends TestCase
 {
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testConstructor(): void
   {
     $container = $this->createContainerForWeb();

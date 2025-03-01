@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Infrastructure\Http\Nette\Security;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use Doctrine\ORM\NoResultException;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -24,9 +25,7 @@ use VsPoint\Infrastructure\Nette\Security\Identity;
 use VsPoint\Infrastructure\Nette\Security\UserAuthenticator;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Infrastructure\Nette\Security\UserAuthenticator
- */
+#[CoversClass(UserAuthenticator::class)]
 final class UserAuthenticatorTest extends TestCase
 {
   use MockeryPHPUnitIntegration;

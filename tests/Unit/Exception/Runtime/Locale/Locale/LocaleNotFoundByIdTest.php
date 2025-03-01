@@ -4,21 +4,19 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Exception\Runtime\Locale\Locale;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use Exception;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use VsPoint\Exception\Runtime\Locale\Locale\LocaleNotFoundById;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Exception\Runtime\Locale\Locale\LocaleNotFoundById
- */
+#[CoversClass(LocaleNotFoundById::class)]
 final class LocaleNotFoundByIdTest extends TestCase
 {
   use MockeryPHPUnitIntegration;
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testConstructor(): void
   {
     $id = 'cze';
