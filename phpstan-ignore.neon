@@ -1,6 +1,6 @@
 parameters:
-    exceptionRules:
-        uncheckedExceptions:
+    exceptions:
+        uncheckedExceptionClasses:
             - ArithmeticError
             - Brick\DateTime\DateTimeException
             - Brick\Math\Exception\MathException
@@ -22,8 +22,6 @@ parameters:
             - Safe\Exceptions\PcreException
             - Safe\Exceptions\StringsException
     ignoreErrors:
-        - '#PHPDoc tag @throws with type .* is not compatible with parent#'
-        - '#PHPDoc type string of property .*::\$defaultName is not the same as PHPDoc type string\|null of overridden property Symfony\\Component\\Console\\Command\\Command::\$defaultName\.#'
         - '#Property .* type has no value type specified in iterable type (array|iterable).*#'
         - '#.* has parameter \$\w+ with no value type specified in iterable type (array|iterable).*#'
         - '#.* return type has no value type specified in iterable type (array|Traversable).*#'
