@@ -27,8 +27,10 @@ final readonly class UserProvider implements MiddlewareInterface
     $this->getUserById = $getUserById;
   }
 
-  public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-  {
+  public function process(
+    ServerRequestInterface $request,
+    RequestHandlerInterface $handler,
+  ): ResponseInterface {
     $jwt = $request->getAttribute('jwt');
 
     if ($jwt !== null) {

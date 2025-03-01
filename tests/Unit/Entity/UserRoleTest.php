@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Entity;
 
+use Nette\Security\Passwords;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
-use Nette\Security\Passwords;
 use Ramsey\Uuid\Uuid;
 use Solcik\Brick\DateTime\Clock;
 use VsPoint\Domain\Acl\User\DoesUserExist;
@@ -216,6 +216,7 @@ final class UserRoleTest extends TestCase
         self::assertTrue($roleId->equals($userRole->getId()));
         self::assertSame($user, $userRole->getUser());
         self::assertEquals(Role::POWER_USER, $userRole->getRole()->getTitle());
+
         return null;
       });
 

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Infrastructure\Http\Nette\Security;
 
-use PHPUnit\Framework\Attributes\CoversClass;
 use Doctrine\ORM\EntityManagerInterface;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -14,6 +13,7 @@ use Nette\Security\IAuthenticator;
 use Nette\Security\IIdentity;
 use Nette\Security\IUserStorage;
 use Nette\Security\User as SecurityUser;
+use PHPUnit\Framework\Attributes\CoversClass;
 use VsPoint\Database\Fixture\InitFixture;
 use VsPoint\Domain\Acl\User\GetUserById;
 use VsPoint\Domain\Acl\User\GetUserByIdQ;
@@ -36,7 +36,7 @@ final class GetLoggedInUserQTest extends TestCase
   {
     $getUserByIdMock = Mockery::mock(GetUserById::class);
 
-    $securityMock = $this->getSecurityUser(false, InitFixture::USER_01,);
+    $securityMock = $this->getSecurityUser(false, InitFixture::USER_01);
 
     $getLoggedInUser = new GetLoggedInUserQ($getUserByIdMock, $securityMock);
 
@@ -52,7 +52,7 @@ final class GetLoggedInUserQTest extends TestCase
    */
   public function testThrowsExceptionIfUserNotFound(): void
   {
-    $securityMock = $this->getSecurityUser(true, '550e8400-e29b-41d4-a716-446655440000',);
+    $securityMock = $this->getSecurityUser(true, '550e8400-e29b-41d4-a716-446655440000');
 
     $emMock = Mockery::mock(EntityManagerInterface::class);
     $emMock->shouldReceive('find')->andReturnNull();
@@ -73,7 +73,7 @@ final class GetLoggedInUserQTest extends TestCase
    */
   public function testReturnsUserWhenLoggedIn(): void
   {
-    $securityMock = $this->getSecurityUser(true, InitFixture::USER_01,);
+    $securityMock = $this->getSecurityUser(true, InitFixture::USER_01);
 
     $emMock = Mockery::mock(EntityManagerInterface::class);
     $emMock->shouldReceive('find')->andReturnNull();

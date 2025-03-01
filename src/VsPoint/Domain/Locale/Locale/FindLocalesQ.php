@@ -11,8 +11,9 @@ use VsPoint\Entity\Locale\Locale;
 
 final readonly class FindLocalesQ implements FindLocales
 {
-  public function __construct(private EntityManagerInterface $em)
-  {
+  public function __construct(
+    private EntityManagerInterface $em,
+  ) {
   }
 
   /**
@@ -29,7 +30,7 @@ final readonly class FindLocalesQ implements FindLocales
       )
       ->setFirstResult($offset)
       ->setMaxResults($limit)
-        ;
+    ;
 
     return new Vector($query->getResult());
   }

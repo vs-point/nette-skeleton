@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Exception\Logic;
 
+use Exception;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
-use Exception;
 use VsPoint\Exception\Logic\InvalidStateException;
 use VsPoint\Test\TestCase;
 

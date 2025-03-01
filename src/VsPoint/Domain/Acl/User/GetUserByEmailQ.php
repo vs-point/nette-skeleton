@@ -33,7 +33,7 @@ final readonly class GetUserByEmailQ implements GetUserByEmail
                     DQL
       )
       ->setParameter('email', Strings::lower($email))
-        ;
+    ;
 
     try {
       return $query->getSingleResult();

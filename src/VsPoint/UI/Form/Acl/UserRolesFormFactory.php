@@ -37,7 +37,7 @@ final readonly class UserRolesFormFactory
     $form
       ->addCheckboxList($f = 'roles', "{$t}.{$f}.label", $roles)
       ->setTranslator(null)
-        ;
+    ;
 
     $form
       ->addSubmit($f = 'submit', 'admin.form.label.submit');

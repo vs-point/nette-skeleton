@@ -14,7 +14,7 @@ final class UserOverviewPresenter extends BasePresenter
 
   public function __construct(
     private readonly FindUsers $findUsers,
-        //        private readonly PreFetch $preFetch,
+    //        private readonly PreFetch $preFetch,
   ) {
     parent::__construct();
   }

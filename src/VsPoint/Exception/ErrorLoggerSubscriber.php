@@ -35,10 +35,10 @@ final readonly class ErrorLoggerSubscriber implements EventSubscriberInterface
     $this->logger->log($e, $level);
 
     // $app = $event->getApplication();
-        // $presenter = $app->getPresenter();
+    // $presenter = $app->getPresenter();
 
-        // if ($presenter instanceof AdminBasePresenter) {
-        //    $app->errorPresenter = trim(AdminErrorPresenter::LINK, ':');
-        //}
+    // if ($presenter instanceof AdminBasePresenter) {
+    //    $app->errorPresenter = trim(AdminErrorPresenter::LINK, ':');
+    // }
   }
 }

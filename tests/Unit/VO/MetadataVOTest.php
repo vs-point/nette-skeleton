@@ -16,7 +16,7 @@ final class MetadataVOTest extends TestCase
   #[Group('unit')]
   public function testInvoke(): void
   {
-    $ogVo = new OgVO('Og title', 'Lorem ipsum', '/img/og/vs-point.png', 'website',);
+    $ogVo = new OgVO('Og title', 'Lorem ipsum', '/img/og/vs-point.png', 'website');
 
     $metadataVoTitle = 'metadata title';
     $metadataVo = new MetadataVO(

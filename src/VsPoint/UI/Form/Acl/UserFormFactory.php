@@ -37,7 +37,7 @@ final readonly class UserFormFactory
       ->addEmail($f = 'email', "{$t}.{$f}.label")
       ->setRequired('admin.form.rule.required')
       ->setDefaultValue('@')
-        ;
+    ;
 
     if ($user === null) {
       $this->addPasswordElements($form);
@@ -55,7 +55,7 @@ final readonly class UserFormFactory
 
   /**
    * This form is intended for changing passwords of other users
-   *  - it is necessary check that user has appropriate permissions to changes other users passwords
+   *  - it is necessary check that user has appropriate permissions to changes other users passwords.
    */
   public function createEditPassword(): Form
   {
@@ -72,7 +72,7 @@ final readonly class UserFormFactory
 
   /**
    * This form is intended for user's own password
-   *  - user should be able to changes password only to himself
+   *  - user should be able to changes password only to himself.
    */
   public function createPasswordChange(): Form
   {
@@ -82,7 +82,7 @@ final readonly class UserFormFactory
     $form
       ->addPassword($f = 'currentPassword', "{$t}.{$f}.label")
       ->setRequired('admin.form.rule.required')
-        ;
+    ;
 
     $this->addPasswordElements($form);
 
@@ -112,7 +112,7 @@ final readonly class UserFormFactory
         ),
         self::PASSWORD_MIN_LENGTH
       )
-        ;
+    ;
 
     $form
       ->addPassword($f = 'passwordCheck', "{$t}.{$f}.label")
@@ -132,7 +132,7 @@ final readonly class UserFormFactory
         self::PASSWORD_MIN_LENGTH
       )
       ->setOmitted()
-        ;
+    ;
 
     return $form;
   }

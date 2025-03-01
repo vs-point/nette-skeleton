@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Helper;
 
-use PHPUnit\Framework\Attributes\CoversClass;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Andx;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Query\Expr\Select;
 use Doctrine\ORM\QueryBuilder;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use PHPUnit\Framework\Attributes\CoversClass;
 use VsPoint\Database\Fixture\InitFixture;
 use VsPoint\Entity\Acl\User;
 use VsPoint\Helper\QueryBuilderHelper;

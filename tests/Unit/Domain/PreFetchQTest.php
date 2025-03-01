@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Domain;
 
-use VsPoint\Domain\PreFetchQ;
+use Ds\Vector;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
-use Ds\Vector;
 use VsPoint\Domain\PreFetch;
+use VsPoint\Domain\PreFetchQ;
 use VsPoint\Test\TestCase;
 
 #[CoversClass(PreFetchQ::class)]

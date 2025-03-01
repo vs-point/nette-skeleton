@@ -24,13 +24,13 @@ final readonly class DoesUserExistQ implements DoesUserExist
       ->from(User::class, 'user')
       ->where('user.email = :email')
       ->setParameter('email', $email)
-        ;
+    ;
 
     if ($user !== null) {
       $qb
         ->andWhere('user.id != :id')
         ->setParameter('id', $user->getId())
-            ;
+      ;
     }
 
     try {

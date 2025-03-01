@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Domain\Acl\User;
 
-use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\Group;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException as DoctrineNonUniqueResultException;
 use Doctrine\ORM\QueryBuilder;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Database\Fixture\InitFixture;
 use VsPoint\Domain\Acl\User\DoesUserExist;
 use VsPoint\Domain\Acl\User\DoesUserExistQ;

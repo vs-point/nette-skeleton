@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Domain\Acl\UserRole;
 
-use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\Group;
 use Doctrine\ORM\EntityManagerInterface;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Domain\Acl\UserRole\UserRoleDeleteORM;
 use VsPoint\Entity\Acl\UserRole;
 use VsPoint\Test\TestCase;

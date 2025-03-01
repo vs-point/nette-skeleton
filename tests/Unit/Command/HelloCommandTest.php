@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Command;
 
-use VsPoint\Console\HelloCommand;
+use Contributte\Console\Application;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
-use Contributte\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
+use VsPoint\Console\HelloCommand;
 use VsPoint\Test\TestCase;
 
 /**

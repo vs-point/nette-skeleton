@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace VsPoint\Infrastructure\Kdyby\FakeSession\DI;
 
-use Override;
-use Nette\Schema\Schema;
-use Nette\DI\Definitions\ServiceDefinition;
 use Nette\DI\CompilerExtension;
+use Nette\DI\Definitions\ServiceDefinition;
 use Nette\Http\Session as NetteSession;
 use Nette\Schema\Expect;
+use Nette\Schema\Schema;
+use Override;
 use VsPoint\Infrastructure\Kdyby\FakeSession\Session;
 
 use function assert;

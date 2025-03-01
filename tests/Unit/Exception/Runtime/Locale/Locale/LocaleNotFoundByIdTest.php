@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Exception\Runtime\Locale\Locale;
 
-use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\Group;
 use Exception;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Exception\Runtime\Locale\Locale\LocaleNotFoundById;
 use VsPoint\Test\TestCase;
 

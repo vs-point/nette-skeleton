@@ -7,50 +7,35 @@ use Rector\Doctrine\Set\DoctrineSetList;
 use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
 use Rector\Set\ValueObject\LevelSetList;
 
-/**
+/*
  * https://getrector.com/find-rule
  */
-return RectorConfig
-  ::configure()
-  ->withPaths(
-    [
-      __DIR__ . '/src',
-      __DIR__ . '/tests',
-    ]
-  )
+return RectorConfig::configure()
+  ->withPaths([__DIR__ . '/src', __DIR__ . '/tests'])
   ->withRootFiles()
   ->withParallel()
-  //->withSymfonyContainerXml(__DIR__ . '/var/cache/dev/App_KernelDevDebugContainer.xml')
+  // ->withSymfonyContainerXml(__DIR__ . '/var/cache/dev/App_KernelDevDebugContainer.xml')
   ->withIndent(indentChar: ' ', indentSize: 4)
   ->withImportNames(
-    importNames:         true,
+    importNames: true,
     importDocBlockNames: true,
-    importShortClasses:  true,
+    importShortClasses: true,
     removeUnusedImports: true,
   )
-  ->withPhpSets(
-    php84: true,
-  )
-  ->withAttributesSets(
-    symfony:  true,
-    doctrine: true,
-    phpunit:  true,
-  )
+  ->withPhpSets(php84: true)
+  ->withAttributesSets(symfony: true, doctrine: true, phpunit: true)
   ->withPreparedSets(
-  //        deadCode:         false,
-  //        codeQuality:      false,
-  //        codingStyle:      false,
-  //        typeDeclarations: true,
-  //        privatization:    false,
-  //        naming:           false,
-  //        instanceOf:       false,
-  //        earlyReturn:      false,
-  //        strictBooleans:   false,
+    //        deadCode:         false,
+    //        codeQuality:      false,
+    //        codingStyle:      false,
+    //        typeDeclarations: true,
+    //        privatization:    false,
+    //        naming:           false,
+    //        instanceOf:       false,
+    //        earlyReturn:      false,
+    //        strictBooleans:   false,
   )
-  ->withComposerBased(
-    doctrine: true,
-    phpunit:  true,
-  )
+  ->withComposerBased(doctrine: true, phpunit: true)
   ->withRules(
     [
       //            AddVoidReturnTypeWhereNoReturnRector::class,
@@ -82,4 +67,4 @@ return RectorConfig
   ->withTypeCoverageLevel(0)
   //    ->withDeadCodeLevel(0)
   //    ->withCodeQualityLevel(0)
-  ;
+;

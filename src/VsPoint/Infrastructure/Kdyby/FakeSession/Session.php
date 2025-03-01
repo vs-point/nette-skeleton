@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace VsPoint\Infrastructure\Kdyby\FakeSession;
 
-use Override;
-use LogicException;
 use ArrayIterator;
 use Iterator;
+use LogicException;
 use Nette\Http\Session as NetteSession;
 use Nette\Http\SessionSection as NetteSessionSection;
+use Override;
 use SessionHandlerInterface;
 
 class Session extends NetteSession
 {
   /**
-   * @var \Nette\Http\SessionSection[]
+   * @var NetteSessionSection[]
    */
   private array $sections = [];
 
@@ -37,7 +37,9 @@ class Session extends NetteSession
   public function disableNative(): void
   {
     if ($this->originalSession->isStarted()) {
-      throw new LogicException('Session is already started, please close it first and then you can disabled it.');
+      throw new LogicException(
+        'Session is already started, please close it first and then you can disabled it.'
+      );
     }
 
     $this->fakeMode = true;
@@ -164,9 +166,9 @@ class Session extends NetteSession
 
   public function clean(): void
   {
-//    if (!$this->fakeMode) {
-//      $this->originalSession->clean();
-//    }
+    //    if (!$this->fakeMode) {
+    //      $this->originalSession->clean();
+    //    }
   }
 
   #[Override]

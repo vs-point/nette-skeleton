@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Infrastructure\Http\Middleware;
 
-use PHPUnit\Framework\Attributes\CoversClass;
-use function Safe\json_decode;
 use Laminas\Diactoros\Response;
 use Laminas\Diactoros\Response\JsonResponse;
 use Laminas\Diactoros\ServerRequest;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Nette\Security\Passwords;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Psr\Http\Server\RequestHandlerInterface;
 use Ramsey\Uuid\Uuid;
 use Solcik\Brick\DateTime\Clock;
@@ -24,6 +23,8 @@ use VsPoint\Exception\Runtime\Acl\UserAlreadyExistsException;
 use VsPoint\Exception\Runtime\Acl\UserNotFound;
 use VsPoint\Infrastructure\Http\Middleware\UserProvider;
 use VsPoint\Test\TestCase;
+
+use function Safe\json_decode;
 
 #[CoversClass(UserProvider::class)]
 final class UserProviderTest extends TestCase
@@ -51,7 +52,7 @@ final class UserProviderTest extends TestCase
 
     $handlerMock = Mockery::mock(RequestHandlerInterface::class);
     $handlerMock->shouldReceive('handle')
-      ->withArgs(fn($req): bool => $req->getAttribute(UserProvider::ATTR_USER) === $userMock)
+      ->withArgs(fn ($req): bool => $req->getAttribute(UserProvider::ATTR_USER) === $userMock)
       ->andReturn(new Response());
 
     $response = $middleware->process($request, $handlerMock);

@@ -81,7 +81,7 @@ final readonly class PreFetchUsers
     $userRoles = $this
       ->toSequence()
       ->reduce(
-        static fn(Map $acc, User $user): Map => $user
+        static fn (Map $acc, User $user): Map => $user
           ->getUserRoles()
           ->reduce(
             static function (Map $acc, UserRole $userRole): Map {

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Http\Web\Front;
 
-use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\Group;
 use Nette\Application\IPresenterFactory;
 use Nette\Application\Request;
 use Nette\Application\Responses\TextResponse;
 use Nette\Bridges\ApplicationLatte\Template;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Http\Web\Front\HomepagePresenter;
 use VsPoint\Test\TestCase;
 

@@ -17,15 +17,15 @@ use VsPoint\Entity\HasId;
 class UserRole implements HasId
 {
   #[ORM\Id]
-    #[ORM\Column(type: 'uuid')]
-    private UuidInterface $id;
+  #[ORM\Column(type: 'uuid')]
+  private UuidInterface $id;
 
   #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'userRoles')]
-    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
-    private User $user;
+  #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
+  private User $user;
 
   #[ORM\Column(type: 'string', nullable: false)]
-    private string $role;
+  private string $role;
 
   private function __construct(UuidInterface $id, User $user, Role $role, UserRoleCreated $userRoleCreated)
   {
@@ -36,8 +36,12 @@ class UserRole implements HasId
     $userRoleCreated->__invoke($this);
   }
 
-  public static function create(UuidInterface $id, User $user, Role $role, UserRoleCreated $userRoleCreated): self
-  {
+  public static function create(
+    UuidInterface $id,
+    User $user,
+    Role $role,
+    UserRoleCreated $userRoleCreated,
+  ): self {
     return new self($id, $user, $role, $userRoleCreated);
   }
 

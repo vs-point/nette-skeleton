@@ -31,7 +31,7 @@ final readonly class FormFactory
     $form->getElementPrototype()->addAttributes([
       'novalidate' => 'true',
     ])
-        ;
+    ;
 
     return $form;
   }

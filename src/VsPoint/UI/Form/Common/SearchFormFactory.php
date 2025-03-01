@@ -27,7 +27,7 @@ final class SearchFormFactory
       ->addText($f = 'query', "{$t}.{$f}.label")
       ->setHtmlAttribute('placeholder', $placeholder)
       ->setHtmlAttribute('autofocus', true)
-        ;
+    ;
 
     $form
       ->addSubmit($f = 'submit', 'common.form.label.search');

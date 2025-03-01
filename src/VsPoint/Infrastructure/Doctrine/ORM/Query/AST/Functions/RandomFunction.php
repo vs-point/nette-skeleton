@@ -10,7 +10,7 @@ use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
 
 /**
- * RandomFunction ::= "RANDOM" "(" ")"
+ * RandomFunction ::= "RANDOM" "(" ")".
  */
 final class RandomFunction extends FunctionNode
 {

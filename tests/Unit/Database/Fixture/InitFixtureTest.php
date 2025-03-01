@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Database\Fixture;
 
+use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
-use Doctrine\ORM\EntityManagerInterface;
 use VsPoint\Database\Fixture\InitFixture;
 use VsPoint\Exception\Runtime\Acl\UserAlreadyExistsException;
 use VsPoint\Test\TestCase;
@@ -18,7 +18,6 @@ use VsPoint\Test\TestCase;
 final class InitFixtureTest extends TestCase
 {
   /**
-   *
    * @throws UserAlreadyExistsException
    */
   #[Group('api')]

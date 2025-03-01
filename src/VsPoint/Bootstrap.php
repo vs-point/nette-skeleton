@@ -132,7 +132,7 @@ final class Bootstrap
   ): Configurator {
     $configurator->defaultExtensions = array_filter(
       $configurator->defaultExtensions,
-      static fn(string $key): bool => in_array($key, $extensions, true),
+      static fn (string $key): bool => in_array($key, $extensions, true),
       ARRAY_FILTER_USE_KEY
     );
 

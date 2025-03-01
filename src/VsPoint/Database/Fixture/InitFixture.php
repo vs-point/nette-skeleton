@@ -54,7 +54,12 @@ final class InitFixture extends AbstractFixture
     );
 
     $powerUserRole = Role::create(Role::POWER_USER);
-    UserRole::create(Uuid::fromString(self::USER_ROLE_POWER_USER), $user01, $powerUserRole, $this->userRoleCreated);
+    UserRole::create(
+      Uuid::fromString(self::USER_ROLE_POWER_USER),
+      $user01,
+      $powerUserRole,
+      $this->userRoleCreated
+    );
 
     $manager->flush();
   }

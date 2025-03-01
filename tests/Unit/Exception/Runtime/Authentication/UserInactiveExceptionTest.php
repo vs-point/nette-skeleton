@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Exception\Runtime\Authentication;
 
-use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\Group;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Entity\Acl\User;
 use VsPoint\Exception\Runtime\Authentication\UserInactiveException;
 use VsPoint\Test\TestCase;

@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Domain\Locale\Locale;
 
-use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\Group;
-use Exception;
-use Mockery;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException as ORMNonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use Exception;
+use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Database\Fixture\LocaleFixture;
 use VsPoint\Domain\Locale\Locale\GetLocaleByIdQ;
 use VsPoint\Entity\Locale\Locale;

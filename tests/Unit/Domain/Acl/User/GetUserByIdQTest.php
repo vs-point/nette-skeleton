@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Domain\Acl\User;
 
+use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
-use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
 use VsPoint\Database\Fixture\InitFixture;
 use VsPoint\Domain\Acl\User\GetUserById;

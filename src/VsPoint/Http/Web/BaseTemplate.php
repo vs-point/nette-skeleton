@@ -38,8 +38,8 @@ abstract class BaseTemplate extends Template
   public ?AclUser $aclUser = null;
 
   #[TemplateFilter]
-    public function money(Money $money): string
-    {
-      return $money->formatTo('en_US');
-    }
+  public function money(Money $money): string
+  {
+    return $money->formatTo('en_US');
+  }
 }

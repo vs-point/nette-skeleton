@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Infrastructure\Doctrine\ORM\Query\AST\Functions;
 
-use PHPUnit\Framework\Attributes\CoversClass;
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use PHPUnit\Framework\Attributes\CoversClass;
 use VsPoint\Infrastructure\Doctrine\ORM\Query\AST\Functions\RandomFunction;
 use VsPoint\Test\TestCase;
 

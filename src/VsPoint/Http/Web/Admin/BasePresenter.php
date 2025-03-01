@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace VsPoint\Http\Web\Admin;
 
-use Override;
 use Nette\DI\Attributes\Inject;
+use Override;
 use VsPoint\Domain\Acl\User\GetUserById;
 use VsPoint\Entity\Acl\User;
 use VsPoint\Exception\Logic\InvalidStateException;
@@ -17,7 +17,7 @@ use VsPoint\Infrastructure\Nette\Security\Identity;
 abstract class BasePresenter extends BBasePresenter
 {
   #[Inject]
-    public GetUserById $getUserById;
+  public GetUserById $getUserById;
 
   protected ?User $loggedUser = null;
 

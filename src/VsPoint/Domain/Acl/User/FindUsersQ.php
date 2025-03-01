@@ -27,7 +27,7 @@ final readonly class FindUsersQ implements FindUsers
                     ORDER BY user.email ASC
                     DQL
       )
-        ;
+    ;
 
     return $query->getResult();
   }

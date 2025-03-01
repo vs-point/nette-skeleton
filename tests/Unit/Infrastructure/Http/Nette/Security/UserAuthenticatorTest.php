@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Infrastructure\Http\Nette\Security;
 
-use PHPUnit\Framework\Attributes\CoversClass;
 use Doctrine\ORM\NoResultException;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Nette\Security\AuthenticationException;
 use Nette\Security\Passwords;
 use Nette\Security\SimpleIdentity;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Ramsey\Uuid\Uuid;
 use Solcik\Brick\DateTime\Clock;
 use VsPoint\Database\Fixture\InitFixture;

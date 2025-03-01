@@ -31,12 +31,12 @@ final readonly class SignInFormFactory
     $form
       ->addText($f = 'email', "{$t}.{$f}.label")
       ->setRequired('admin.form.rule.required')
-        ;
+    ;
 
     $form
       ->addPassword($f = 'password', "{$t}.{$f}.label")
       ->setRequired('admin.form.rule.required')
-        ;
+    ;
 
     $form
       ->addSubmit($f = 'submit', "{$t}.{$f}.caption");

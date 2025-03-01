@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Domain\Locale\Locale;
 
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
-use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use VsPoint\Domain\Locale\Locale\FindLocalesQ;
 use VsPoint\Entity\Locale\Locale;
 use VsPoint\Test\TestCase;

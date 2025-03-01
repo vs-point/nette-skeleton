@@ -33,7 +33,7 @@ final readonly class GetLocaleByIdQ implements GetLocaleById
                     DQL
       )
       ->setParameter('id', $id)
-        ;
+    ;
 
     try {
       return $query->getSingleResult();

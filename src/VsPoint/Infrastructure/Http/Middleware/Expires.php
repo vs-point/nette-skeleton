@@ -26,8 +26,10 @@ final readonly class Expires implements MiddlewareInterface
     $this->minutes = $minutes;
   }
 
-  public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-  {
+  public function process(
+    ServerRequestInterface $request,
+    RequestHandlerInterface $handler,
+  ): ResponseInterface {
     $response = $handler->handle($request);
 
     $timeZone = TimeZone::parse('GMT');

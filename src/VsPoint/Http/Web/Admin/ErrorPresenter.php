@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace VsPoint\Http\Web\Admin;
 
-use Override;
 use Nette\Application\BadRequestException;
 use Nette\Application\Request;
+use Override;
 use Throwable;
 
 final class ErrorPresenter extends BasePresenter

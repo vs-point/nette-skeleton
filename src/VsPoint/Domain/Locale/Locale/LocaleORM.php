@@ -9,8 +9,9 @@ use VsPoint\Entity\Locale\Locale;
 
 final readonly class LocaleORM implements LocaleCreated
 {
-  public function __construct(private EntityManagerInterface $em)
-  {
+  public function __construct(
+    private EntityManagerInterface $em,
+  ) {
   }
 
   public function __invoke(Locale $locale): void

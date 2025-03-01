@@ -21,7 +21,7 @@ final readonly class GetUserByIdQ implements GetUserById
    */
   public function __invoke(UuidInterface $id): User
   {
-    /** @var null|User $user */
+    /** @var User|null $user */
     $user = $this->em->find(User::class, $id);
 
     if ($user === null) {

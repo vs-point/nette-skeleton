@@ -7,8 +7,7 @@ use VsPoint\Bootstrap;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-return Bootstrap
-  ::bootForCli()
+return Bootstrap::bootForCli()
   ->createContainer()
   ->getByType(Application::class)
 ;

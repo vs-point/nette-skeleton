@@ -13,8 +13,9 @@ use VsPoint\Http\Web\BasePresenter;
 
 final readonly class CheckAuth implements EventSubscriberInterface
 {
-  public function __construct(private AclHelper $aclHelper)
-  {
+  public function __construct(
+    private AclHelper $aclHelper,
+  ) {
   }
 
   /**
@@ -39,7 +40,7 @@ final readonly class CheckAuth implements EventSubscriberInterface
 
     if (($privilegeFlag & AclHelper::INACTIVITY) > 0) {
       $presenter->getUser()->logout(true)
-            ;
+      ;
       $presenter->flashMessage(sprintf('common.%s.flash.inactivity', self::class), 'warning');
     }
 
@@ -48,7 +49,7 @@ final readonly class CheckAuth implements EventSubscriberInterface
       $presenter
         ->getUser()
         ->logout(true)
-            ;
+      ;
 
       $presenter->backlink = $presenter->storeRequest();
       $presenter->redirect(SignInPresenter::LINK);

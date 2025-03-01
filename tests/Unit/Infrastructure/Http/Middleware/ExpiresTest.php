@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Infrastructure\Http\Middleware;
 
-use PHPUnit\Framework\Attributes\CoversClass;
-use DateTimeInterface;
 use Brick\DateTime\TimeZone;
 use Brick\DateTime\ZonedDateTime;
+use DateTimeInterface;
 use Laminas\Diactoros\Response;
 use Laminas\Diactoros\ServerRequest;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Psr\Http\Server\RequestHandlerInterface;
 use Solcik\Brick\DateTime\Clock;
 use VsPoint\Infrastructure\Http\Middleware\Expires;

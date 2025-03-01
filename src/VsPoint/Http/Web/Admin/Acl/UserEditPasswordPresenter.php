@@ -39,7 +39,7 @@ final class UserEditPasswordPresenter extends BasePresenter
     try {
       $uuid = Uuid::fromString($id);
       $this->aclUser = $this->getUserById->__invoke($uuid);
-    } catch (InvalidUuidStringException | UserNotFound) {
+    } catch (InvalidUuidStringException|UserNotFound) {
       $this->flashMessage(sprintf('admin.%s.flash.userNotFound', self::class), 'error');
       $this->redirect(UserOverviewPresenter::LINK);
     }

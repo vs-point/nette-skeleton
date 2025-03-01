@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\UI\Form;
 
-use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\Group;
-use stdClass;
 use Contributte\FormsBootstrap\BootstrapForm;
 use Contributte\FormsBootstrap\Enums\RenderMode;
 use Nette\Localization\Translator;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use stdClass;
 use VsPoint\Test\TestCase;
 use VsPoint\UI\Form\FormFactory;
 

@@ -16,7 +16,7 @@ final class GtmVOTest extends TestCase
   public function testInvoke(): void
   {
     $gtmVoPage = 'test page';
-    $gtmVo = new GtmVO($gtmVoPage, ['event 1', 'event 2'],);
+    $gtmVo = new GtmVO($gtmVoPage, ['event 1', 'event 2']);
 
     self::assertSame($gtmVo->getPage(), $gtmVoPage);
     self::assertTrue($gtmVo->hasEvents());

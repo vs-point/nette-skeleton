@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace VsPoint\Database\Migration;
 
-use Override;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
+use Override;
 
 /**
  * Auto-generated Migration: Please modify to your needs!

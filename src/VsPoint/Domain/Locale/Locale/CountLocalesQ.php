@@ -10,8 +10,9 @@ use Doctrine\ORM\NoResultException;
 
 final readonly class CountLocalesQ implements CountLocales
 {
-  public function __construct(private EntityManagerInterface $em)
-  {
+  public function __construct(
+    private EntityManagerInterface $em,
+  ) {
   }
 
   public function __invoke(): int
@@ -23,11 +24,11 @@ final readonly class CountLocalesQ implements CountLocales
                     FROM VsPoint\Entity\Locale\Locale as locale
                     DQL
       )
-        ;
+    ;
 
     try {
       return $query->getSingleScalarResult();
-    } catch (NoResultException | NonUniqueResultException) {
+    } catch (NoResultException|NonUniqueResultException) {
       return 0;
     }
   }

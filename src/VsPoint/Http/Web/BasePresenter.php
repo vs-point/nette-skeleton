@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace VsPoint\Http\Web;
 
-use Override;
 use Nette\Application\Attributes\Persistent;
 use Nette\Application\Helpers;
 use Nette\Application\UI\Presenter;
 use Nette\DI\Attributes\Inject;
+use Override;
 use VsPoint\Domain\Acl\User\GetUserById;
 use VsPoint\Entity\Acl\User;
 use VsPoint\Exception\Logic\InvalidStateException;
@@ -19,13 +19,13 @@ use VsPoint\Infrastructure\Nette\Security\Identity;
 abstract class BasePresenter extends Presenter
 {
   #[Persistent]
-    public string $locale = 'cs';
+  public string $locale = 'cs';
 
   #[Persistent]
-    public string $backlink = '';
+  public string $backlink = '';
 
   #[Inject]
-    public GetUserById $getUserById;
+  public GetUserById $getUserById;
 
   private ?User $loggedUser = null;
 

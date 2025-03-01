@@ -48,7 +48,7 @@ class User implements HasId, Stringable
   private ?ZonedDateTime $gdpr;
 
   #[ORM\Id]
-  #[ORM\Column(type: 'uuid')]
+  #[Column(type: 'uuid')]
   private UuidInterface $id;
 
   /**
@@ -108,7 +108,17 @@ class User implements HasId, Stringable
     Passwords $service,
     UserCreated $created,
   ): self {
-    return new self($uuid, $email, $password, $expiration, $createdAt, $gdpr, $doesUserExist, $service, $created);
+    return new self(
+      $uuid,
+      $email,
+      $password,
+      $expiration,
+      $createdAt,
+      $gdpr,
+      $doesUserExist,
+      $service,
+      $created
+    );
   }
 
   /**
@@ -156,7 +166,9 @@ class User implements HasId, Stringable
 
     $newUserRoles = new ArrayCollection();
     foreach ($requestedRoles as $requestedRole) {
-      $newUserRoles->add(UserRole::create(Uuid::uuid4(), $this, Role::create($requestedRole), $userRoleCreated));
+      $newUserRoles->add(
+        UserRole::create(Uuid::uuid4(), $this, Role::create($requestedRole), $userRoleCreated)
+      );
     }
     $this->userRoles = $newUserRoles;
 
@@ -167,8 +179,12 @@ class User implements HasId, Stringable
    * @throws InvalidPasswordException
    * @throws UserInactiveException
    */
-  public function logIn(Passwords $service, string $password, ZonedDateTime $timestamp, UserLoggedIn $loggedIn): void
-  {
+  public function logIn(
+    Passwords $service,
+    string $password,
+    ZonedDateTime $timestamp,
+    UserLoggedIn $loggedIn,
+  ): void {
     if (!$service->verify($password, $this->getPasswordHash())) {
       throw new InvalidPasswordException();
     }
@@ -222,7 +238,7 @@ class User implements HasId, Stringable
   }
 
   /**
-   * Returns all user's ACL roles names incl. "user" role
+   * Returns all user's ACL roles names incl. "user" role.
    *
    * @return array<string>
    */
@@ -249,7 +265,7 @@ class User implements HasId, Stringable
   }
 
   /**
-   * Returns all user's UserRoles names doesn't incl. "user" role because it is not defined in UserRole table
+   * Returns all user's UserRoles names doesn't incl. "user" role because it is not defined in UserRole table.
    *
    * @return array<string>
    */

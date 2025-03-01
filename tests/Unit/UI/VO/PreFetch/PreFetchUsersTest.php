@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\UI\VO\PreFetch;
 
-use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\Group;
 use Doctrine\ORM\EntityManagerInterface;
 use Ds\Set;
 use Ds\Vector;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use Ramsey\Uuid\Uuid;
 use VsPoint\Database\Fixture\InitFixture;
 use VsPoint\Test\TestCase;

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Helper;
 
-use PHPUnit\Framework\Attributes\CoversClass;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Ramsey\Uuid\Uuid;
 use VsPoint\Entity\Acl\User;
 use VsPoint\Helper\Transform;
