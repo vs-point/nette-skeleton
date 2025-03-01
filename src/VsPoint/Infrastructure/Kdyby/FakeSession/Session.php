@@ -157,15 +157,12 @@ class Session extends \Nette\Http\Session
 
   public function clean(): void
   {
-    if (!$this->fakeMode) {
-      $this->originalSession->clean();
-    }
+//    if (!$this->fakeMode) {
+//      $this->originalSession->clean();
+//    }
   }
 
-  /**
-   * @return $this
-   */
-  public function setName(string $name)
+  public function setName(string $name): static
   {
     $this->originalSession->setName($name);
 
@@ -179,10 +176,8 @@ class Session extends \Nette\Http\Session
 
   /**
    * @param mixed[] $options
-   *
-   * @return static
    */
-  public function setOptions(array $options): self
+  public function setOptions(array $options): static
   {
     $this->originalSession->setOptions($options);
 
@@ -197,25 +192,19 @@ class Session extends \Nette\Http\Session
     return $this->originalSession->getOptions();
   }
 
-  /**
-   * @return $this
-   */
-  public function setExpiration(?string $time)
+  public function setExpiration(?string $time): static
   {
     $this->originalSession->setExpiration($time);
 
     return $this;
   }
 
-  /**
-   * @return $this
-   */
   public function setCookieParameters(
     string $path,
     ?string $domain = null,
     ?bool $secure = null,
     ?string $sameSite = null,
-  ) {
+  ): static {
     $this->originalSession->setCookieParameters($path, $domain, $secure, $sameSite);
 
     return $this;
@@ -229,20 +218,14 @@ class Session extends \Nette\Http\Session
     return $this->originalSession->getCookieParameters();
   }
 
-  /**
-   * @return $this
-   */
-  public function setSavePath(string $path)
+  public function setSavePath(string $path): static
   {
     $this->originalSession->setSavePath($path);
 
     return $this;
   }
 
-  /**
-   * @return $this
-   */
-  public function setHandler(SessionHandlerInterface $handler)
+  public function setHandler(SessionHandlerInterface $handler): static
   {
     $this->originalSession->setHandler($handler);
 

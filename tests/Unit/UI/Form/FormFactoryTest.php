@@ -27,7 +27,7 @@ final class FormFactoryTest extends TestCase
     $form = $factory->create(\stdClass::class);
 
     self::assertInstanceOf(BootstrapForm::class, $form);
-    self::assertEquals(RenderMode::VERTICAL_MODE, $form->getRenderMode());
+    self::assertSame(RenderMode::VERTICAL_MODE, $form->getRenderMode());
     self::assertSame($translator, $form->getTranslator());
     self::assertFalse($form->isAjax());
   }

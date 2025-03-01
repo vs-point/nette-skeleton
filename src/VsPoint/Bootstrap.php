@@ -12,14 +12,14 @@ use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 use Laminas\HttpHandlerRunner\RequestHandlerRunner;
 use Laminas\Stratigility\Middleware\ErrorResponseGenerator;
 use Nette\Application\Application;
-use Nette\Configurator;
+use Nette\Bootstrap\Configurator;
 use Nette\Utils\Strings;
 use Psr\Http\Message\ResponseInterface;
 use Relay\Relay;
 use Solcik\Doctrine\DBAL\Type\ZonedDateTimeType;
+use Solcik\Nette\Forms\Controls\ZonedDateTimeInput;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Throwable;
-use VsPoint\Infrastructure\Nette\Forms\ZonedDateTimeInput;
 
 final class Bootstrap
 {
@@ -110,6 +110,7 @@ final class Bootstrap
         'logDir' => dirname(__DIR__, 2) . '/storage/logs',
       ]
     );
+    // TODO
     $configurator->setDebugMode(['172.24.0.1']);
     // $configurator->setDebugMode(true);
     // $configurator->setDebugMode(false);

@@ -99,9 +99,7 @@ final class GetLoggedInUserQTest extends TestCase
     array $roles = [],
     bool $isAllowed = false,
   ): SecurityUser {
-    /** @phpstan-ignore-next-line */
     $storageMock = Mockery::mock(IUserStorage::class);
-    /** @phpstan-ignore-next-line */
     $authenticatorMock = Mockery::mock(IAuthenticator::class);
     $authorizatorMock = Mockery::mock(Authorizator::class);
 

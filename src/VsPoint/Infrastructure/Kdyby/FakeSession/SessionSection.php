@@ -43,10 +43,7 @@ class SessionSection extends \Nette\Http\SessionSection
     return new ArrayIterator($this->data);
   }
 
-  /**
-   * @return mixed
-   */
-  public function &__get(string $name)
+  public function &__get(string $name): mixed
   {
     if ($this->warnOnUndefined && !array_key_exists($name, $this->data)) {
       trigger_error(sprintf("The variable '%s' does not exist in session section", $name), E_USER_NOTICE);
@@ -61,7 +58,7 @@ class SessionSection extends \Nette\Http\SessionSection
    *
    * @return static
    */
-  public function setExpiration($time, $variables = null): self
+  public function setExpiration(?string $expire, string|array|null $variables = null): static
   {
     return $this;
   }

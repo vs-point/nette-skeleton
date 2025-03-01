@@ -7,11 +7,11 @@ namespace VsPoint\UI\Form\Acl;
 use Contributte\Translation\Wrappers\Message;
 use Nette\Application\UI\Form;
 use Nette\SmartObject;
+use Solcik\Nette\Forms\Controls\LocalDateInput;
 use VsPoint\DTO\Acl\PasswordFormDTO;
 use VsPoint\DTO\Acl\PasswordWithCheckFormDTO;
 use VsPoint\DTO\Acl\UserFormDTO;
 use VsPoint\Entity\Acl\User;
-use VsPoint\Infrastructure\Nette\Forms\LocalDateInput;
 use VsPoint\UI\Form\FormFactory;
 
 final class UserFormFactory

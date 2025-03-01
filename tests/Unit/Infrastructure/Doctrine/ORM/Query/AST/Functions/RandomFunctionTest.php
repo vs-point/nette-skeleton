@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\VsPoint\Infrastructure\Doctrine\ORM\Query\AST\Functions;
+namespace VsPoint\Test\Unit\Infrastructure\Doctrine\ORM\Query\AST\Functions;
 
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\Parser;
