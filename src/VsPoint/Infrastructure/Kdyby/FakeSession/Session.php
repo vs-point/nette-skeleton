@@ -1,0 +1,251 @@
+<?php
+
+declare(strict_types=1);
+
+namespace VsPoint\Infrastructure\Kdyby\FakeSession;
+
+use ArrayIterator;
+use Iterator;
+use Nette\Http\Session as NetteSession;
+use Nette\Http\SessionSection as NetteSessionSection;
+use SessionHandlerInterface;
+
+class Session extends \Nette\Http\Session
+{
+  /**
+   * @var \Nette\Http\SessionSection[]
+   */
+  private array $sections = [];
+
+  private bool $started = false;
+
+  private bool $exists = false;
+
+  private string $id = '';
+
+  private \Nette\Http\Session $originalSession;
+
+  private bool $fakeMode = false;
+
+  public function __construct(NetteSession $originalSession)
+  {
+    $this->originalSession = $originalSession;
+  }
+
+  public function disableNative(): void
+  {
+    if ($this->originalSession->isStarted()) {
+      throw new \LogicException('Session is already started, please close it first and then you can disabled it.');
+    }
+
+    $this->fakeMode = true;
+  }
+
+  public function enableNative(): void
+  {
+    $this->fakeMode = false;
+  }
+
+  public function isNativeEnabled(): bool
+  {
+    return !$this->fakeMode;
+  }
+
+  public function start(): void
+  {
+    if (!$this->fakeMode) {
+      $this->originalSession->start();
+    }
+  }
+
+  public function isStarted(): bool
+  {
+    if (!$this->fakeMode) {
+      return $this->originalSession->isStarted();
+    }
+
+    return $this->started;
+  }
+
+  public function setFakeStarted(bool $started): void
+  {
+    $this->started = $started;
+  }
+
+  public function close(): void
+  {
+    if (!$this->fakeMode) {
+      $this->originalSession->close();
+    }
+  }
+
+  public function destroy(): void
+  {
+    if (!$this->fakeMode) {
+      $this->originalSession->destroy();
+    }
+  }
+
+  public function exists(): bool
+  {
+    if (!$this->fakeMode) {
+      return $this->originalSession->exists();
+    }
+
+    return $this->exists;
+  }
+
+  public function setFakeExists(bool $exists): void
+  {
+    $this->exists = $exists;
+  }
+
+  public function regenerateId(): void
+  {
+    if (!$this->fakeMode) {
+      $this->originalSession->regenerateId();
+    }
+  }
+
+  public function getId(): string
+  {
+    if (!$this->fakeMode) {
+      return $this->originalSession->getId();
+    }
+
+    return $this->id;
+  }
+
+  public function setFakeId(string $id): void
+  {
+    $this->id = $id;
+  }
+
+  public function getSection(string $section, string $class = NetteSessionSection::class): NetteSessionSection
+  {
+    if (!$this->fakeMode) {
+      return $this->originalSession->getSection($section, $class);
+    }
+
+    if (isset($this->sections[$section])) {
+      return $this->sections[$section];
+    }
+
+    return $this->sections[$section] = parent::getSection(
+      $section,
+      $class !== NetteSessionSection::class ? $class : SessionSection::class
+    );
+  }
+
+  public function hasSection(string $section): bool
+  {
+    if (!$this->fakeMode) {
+      return $this->originalSession->hasSection($section);
+    }
+
+    return isset($this->sections[$section]);
+  }
+
+  public function getIterator(): Iterator
+  {
+    if (!$this->fakeMode) {
+      return $this->originalSession->getIterator();
+    }
+
+    return new ArrayIterator(array_keys($this->sections));
+  }
+
+  public function clean(): void
+  {
+    if (!$this->fakeMode) {
+      $this->originalSession->clean();
+    }
+  }
+
+  /**
+   * @return $this
+   */
+  public function setName(string $name)
+  {
+    $this->originalSession->setName($name);
+
+    return $this;
+  }
+
+  public function getName(): string
+  {
+    return $this->originalSession->getName();
+  }
+
+  /**
+   * @param mixed[] $options
+   *
+   * @return static
+   */
+  public function setOptions(array $options): self
+  {
+    $this->originalSession->setOptions($options);
+
+    return $this;
+  }
+
+  /**
+   * @return mixed[]
+   */
+  public function getOptions(): array
+  {
+    return $this->originalSession->getOptions();
+  }
+
+  /**
+   * @return $this
+   */
+  public function setExpiration(?string $time)
+  {
+    $this->originalSession->setExpiration($time);
+
+    return $this;
+  }
+
+  /**
+   * @return $this
+   */
+  public function setCookieParameters(
+    string $path,
+    ?string $domain = null,
+    ?bool $secure = null,
+    ?string $sameSite = null,
+  ) {
+    $this->originalSession->setCookieParameters($path, $domain, $secure, $sameSite);
+
+    return $this;
+  }
+
+  /**
+   * @return mixed[]
+   */
+  public function getCookieParameters(): array
+  {
+    return $this->originalSession->getCookieParameters();
+  }
+
+  /**
+   * @return $this
+   */
+  public function setSavePath(string $path)
+  {
+    $this->originalSession->setSavePath($path);
+
+    return $this;
+  }
+
+  /**
+   * @return $this
+   */
+  public function setHandler(SessionHandlerInterface $handler)
+  {
+    $this->originalSession->setHandler($handler);
+
+    return $this;
+  }
+}
