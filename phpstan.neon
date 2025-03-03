@@ -28,7 +28,7 @@ parameters:
             - redirectPermanent
             - sendJson
             - sendResponse
-#    doctrine:
-#        objectManagerLoader: tests/object-manager.php
+    doctrine:
+        objectManagerLoader: tests/object-manager.php
 
 rules: []
