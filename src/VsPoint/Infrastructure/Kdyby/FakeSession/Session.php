@@ -45,16 +45,6 @@ class Session extends NetteSession
     $this->fakeMode = true;
   }
 
-  public function enableNative(): void
-  {
-    $this->fakeMode = false;
-  }
-
-  public function isNativeEnabled(): bool
-  {
-    return !$this->fakeMode;
-  }
-
   #[Override]
   public function start(): void
   {
@@ -71,11 +61,6 @@ class Session extends NetteSession
     }
 
     return $this->started;
-  }
-
-  public function setFakeStarted(bool $started): void
-  {
-    $this->started = $started;
   }
 
   #[Override]
@@ -104,11 +89,6 @@ class Session extends NetteSession
     return $this->exists;
   }
 
-  public function setFakeExists(bool $exists): void
-  {
-    $this->exists = $exists;
-  }
-
   #[Override]
   public function regenerateId(): void
   {
@@ -125,11 +105,6 @@ class Session extends NetteSession
     }
 
     return $this->id;
-  }
-
-  public function setFakeId(string $id): void
-  {
-    $this->id = $id;
   }
 
   #[Override]
@@ -157,18 +132,7 @@ class Session extends NetteSession
 
   public function getIterator(): Iterator
   {
-    if (!$this->fakeMode) {
-      return $this->originalSession->getIterator();
-    }
-
     return new ArrayIterator(array_keys($this->sections));
-  }
-
-  public function clean(): void
-  {
-    //    if (!$this->fakeMode) {
-    //      $this->originalSession->clean();
-    //    }
   }
 
   #[Override]
@@ -223,14 +187,6 @@ class Session extends NetteSession
     $this->originalSession->setCookieParameters($path, $domain, $secure, $sameSite);
 
     return $this;
-  }
-
-  /**
-   * @return mixed[]
-   */
-  public function getCookieParameters(): array
-  {
-    return $this->originalSession->getCookieParameters();
   }
 
   #[Override]

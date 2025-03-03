@@ -15,6 +15,9 @@ final readonly class PictureVO
    */
   private array $sources;
 
+  /**
+   * @param PictureSourceVO[] $sources
+   */
   public function __construct(string $url, string $alt, array $sources = [])
   {
     $this->url = $url;

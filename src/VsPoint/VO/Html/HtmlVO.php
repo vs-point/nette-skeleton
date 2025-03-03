@@ -19,6 +19,10 @@ final readonly class HtmlVO
     $this->metadata = $metadata;
   }
 
+  /**
+   * @param string[] $keywords
+   * @param string[] $gtmEvents
+   */
   public static function create(
     string $title,
     string $description,

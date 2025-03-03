@@ -38,5 +38,6 @@ final class HomepagePresenterTest extends TestCase
 
     self::assertInstanceOf(TextResponse::class, $response);
     self::assertInstanceOf(Template::class, $response->getSource());
+    self::assertStringContainsString('javascript', (string) $response->getSource());
   }
 }

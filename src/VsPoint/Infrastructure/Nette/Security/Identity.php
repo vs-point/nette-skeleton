@@ -52,6 +52,9 @@ final readonly class Identity implements IIdentity
     return $this->email;
   }
 
+  /**
+   * @return array{'email': string}
+   */
   public function getData(): array
   {
     return [

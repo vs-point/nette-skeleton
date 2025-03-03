@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace VsPoint\Domain;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Ds\Sequence;
+use loophp\collection\Contract\Collection;
 use VsPoint\Entity\Acl\User;
 use VsPoint\Entity\Acl\UserRole;
 use VsPoint\VO\PreFetch\PreFetchUserRoles;
@@ -19,17 +19,17 @@ final readonly class PreFetchQ implements PreFetch
   }
 
   /**
-   * @param Sequence<User> $users
+   * @param Collection<int, User> $users
    */
-  public function forUsers(Sequence $users): PreFetchUsers
+  public function forUsers(Collection $users): PreFetchUsers
   {
     return new PreFetchUsers($this->em, $users);
   }
 
   /**
-   * @param Sequence<UserRole> $userRoles
+   * @param Collection<int, UserRole> $userRoles
    */
-  public function forUserRoles(Sequence $userRoles): PreFetchUserRoles
+  public function forUserRoles(Collection $userRoles): PreFetchUserRoles
   {
     return new PreFetchUserRoles($this->em, $userRoles);
   }

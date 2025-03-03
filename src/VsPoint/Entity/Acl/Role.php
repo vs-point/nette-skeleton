@@ -32,12 +32,18 @@ final readonly class Role
   }
 
   /**
-   * @return array<string>
+   * @return array<string, string>
    */
   public static function getAllRoles(): array
   {
     $rc = new ReflectionClass(self::class);
 
-    return array_combine($rc->getConstants(), $rc->getConstants());
+    /** @var array<string, string> $constants */
+    $constants = $rc->getConstants();
+
+    /** @var array<string, string> $combined */
+    $combined = array_combine($constants, $constants);
+
+    return $combined;
   }
 }

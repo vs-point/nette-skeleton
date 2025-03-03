@@ -17,7 +17,7 @@ abstract class TestCase extends BaseTestCase
 
   protected function createContainerForWeb(): Container
   {
-    $configurator = Bootstrap::bootForWeb();
+    $configurator = Bootstrap::bootForWeb(enableTracy: false);
 
     $configurator->addConfig(__DIR__ . '/../src/config/test/ext/kdyby.fakeSession.neon');
 

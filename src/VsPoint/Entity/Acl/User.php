@@ -10,8 +10,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\OneToMany;
-use Ds\Sequence;
-use Ds\Vector;
+use loophp\collection\Collection as LoopCollection;
+use loophp\collection\Contract\Collection as CollectionInterface;
 use Nette\Security\Passwords;
 use Nette\Utils\Strings;
 use Ramsey\Uuid\Uuid;
@@ -244,24 +244,25 @@ class User implements HasId, Stringable
    */
   public function getRoles(): array
   {
-    return array_unique(
-      $this->getUserRoles()->reduce(
-        static function (array $acc, UserRole $userRole): array {
-          $acc[] = $userRole->getRole()->getTitle();
+    /** @var string[] $userRoles */
+    $userRoles = $this->getUserRoles()->reduce(
+      static function (array $acc, UserRole $userRole): array {
+        $acc[] = $userRole->getRole()->getTitle();
 
-          return $acc;
-        },
-        ['user']
-      )
+        return $acc;
+      },
+      ['user']
     );
+
+    return array_unique($userRoles);
   }
 
   /**
-   * @return Sequence<UserRole>
+   * @return CollectionInterface<int, UserRole>
    */
-  public function getUserRoles(): Sequence
+  public function getUserRoles(): CollectionInterface
   {
-    return new Vector($this->userRoles->getIterator());
+    return LoopCollection::fromIterable($this->userRoles);
   }
 
   /**
@@ -271,7 +272,8 @@ class User implements HasId, Stringable
    */
   public function getUserRolesList(): array
   {
-    return $this->getUserRoles()->reduce(
+    /** @var string[] $userRoles */
+    $userRoles = $this->getUserRoles()->reduce(
       static function (array $items, UserRole $userRole): array {
         $items[] = $userRole->getRole()->getTitle();
 
@@ -279,6 +281,8 @@ class User implements HasId, Stringable
       },
       []
     );
+
+    return $userRoles;
   }
 
   public function isPasswordCorrect(string $password, Passwords $passwords): bool

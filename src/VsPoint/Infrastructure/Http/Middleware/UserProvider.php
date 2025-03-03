@@ -13,6 +13,9 @@ use Ramsey\Uuid\Uuid;
 use VsPoint\Domain\Acl\User\GetUserById;
 use VsPoint\Exception\Runtime\Acl\UserNotFound;
 
+use function array_key_exists;
+use function is_array;
+
 final readonly class UserProvider implements MiddlewareInterface
 {
   /**
@@ -34,7 +37,12 @@ final readonly class UserProvider implements MiddlewareInterface
     $jwt = $request->getAttribute('jwt');
 
     if ($jwt !== null) {
+      assert(is_array($jwt));
+      assert(array_key_exists('id', $jwt));
+
       $id = $jwt['id'];
+
+      assert(is_string($id));
 
       try {
         $user = $this->getUserById->__invoke(Uuid::fromString($id));

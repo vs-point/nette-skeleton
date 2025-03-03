@@ -43,7 +43,7 @@ final class SignInPresenter extends BasePresenter
         $securityUser = $this->getUser();
         $securityUser->login($data->email, $data->password);
       } catch (AuthenticationException $e) {
-        if ($e->getCode() === Authenticator::NOT_APPROVED) {
+        if ($e->getCode() === Authenticator::NotApproved) {
           $form->addError("{$t}.error.userInactive");
         } else {
           $form->addError("{$t}.error.authenticationMismatch");

@@ -11,9 +11,6 @@ use Symfony\Component\Console\Tester\CommandTester;
 use VsPoint\Console\HelloCommand;
 use VsPoint\Test\TestCase;
 
-/**
- * @internal
- */
 #[CoversClass(HelloCommand::class)]
 final class HelloCommandTest extends TestCase
 {

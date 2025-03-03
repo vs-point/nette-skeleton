@@ -22,7 +22,7 @@ class SessionSection extends \Nette\Http\SessionSection
   }
 
   #[Override]
-  public function __set(string $name, $value): void
+  public function __set(string $name, mixed $value): void
   {
     $this->data[$name] = $value;
   }

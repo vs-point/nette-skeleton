@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Domain\Acl\User;
 
-use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException as DoctrineNonUniqueResultException;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -80,7 +80,7 @@ final class DoesUserExistQTest extends TestCase
 
     $exception = new DoctrineNonUniqueResultException('Non unique mock exception.');
 
-    $queryMock = Mockery::mock(AbstractQuery::class);
+    $queryMock = Mockery::mock(Query::class);
     $queryMock
       ->allows('getOneOrNullResult')
       ->andThrows($exception)

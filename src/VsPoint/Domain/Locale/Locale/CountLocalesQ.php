@@ -8,6 +8,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 
+use function assert;
+
 final readonly class CountLocalesQ implements CountLocales
 {
   public function __construct(
@@ -27,7 +29,11 @@ final readonly class CountLocalesQ implements CountLocales
     ;
 
     try {
-      return $query->getSingleScalarResult();
+      $result = $query->getSingleScalarResult();
+
+      assert(is_int($result));
+
+      return $result;
     } catch (NoResultException|NonUniqueResultException) {
       return 0;
     }

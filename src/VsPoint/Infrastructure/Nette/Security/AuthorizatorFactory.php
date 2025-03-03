@@ -114,7 +114,7 @@ final class AuthorizatorFactory
     // ****************************************************************************************************************
     // POWER USER
 
-    $acl->allow(Role::POWER_USER, Permission::ALL);
+    $acl->allow(Role::POWER_USER, Permission::All);
 
     return $acl;
   }

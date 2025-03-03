@@ -11,9 +11,6 @@ use VsPoint\Database\Fixture\InitFixture;
 use VsPoint\Exception\Runtime\Acl\UserAlreadyExistsException;
 use VsPoint\Test\TestCase;
 
-/**
- * @internal
- */
 #[CoversClass(InitFixture::class)]
 final class InitFixtureTest extends TestCase
 {

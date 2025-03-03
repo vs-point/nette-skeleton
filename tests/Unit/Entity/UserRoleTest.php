@@ -64,7 +64,7 @@ final class UserRoleTest extends TestCase
     // Assert properties
     self::assertTrue($roleId->equals($userRole->getId()));
     self::assertSame($user, $userRole->getUser());
-    self::assertEquals($role->getTitle(), $userRole->getRole()->getTitle());
+    self::assertSame($role->getTitle(), $userRole->getRole()->getTitle());
   }
 
   /**
@@ -169,7 +169,7 @@ final class UserRoleTest extends TestCase
 
     // Test getRole()
     $returnedRole = $userRole->getRole();
-    self::assertEquals(Role::POWER_USER, $returnedRole->getTitle());
+    self::assertSame(Role::POWER_USER, $returnedRole->getTitle());
   }
 
   /**
@@ -215,7 +215,7 @@ final class UserRoleTest extends TestCase
       ->willReturnCallback(function (UserRole $userRole) use ($user, $roleId) {
         self::assertTrue($roleId->equals($userRole->getId()));
         self::assertSame($user, $userRole->getUser());
-        self::assertEquals(Role::POWER_USER, $userRole->getRole()->getTitle());
+        self::assertSame(Role::POWER_USER, $userRole->getRole()->getTitle());
 
         return null;
       });

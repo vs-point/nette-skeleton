@@ -8,11 +8,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Nette\MemberAccessException;
+use Nette\Security\Authenticator;
 use Nette\Security\Authorizator;
-use Nette\Security\IAuthenticator;
 use Nette\Security\IIdentity;
-use Nette\Security\IUserStorage;
 use Nette\Security\User as SecurityUser;
+use Nette\Security\UserStorage;
 use PHPUnit\Framework\Attributes\CoversClass;
 use VsPoint\Database\Fixture\InitFixture;
 use VsPoint\Domain\Acl\User\GetUserById;
@@ -55,7 +55,7 @@ final class GetLoggedInUserQTest extends TestCase
     $securityMock = $this->getSecurityUser(true, '550e8400-e29b-41d4-a716-446655440000');
 
     $emMock = Mockery::mock(EntityManagerInterface::class);
-    $emMock->shouldReceive('find')->andReturnNull();
+    $emMock->allows('find')->andReturnNull();
 
     $getUserByIdQ = new GetUserByIdQ($emMock);
 
@@ -75,9 +75,6 @@ final class GetLoggedInUserQTest extends TestCase
   {
     $securityMock = $this->getSecurityUser(true, InitFixture::USER_01);
 
-    $emMock = Mockery::mock(EntityManagerInterface::class);
-    $emMock->shouldReceive('find')->andReturnNull();
-
     $container = $this->createContainer();
 
     $getUserByIdQ = $container->getByType(GetUserByIdQ::class);
@@ -90,16 +87,17 @@ final class GetLoggedInUserQTest extends TestCase
   }
 
   /**
+   * @param array<string> $roles
+   *
    * @throws MemberAccessException
    */
   private function getSecurityUser(
     bool $loggedIn = false,
     ?string $userId = null,
     array $roles = [],
-    bool $isAllowed = false,
   ): SecurityUser {
-    $storageMock = Mockery::mock(IUserStorage::class);
-    $authenticatorMock = Mockery::mock(IAuthenticator::class);
+    $storageMock = Mockery::mock(UserStorage::class);
+    $authenticatorMock = Mockery::mock(Authenticator::class);
     $authorizatorMock = Mockery::mock(Authorizator::class);
 
     $userMock = Mockery::mock(
@@ -108,12 +106,10 @@ final class GetLoggedInUserQTest extends TestCase
     )->makePartial();
 
     $identityMock = Mockery::mock(IIdentity::class);
-    $identityMock->shouldReceive('getId')->andReturn($userId);
-    $identityMock->shouldReceive('getRoles')->andReturn($roles);
+    $identityMock->allows('getId')->andReturns($userId);
+    $identityMock->allows('getRoles')->andReturns($roles);
 
-    $storageMock->shouldReceive('getIdentity')->andReturn($identityMock);
-    $storageMock->shouldReceive('isAuthenticated')->andReturn($loggedIn);
-    $storageMock->shouldReceive('getLogoutReason')->andReturn(null);
+    $storageMock->allows('getState')->andReturns([$loggedIn, $identityMock, null]);
 
     return $userMock;
   }

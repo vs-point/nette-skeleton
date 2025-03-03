@@ -4,6 +4,6 @@ extensions:
 nettrine.migrations:
     table: aa_migrations
     column: version
-    directory: %appDir%/Database/Migration
-    namespace: VsPoint\Database\Migration
     versionsOrganization: null
+    directories:
+        VsPoint\Database\Migration: %appDir%/Database/Migration

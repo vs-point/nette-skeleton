@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace VsPoint\Domain\Locale\Locale;
 
-use Ds\Sequence;
+use loophp\collection\Contract\Collection;
 use VsPoint\Entity\Locale\Locale;
 
 interface FindLocales
 {
   /**
-   * @return Sequence<Locale>
+   * @return Collection<int, Locale>
    */
-  public function __invoke(int $limit, int $offset): Sequence;
+  public function __invoke(int $limit, int $offset): Collection;
 }

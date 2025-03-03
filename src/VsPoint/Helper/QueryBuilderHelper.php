@@ -77,6 +77,7 @@ final class QueryBuilderHelper
   /**
    * @param literal-string $class
    * @param literal-string $alias
+   * @param array<string>  $ids
    */
   public static function createPostFetch(
     EntityManagerInterface $em,

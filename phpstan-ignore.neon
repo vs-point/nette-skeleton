@@ -1,28 +1,61 @@
 parameters:
-    exceptions:
-        uncheckedExceptionClasses:
-            - ArithmeticError
-            - Brick\DateTime\DateTimeException
-            - Brick\Math\Exception\MathException
-            - Brick\Money\Exception\UnknownCurrencyException
-            - Doctrine\ORM\Query\QueryException
-            - LogicException
-            - Nette\Application\AbortException
-            - Nette\Application\BadRequestException
-            - Nette\Application\UI\InvalidLinkException
-            - Nette\DI\MissingServiceException
-            - Nette\IOException
-            - Nette\InvalidStateException
-            - PHPUnit\Framework\Exception
-            - ReflectionException
-            - OutOfBoundsException
-            - Safe\Exceptions\ArrayException
-            - Safe\Exceptions\FilesystemException
-            - Safe\Exceptions\JsonException
-            - Safe\Exceptions\PcreException
-            - Safe\Exceptions\StringsException
     ignoreErrors:
-        - '#Property .* type has no value type specified in iterable type (array|iterable).*#'
-        - '#.* has parameter \$\w+ with no value type specified in iterable type (array|iterable).*#'
-        - '#.* return type has no value type specified in iterable type (array|Traversable).*#'
-        - '#VsPoint\\Infrastructure\\Kdyby\\FakeSession\\Session::__construct\(\) does not call parent constructor from Nette\\Http\\Session.#'
+        -
+            message: '#^Property Nette\\Forms\\Form\:\:\$onSuccess \(array\<callable\(Nette\\Application\\UI\\Form, mixed\)\: void\>\) does not accept non\-empty\-array\<\(callable\(Nette\\Application\\UI\\Form, mixed\)\: void\)\|\(Closure\(Nette\\Application\\UI\\Form, VsPoint\\DTO\\Acl\\PasswordWithCheckFormDTO\)\: void\)\>\.$#'
+            identifier: assign.propertyType
+            count: 1
+            path: src/VsPoint/Http/Web/Admin/Acl/ChangePasswordPresenter.php
+
+        -
+            message: '#^Property Nette\\Forms\\Form\:\:\$onSuccess \(array\<callable\(Nette\\Application\\UI\\Form, mixed\)\: void\>\) does not accept non\-empty\-array\<\(callable\(Nette\\Application\\UI\\Form, mixed\)\: void\)\|\(Closure\(Nette\\Application\\UI\\Form, VsPoint\\DTO\\Acl\\SignInFormDTO\)\: void\)\>\.$#'
+            identifier: assign.propertyType
+            count: 1
+            path: src/VsPoint/Http/Web/Admin/Acl/SignInPresenter.php
+
+        -
+            message: '#^Property Nette\\Forms\\Form\:\:\$onSuccess \(array\<callable\(Nette\\Application\\UI\\Form, mixed\)\: void\>\) does not accept non\-empty\-array\<\(callable\(Nette\\Application\\UI\\Form, mixed\)\: void\)\|\(Closure\(Nette\\Application\\UI\\Form, VsPoint\\DTO\\Acl\\UserFormDTO\)\: void\)\>\.$#'
+            identifier: assign.propertyType
+            count: 1
+            path: src/VsPoint/Http/Web/Admin/Acl/UserCreatePresenter.php
+
+        -
+            message: '#^Property Nette\\Forms\\Form\:\:\$onSuccess \(array\<callable\(Nette\\Application\\UI\\Form, mixed\)\: void\>\) does not accept non\-empty\-array\<\(callable\(Nette\\Application\\UI\\Form, mixed\)\: void\)\|\(Closure\(Nette\\Application\\UI\\Form, VsPoint\\DTO\\Acl\\PasswordFormDTO\)\: never\)\>\.$#'
+            identifier: assign.propertyType
+            count: 1
+            path: src/VsPoint/Http/Web/Admin/Acl/UserEditPasswordPresenter.php
+
+        -
+            message: '#^Property Nette\\Forms\\Form\:\:\$onSuccess \(array\<callable\(Nette\\Application\\UI\\Form, mixed\)\: void\>\) does not accept non\-empty\-array\<\(callable\(Nette\\Application\\UI\\Form, mixed\)\: void\)\|\(Closure\(Nette\\Application\\UI\\Form, VsPoint\\DTO\\Acl\\UserFormDTO\)\: void\)\>\.$#'
+            identifier: assign.propertyType
+            count: 1
+            path: src/VsPoint/Http/Web/Admin/Acl/UserEditPresenter.php
+
+        -
+            message: '#^Property Nette\\Forms\\Form\:\:\$onSuccess \(array\<callable\(Nette\\Application\\UI\\Form, mixed\)\: void\>\) does not accept non\-empty\-array\<\(callable\(Nette\\Application\\UI\\Form, mixed\)\: void\)\|\(Closure\(Nette\\Application\\UI\\Form, VsPoint\\DTO\\Acl\\UserRolesFormDTO\)\: never\)\>\.$#'
+            identifier: assign.propertyType
+            count: 1
+            path: src/VsPoint/Http/Web/Admin/Acl/UserRolesEditPresenter.php
+
+        -
+            message: '#^Property Nette\\Forms\\Form\:\:\$onSuccess \(array\<callable\(Nette\\Application\\UI\\Form, mixed\)\: void\>\) does not accept non\-empty\-array\<\(callable\(Nette\\Application\\UI\\Form, mixed\)\: void\)\|\(Closure\(Nette\\Application\\UI\\Form, VsPoint\\DTO\\Common\\SearchFormDTO\)\: void\)\>\.$#'
+            identifier: assign.propertyType
+            count: 1
+            path: src/VsPoint/Http/Web/Admin/HomepagePresenter.php
+
+        -
+            message: '#^Method VsPoint\\Infrastructure\\Kdyby\\FakeSession\\Session\:\:getSection\(\) should return T of Nette\\Http\\SessionSection but returns Nette\\Http\\SessionSection\.$#'
+            identifier: return.type
+            count: 1
+            path: src/VsPoint/Infrastructure/Kdyby/FakeSession/Session.php
+
+        -
+            message: '#^VsPoint\\Infrastructure\\Kdyby\\FakeSession\\Session\:\:__construct\(\) does not call parent constructor from Nette\\Http\\Session\.$#'
+            identifier: constructor.missingParentCall
+            count: 1
+            path: src/VsPoint/Infrastructure/Kdyby/FakeSession/Session.php
+
+        -
+            message: '#^Parameter \#1 \$validator of method Nette\\Forms\\Controls\\TextInput\:\:addRule\(\) expects \(callable\(\)\: mixed\)\|string, mixed given\.$#'
+            identifier: argument.type
+            count: 2
+            path: src/VsPoint/UI/Form/Acl/UserFormFactory.php

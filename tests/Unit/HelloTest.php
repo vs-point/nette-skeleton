@@ -8,9 +8,6 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Test\TestCase;
 
-/**
- * @internal
- */
 #[CoversNothing]
 final class HelloTest extends TestCase
 {

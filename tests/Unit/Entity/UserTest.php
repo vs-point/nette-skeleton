@@ -95,7 +95,7 @@ final class UserTest extends TestCase
     );
 
     // Test all getters
-    self::assertEquals($email, $user->getEmail());
+    self::assertSame($email, $user->getEmail());
     self::assertTrue($passwords->verify($password, $user->getPassword()));
     self::assertEquals($expiration, $user->getExpiration());
     self::assertEquals($now, $user->getCreatedAt());
@@ -209,7 +209,7 @@ final class UserTest extends TestCase
 
     $user->edit($newEmail, $newExpiration, $doesUserExist, $userEdited);
 
-    self::assertEquals($newEmail, $user->getEmail());
+    self::assertSame($newEmail, $user->getEmail());
     self::assertEquals($newExpiration, $user->getExpiration());
   }
 
@@ -483,7 +483,7 @@ final class UserTest extends TestCase
     );
 
     // Test __toString method returns email
-    self::assertEquals($email, (string) $user);
+    self::assertSame($email, (string) $user);
   }
 
   /**

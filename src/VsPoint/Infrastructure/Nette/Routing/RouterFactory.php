@@ -40,8 +40,8 @@ final class RouterFactory
         'module' => 'Admin',
         'presenter' => 'Homepage',
         'action' => [
-          Route::VALUE => 'default',
-          Route::PATTERN => '[a-z-]+',
+          Route::Value => 'default',
+          Route::Pattern => '[a-z-]+',
         ],
       ]
     );
@@ -52,9 +52,9 @@ final class RouterFactory
   }
 
   /**
-   * @param array|string $metadata
+   * @param array{'presenter': string, 'action'?: string}|string $metadata
    */
-  private function addRoute(string $mask, $metadata, int $flags = 0): void
+  private function addRoute(string $mask, array|string $metadata, int $flags = 0): void
   {
     if (is_string($metadata)) {
       $metadata = [
@@ -63,7 +63,7 @@ final class RouterFactory
       ];
     }
 
-    $metadata['presenter'] = trim((string) $metadata['presenter'], ':');
+    $metadata['presenter'] = trim($metadata['presenter'], ':');
     $metadata['action'] ??= 'default';
 
     $this->router->addRoute($mask, $metadata, $flags);

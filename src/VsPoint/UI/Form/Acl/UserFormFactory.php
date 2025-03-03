@@ -103,7 +103,7 @@ final readonly class UserFormFactory
         'length' => self::PASSWORD_MIN_LENGTH,
       ]))
       ->addRule(
-        $form::MIN_LENGTH,
+        $form::MinLength,
         new Message(
           "{$t}.{$f}.length",
           [
@@ -116,13 +116,13 @@ final readonly class UserFormFactory
 
     $form
       ->addPassword($f = 'passwordCheck', "{$t}.{$f}.label")
-      ->addRule(Form::EQUAL, "{$t}.{$f}.error.passwordEqualCheck", $form['password'])
+      ->addRule(Form::Equal, "{$t}.{$f}.error.passwordEqualCheck", $form['password'])
       ->setRequired('admin.form.rule.required')
       ->setOption('description', new Message("{$t}.{$f}.length", [
         'length' => self::PASSWORD_MIN_LENGTH,
       ]))
       ->addRule(
-        $form::MIN_LENGTH,
+        $form::MinLength,
         new Message(
           "{$t}.{$f}.length",
           [

@@ -35,10 +35,10 @@ abstract class BasePresenter extends Presenter
   #[Override]
   public function formatTemplateFiles(): array
   {
-    /** @var string $name */
     $name = $this->getName();
-    /** @var string $filename */
+    assert(is_string($name));
     $filename = self::getReflection()->getFileName();
+    assert(is_string($filename));
 
     [, $presenter] = Helpers::splitName($name);
     $dir = dirname($filename);

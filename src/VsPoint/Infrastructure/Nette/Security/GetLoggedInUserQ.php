@@ -11,6 +11,8 @@ use VsPoint\Entity\Acl\User;
 use VsPoint\Exception\Runtime\Acl\UserNotFound;
 use VsPoint\Exception\Runtime\Acl\UserNotLoggedInException;
 
+use function is_string;
+
 final readonly class GetLoggedInUserQ implements GetLoggedInUser
 {
   public function __construct(
@@ -30,6 +32,8 @@ final readonly class GetLoggedInUserQ implements GetLoggedInUser
     }
 
     $id = $this->security->getId();
+
+    assert(is_string($id));
 
     return $this->getUserById->__invoke(Uuid::fromString($id));
   }

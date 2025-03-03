@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace VsPoint\VO\PreFetch;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Ds\Sequence;
-use Ds\Set;
-use Ds\Vector;
+use loophp\collection\Collection as LoopCollection;
+use loophp\collection\Contract\Collection;
 use Ramsey\Uuid\UuidInterface;
 use VsPoint\Entity\Acl\UserRole;
 use VsPoint\Helper\Transform;
@@ -15,11 +14,11 @@ use VsPoint\Helper\Transform;
 final readonly class PreFetchUserRoles
 {
   /**
-   * @param Sequence<UserRole> $userRoles
+   * @param Collection<int, UserRole> $userRoles
    */
   public function __construct(
     private EntityManagerInterface $em,
-    private Sequence $userRoles,
+    private Collection $userRoles,
   ) {
   }
 
@@ -28,21 +27,21 @@ final readonly class PreFetchUserRoles
    */
   public function toArray(): array
   {
-    return $this->userRoles->toArray();
+    return $this->userRoles->all();
   }
 
   /**
-   * @return Sequence<UserRole>
+   * @return Collection<int, UserRole>
    */
-  public function toSequence(): Sequence
+  public function toCollection(): Collection
   {
     return $this->userRoles;
   }
 
   /**
-   * @param Set<UuidInterface> $ids
+   * @param Collection<int, UuidInterface> $ids
    */
-  public static function byIds(EntityManagerInterface $em, Set $ids): self
+  public static function byIds(EntityManagerInterface $em, Collection $ids): self
   {
     /** @var UserRole[] $userRoles */
     $userRoles = $em
@@ -53,24 +52,23 @@ final readonly class PreFetchUserRoles
         WHERE userRole.id IN (:ids)
         DQL
       )
-      ->setParameter('ids', Transform::fromUuidsToStringUuids($ids->toArray()))
+      ->setParameter('ids', Transform::fromUuidsToStringUuids($ids->all()))
       ->getResult()
     ;
 
-    return new self($em, new Vector($userRoles));
+    return new self($em, LoopCollection::fromIterable($userRoles));
   }
 
   public function withUser(): PreFetchUsers
   {
-    /** @var Set<UuidInterface> $ids */
-    $ids = $this->toSequence()->reduce(
-      static function (Set $acc, UserRole $userRole): Set {
+    /** @var Collection<int, UuidInterface> $ids */
+    $ids = $this->toCollection()->reduce(
+      static function (Collection $acc, UserRole $userRole): Collection {
         $id = $userRole->getUser()->getId();
-        $acc->add($id);
 
-        return $acc;
+        return $acc->append($id);
       },
-      new Set()
+      LoopCollection::empty()
     );
 
     return PreFetchUsers::byIds($this->em, $ids);

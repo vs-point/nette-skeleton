@@ -42,7 +42,7 @@ final readonly class DispatcherFactory
 
       if (!$this->debugMode) {
         $this->cache->save('routes', $data, [
-          Cache::FILES => [__DIR__ . '/../../../config/api/config/routes.php'],
+          Cache::Files => [__DIR__ . '/../../../config/api/config/routes.php'],
         ]);
       }
     }

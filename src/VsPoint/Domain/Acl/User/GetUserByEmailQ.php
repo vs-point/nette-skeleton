@@ -36,7 +36,10 @@ final readonly class GetUserByEmailQ implements GetUserByEmail
     ;
 
     try {
-      return $query->getSingleResult();
+      /** @var User $result */
+      $result = $query->getSingleResult();
+
+      return $result;
     } catch (DoctrineNonUniqueResultException $e) {
       throw NonUniqueResultException::from($e);
     } catch (NoResultException $e) {

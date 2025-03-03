@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Domain\Locale\Locale;
 
-use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException as ORMNonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\Query;
 use Exception;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -71,7 +71,7 @@ class GetLocaleByIdQTest extends TestCase
   {
     $emMock = Mockery::mock(EntityManagerInterface::class);
 
-    $queryMock = Mockery::mock(AbstractQuery::class);
+    $queryMock = Mockery::mock(Query::class);
     $queryMock
       ->allows('setParameter')->andReturnSelf()
     ;

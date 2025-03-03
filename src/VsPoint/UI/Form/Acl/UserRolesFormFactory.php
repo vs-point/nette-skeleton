@@ -7,6 +7,7 @@ namespace VsPoint\UI\Form\Acl;
 use Nette\Application\UI\Form;
 use Nette\Localization\Translator;
 use Nette\SmartObject;
+use Stringable;
 use VsPoint\DTO\Acl\UserRolesFormDTO;
 use VsPoint\Entity\Acl\Role;
 use VsPoint\Entity\Acl\UserRole;
@@ -28,7 +29,7 @@ final readonly class UserRolesFormFactory
     $t = 'admin.' . self::class;
 
     $roles = array_map(
-      fn (string $item): string => $this->trans->translate(
+      fn (string $item): string|Stringable => $this->trans->translate(
         sprintf('admin.%s.roles.values.%s', UserRole::class, $item)
       ),
       Role::getAllRoles()

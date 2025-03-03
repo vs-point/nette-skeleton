@@ -20,6 +20,8 @@ use Solcik\Nette\Forms\Controls\ZonedDateTimeInput;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Throwable;
 
+use function getenv;
+
 final class Bootstrap
 {
   public const string TIMEZONE = 'Europe/Prague';
@@ -68,7 +70,7 @@ final class Bootstrap
 
   public static function bootForApi(): Configurator
   {
-    $configurator = self::prepareConfigurator();
+    $configurator = self::prepareConfigurator(enableTracy: false);
     $configurator->addConfig(dirname(__DIR__) . '/config/api/index.neon');
 
     return self::filterDefaultExtensionsFromConfigurator(
@@ -77,9 +79,9 @@ final class Bootstrap
     );
   }
 
-  public static function bootForWeb(): Configurator
+  public static function bootForWeb(bool $enableTracy = true): Configurator
   {
-    $configurator = self::prepareConfigurator();
+    $configurator = self::prepareConfigurator($enableTracy);
     $configurator->addConfig(dirname(__DIR__) . '/config/web/index.neon');
 
     return $configurator;
@@ -87,7 +89,7 @@ final class Bootstrap
 
   public static function bootForCli(): Configurator
   {
-    $configurator = self::prepareConfigurator();
+    $configurator = self::prepareConfigurator(enableTracy: false);
     $configurator->addConfig(dirname(__DIR__) . '/config/console/index.neon');
 
     return self::filterDefaultExtensionsFromConfigurator(
@@ -96,24 +98,30 @@ final class Bootstrap
     );
   }
 
-  private static function prepareConfigurator(): Configurator
+  private static function prepareConfigurator(bool $enableTracy = true): Configurator
   {
     $env = Dotenv::createUnsafeImmutable(dirname(__DIR__, 2));
     $env->safeLoad();
 
     $configurator = new Configurator();
-    $configurator->addParameters(
+    $configurator->addStaticParameters(
       [
         'rootDir' => dirname(__DIR__, 2),
         'wwwDir' => dirname(__DIR__, 2) . '/public',
         'logDir' => dirname(__DIR__, 2) . '/storage/logs',
       ]
     );
-    // TODO
-    $configurator->setDebugMode(['172.24.0.1']);
+    $configurator->addDynamicParameters([
+      'env' => getenv(),
+    ]);
+
     // $configurator->setDebugMode(true);
     // $configurator->setDebugMode(false);
-    $configurator->enableTracy(dirname(__DIR__, 2) . '/storage/logs');
+
+    if ($enableTracy) {
+      $configurator->enableTracy(dirname(__DIR__, 2) . '/storage/logs');
+    }
+
     $configurator->setTempDirectory(dirname(__DIR__, 2) . '/storage/temp');
     $configurator->setTimeZone(self::TIMEZONE);
 

@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace VsPoint\Test\Unit\UI\VO\PreFetch;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Ds\Set;
-use Ds\Vector;
+use loophp\collection\Collection as LoopCollection;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use Ramsey\Uuid\Uuid;
 use VsPoint\Database\Fixture\InitFixture;
+use VsPoint\Entity\Acl\UserRole;
 use VsPoint\Test\TestCase;
 use VsPoint\VO\PreFetch\PreFetchUserRoles;
 
@@ -24,12 +24,13 @@ final class PreFetchUserRolesTest extends TestCase
 
     $em = $container->getByType(EntityManagerInterface::class);
 
-    $users = new Vector();
-    $preFetchUsers = new PreFetchUserRoles($em, $users);
+    /** @var LoopCollection<int, UserRole> $userRoles */
+    $userRoles = LoopCollection::empty();
+    $preFetchUserRoles = new PreFetchUserRoles($em, $userRoles);
 
-    self::assertCount(0, $preFetchUsers->toArray());
+    self::assertCount(0, $preFetchUserRoles->toArray());
 
-    $sequence = $preFetchUsers->toSequence();
+    $sequence = $preFetchUserRoles->toCollection();
 
     self::assertCount(0, $sequence);
   }
@@ -42,12 +43,12 @@ final class PreFetchUserRolesTest extends TestCase
     $em = $container->getByType(EntityManagerInterface::class);
 
     $userRoleId01 = Uuid::fromString(InitFixture::USER_ROLE_POWER_USER);
-    $userRolesIds = new Set([$userRoleId01]);
+    $userRolesIds = LoopCollection::fromIterable([$userRoleId01]);
     $preFetchUserRoles = PreFetchUserRoles::byIds($em, $userRolesIds);
 
     self::assertCount(1, $preFetchUserRoles->toArray());
 
-    $sequence = $preFetchUserRoles->toSequence();
+    $sequence = $preFetchUserRoles->toCollection();
 
     self::assertCount(1, $sequence);
   }
@@ -60,7 +61,7 @@ final class PreFetchUserRolesTest extends TestCase
     $em = $container->getByType(EntityManagerInterface::class);
 
     $userRoleId01 = Uuid::fromString(InitFixture::USER_ROLE_POWER_USER);
-    $userRolesIds = new Set([$userRoleId01]);
+    $userRolesIds = LoopCollection::fromIterable([$userRoleId01]);
     $preFetchUserRoles = PreFetchUserRoles::byIds($em, $userRolesIds);
 
     $preFetchUsers = $preFetchUserRoles->withUser();

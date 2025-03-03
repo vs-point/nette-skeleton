@@ -36,7 +36,10 @@ final readonly class GetLocaleByIdQ implements GetLocaleById
     ;
 
     try {
-      return $query->getSingleResult();
+      /** @var Locale $result */
+      $result = $query->getSingleResult();
+
+      return $result;
     } catch (ORMNonUniqueResultException $e) {
       throw NonUniqueResultException::from($e);
     } catch (NoResultException $e) {

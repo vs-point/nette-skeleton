@@ -20,6 +20,8 @@ use VsPoint\Exception\Runtime\Acl\UserNotFoundByEmail;
 use VsPoint\Exception\Runtime\Authentication\InvalidPasswordException;
 use VsPoint\Exception\Runtime\Authentication\UserInactiveException;
 
+use function is_string;
+
 final readonly class UserAuthenticator implements Authenticator, IdentityHandler
 {
   public function __construct(
@@ -39,7 +41,7 @@ final readonly class UserAuthenticator implements Authenticator, IdentityHandler
     try {
       $userE = $this->getUserByEmail->__invoke($user);
     } catch (UserNotFoundByEmail $e) {
-      throw new AuthenticationException('The username is incorrect.', self::IDENTITY_NOT_FOUND, $e);
+      throw new AuthenticationException('The username is incorrect.', self::IdentityNotFound, $e);
     }
 
     $timestamp = $this->clock->createZonedDateTime();
@@ -47,9 +49,9 @@ final readonly class UserAuthenticator implements Authenticator, IdentityHandler
     try {
       $userE->logIn($this->passwords, $password, $timestamp, $this->userLoggedIn);
     } catch (InvalidPasswordException $e) {
-      throw new AuthenticationException('The password is incorrect.', self::INVALID_CREDENTIAL, $e);
+      throw new AuthenticationException('The password is incorrect.', self::InvalidCredential, $e);
     } catch (UserInactiveException $e) {
-      throw new AuthenticationException('The user is inactive.', self::NOT_APPROVED, $e);
+      throw new AuthenticationException('The user is inactive.', self::NotApproved, $e);
     }
 
     return Identity::from($userE);
@@ -69,7 +71,9 @@ final readonly class UserAuthenticator implements Authenticator, IdentityHandler
   public function wakeupIdentity(IIdentity $identity): ?IIdentity
   {
     if ($identity instanceof SimpleIdentity) {
-      $id = Uuid::fromString($identity->getId());
+      $uuid = $identity->getId();
+      assert(is_string($uuid));
+      $id = Uuid::fromString($uuid);
 
       try {
         $user = $this->getUserById->__invoke($id);

@@ -21,8 +21,6 @@ parameters:
     paths:
         - %currentWorkingDirectory%/src
         - %currentWorkingDirectory%/tests
-    universalObjectCratesClasses:
-        - SimpleXMLElement
     earlyTerminatingMethodCalls:
         Nette\Application\UI\Presenter:
             - redirect

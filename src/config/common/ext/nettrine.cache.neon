@@ -1,6 +1,8 @@
+# https://github.com/contributte/doctrine-cache/tree/master/.docs
+
 extensions:
     nettrine.cache: Nettrine\Cache\DI\CacheExtension
 
 nettrine.cache:
-    driver: Doctrine\Common\Cache\PhpFileCache(%tempDir%/cache/nettrine.cache)
-    # driver: Doctrine\Common\Cache\PredisCache
+#    adapter: Symfony\Component\Cache\Adapter\FilesystemAdapter(%tempDir%/cache/nettrine-cache)
+#    driver: Symfony\Component\Cache\Adapter\ApcuAdapter()

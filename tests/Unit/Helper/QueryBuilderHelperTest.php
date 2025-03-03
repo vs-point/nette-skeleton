@@ -36,8 +36,10 @@ final class QueryBuilderHelperTest extends TestCase
 
     $joinDql = $qbLast->getDQLPart('join');
 
+    self::assertIsArray($joinDql);
     self::assertCount(1, $joinDql);
     self::assertArrayHasKey('user', $joinDql);
+    self::assertIsArray($joinDql['user']);
     self::assertCount(1, $joinDql['user']);
     self::assertInstanceOf(Join::class, $joinDql['user'][0]);
   }
@@ -72,6 +74,7 @@ final class QueryBuilderHelperTest extends TestCase
 
     $selectDqlPart = $qbPostFetch->getDQLPart('select');
 
+    self::assertIsArray($selectDqlPart);
     self::assertCount(1, $selectDqlPart);
 
     $selectPartial = $selectDqlPart[0];
