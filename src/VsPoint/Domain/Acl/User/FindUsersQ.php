@@ -29,9 +29,6 @@ final readonly class FindUsersQ implements FindUsers
       )
     ;
 
-    /** @var User[] $result */
-    $result = $query->getResult();
-
-    return $result;
+    return $query->getResult();
   }
 }

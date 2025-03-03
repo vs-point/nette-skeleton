@@ -17,7 +17,7 @@ final readonly class FindLocalesQ implements FindLocales
   }
 
   /**
-   * @return Collection<int, Locale>
+   * @return Collection<int<0, max>, Locale>
    */
   public function __invoke(int $limit, int $offset): Collection
   {
@@ -32,7 +32,6 @@ final readonly class FindLocalesQ implements FindLocales
       ->setMaxResults($limit)
     ;
 
-    /** @var Locale[] $result */
     $result = $query->getResult();
 
     return LoopCollection::fromIterable($result);

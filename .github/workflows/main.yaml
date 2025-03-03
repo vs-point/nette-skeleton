@@ -81,6 +81,19 @@ jobs:
       matrix:
         operating-system: [ 'ubuntu-24.04' ]
         php-versions: [ '8.4' ]
+        postgres-version: [ '17.4-alpine' ]
+    # Docs: https://docs.github.com/en/actions/using-containerized-services
+    services:
+      postgres:
+        image: 'postgres:${{ matrix.postgres-version }}'
+        env:
+          POSTGRES_USER: '${{env.DB_USER}}'
+          POSTGRES_PASSWORD: '${{env.DB_PASS}}'
+          POSTGRES_DB: '${{env.DB_NAME}}'
+        ports:
+          - 5432/tcp
+        options: >-
+          --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 3
     steps:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v4
@@ -98,6 +111,8 @@ jobs:
           dependency-versions: 'locked'
 
       - name: 🟩️️ PHPStan
+        env:
+          DATABASE_URL: ${{ env.DB_DRIVER }}://${{ env.DB_USER }}:${{ env.DB_PASS }}@${{ env.DB_HOST }}:${{ job.services.postgres.ports['5432'] }}/${{ env.DB_NAME }}
         run: php ./vendor/bin/phpstan --ansi
 
   rector:

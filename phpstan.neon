@@ -28,7 +28,18 @@ parameters:
             - redirectPermanent
             - sendJson
             - sendResponse
-#    doctrine:
-#        objectManagerLoader: tests/object-manager.php
+    doctrine:
+        objectManagerLoader: tests/object-manager.php
+        reportDynamicQueryBuilders: true
+        reportUnknownTypes: true
+        literalString: true
+
+services:
+#    -
+#        class: VsPoint\Infrastructure\PHPStan\Type\Doctrine\Descriptors\ZonedDateTimeType
+#        tags: [phpstan.doctrine.typeDescriptor]
+    -
+        factory: PHPStan\Type\Doctrine\Descriptors\ReflectionDescriptor(Solcik\Doctrine\DBAL\Type\ZonedDateTimeType)
+        tags: [phpstan.doctrine.typeDescriptor]
 
 rules: []
