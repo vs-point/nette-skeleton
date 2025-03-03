@@ -95,19 +95,6 @@ docker compose exec php php -d xdebug.mode=coverage ./vendor/bin/phpunit --cover
 # go to http://localhost
 ```
 
-# VsPoint
-
-## Init
-
-```shell
-docker compose up
-docker container exec -i $(docker compose ps -q database) mariadb --user=$DB_USER --database=$DB_NAME --password=$DB_PASSWORD < ./.data/db_backup_dev.sql
-docker compose exec php composer install
-
-npm install
-npm run build
-```
-
 ## Tools
 
 ### PHP Parallel Lint
@@ -164,12 +151,4 @@ docker compose exec php ./vendor/bin/swiss-knife namespace-to-psr-4 ./src/VsPoin
 docker compose exec php ./vendor/bin/swiss-knife namespace-to-psr-4 ./tests --namespace-root "VsPoint\\Test\\"
 docker compose exec php ./vendor/bin/swiss-knife finalize-classes ./src ./tests
 docker compose exec php ./vendor/bin/swiss-knife privatize-constants ./src ./test
-```
-
-### Config transformer
-
-- https://github.com/symplify/config-transformer
-
-```shell
-docker compose exec php ./vendor/bin/config-transformer convert config/parameters.yml
 ```
