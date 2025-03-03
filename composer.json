@@ -117,6 +117,7 @@
     "phpstan/phpstan-symfony": "^1.1.8",
     "phpunit/phpunit": "^9.5.20",
     "rector/rector": "^v0.12.23@dev",
+    "rector/swiss-knife": "^2.1",
     "roave/security-advisories": "dev-master",
     "slam/phpstan-extensions": "^6.0.0",
     "slevomat/coding-standard": "dev-master",
@@ -140,7 +141,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "VsPoint\\Test\\": "tests/"
+      "VsPoint\\Test\\": "tests"
     }
   },
   "minimum-stability": "dev",

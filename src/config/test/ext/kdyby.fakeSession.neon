@@ -1,0 +1,5 @@
+extensions:
+    kdyby.fakeSession: VsPoint\Infrastructure\Kdyby\FakeSession\DI\FakeSessionExtension
+
+kdyby.fakeSession:
+    enabled: true

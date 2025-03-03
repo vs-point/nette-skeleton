@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "05ac10831b34b60eaf265b1f290f37db",
+    "content-hash": "7fd131b3820b3380a0314c19037b158b",
     "packages": [
         {
             "name": "brick/brick",
@@ -12684,6 +12684,53 @@
             "time": "2022-05-01T15:50:16+00:00"
         },
         {
+            "name": "rector/swiss-knife",
+            "version": "2.1.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rectorphp/swiss-knife.git",
+                "reference": "871f3cfa431821144ee6f6fb6883a3a4523892cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rectorphp/swiss-knife/zipball/871f3cfa431821144ee6f6fb6883a3a4523892cc",
+                "reference": "871f3cfa431821144ee6f6fb6883a3a4523892cc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "bin": [
+                "bin/swiss-knife"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rector\\SwissKnife\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Swiss knife in pocket of every upgrade architect",
+            "support": {
+                "issues": "https://github.com/rectorphp/swiss-knife/issues",
+                "source": "https://github.com/rectorphp/swiss-knife/tree/2.1.15"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/rectorphp",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/tomasvotruba",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-02-19T09:51:24+00:00"
+        },
+        {
             "name": "roave/security-advisories",
             "version": "dev-master",
             "source": {
@@ -14948,6 +14995,7 @@
         "contributte/psr11-container-interface": 20,
         "contributte/redis": 20,
         "contributte/translation": 20,
+        "jetbrains/phpstorm-stubs": 20,
         "nettrine/annotations": 20,
         "nettrine/cache": 20,
         "nettrine/dbal": 20,
@@ -14955,17 +15003,16 @@
         "nettrine/migrations": 20,
         "nettrine/orm": 20,
         "php-ds/php-ds": 20,
-        "solcik/extras": 20,
-        "jetbrains/phpstorm-stubs": 20,
         "rector/rector": 20,
         "roave/security-advisories": 20,
-        "slevomat/coding-standard": 20
+        "slevomat/coding-standard": 20,
+        "solcik/extras": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.1"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }
