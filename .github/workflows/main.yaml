@@ -12,6 +12,7 @@ env:
   DB_NAME: vspoint
   DB_HOST: localhost
   DB_PORT: 5432
+  DOCTRINE_PROXY_AUTOGENERATE: 0
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -173,6 +174,7 @@ jobs:
         run: |
           php ./console migrations:migrate --no-interaction
           php ./console doctrine:fixtures:load --no-interaction
+          php ./console orm:generate-proxies
 
       - name: 🧮 PHPUnit
         env:
