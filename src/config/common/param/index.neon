@@ -3,14 +3,7 @@ parameters:
         name: vspoint/web
         url: ::getenv(APP_URL)
 
-    database:
-        driver: pdo_pgsql
-        username: vspoint
-        password: passw0rd
-        dbname: vspoint
-        host: db
-        port: 5432
-
+#    database:
 #        driver: %env.DB_DRIVER%
 #        url: ::getenv(DATABASE_URL)
 #        url: %env.DATABASE_URL%

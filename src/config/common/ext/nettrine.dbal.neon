@@ -8,14 +8,7 @@ nettrine.dbal:
     #     sqlLogger: Nettrine\DBAL\Logger\PsrLogger
     connections:
         default:
-            driver: %database.driver%
-#            url: %database.url%
-            host: %database.host%
-            port: %database.port%
-            user: %database.username%
-            password: %database.password%
-            dbname: %database.dbname%
-            serverVersion: '17.4'
+            url: %database.url%
             charset: UTF8
     types:
         uuid: Ramsey\Uuid\Doctrine\UuidType

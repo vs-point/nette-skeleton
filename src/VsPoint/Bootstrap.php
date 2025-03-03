@@ -115,7 +115,7 @@ final class Bootstrap
       'env' => getenv(),
     ]);
 
-    // $configurator->setDebugMode(true);
+    $configurator->setDebugMode(true);
     // $configurator->setDebugMode(false);
 
     if ($enableTracy) {

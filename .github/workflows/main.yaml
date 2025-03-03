@@ -6,7 +6,7 @@ on:
     - cron: '0 8 * * 1' # At 08:00 on Monday
 
 env:
-  DB_DRIVER: pdo_pgsql
+  DB_DRIVER: postgresql
   DB_USER: vspoint
   DB_PASS: passw0rd
   DB_NAME: vspoint
@@ -169,12 +169,14 @@ jobs:
 
       - name: 💾 Prepare database + run migration
         env:
-          DATABASE_URL: postgresql://vspoint:passw0rd@127.0.0.1:${{ job.services.postgres.ports['5432'] }}/vspoint
+          DATABASE_URL: ${{ env.DB_DRIVER }}://${{ env.DB_USER }}:${{ env.DB_PASS }}@${{ env.DB_HOST }}:${{ job.services.postgres.ports['5432'] }}/${{ env.DB_NAME }}
         run: |
           php ./console migrations:migrate --no-interaction
           php ./console doctrine:fixtures:load --no-interaction
 
       - name: 🧮 PHPUnit
+        env:
+          DATABASE_URL: ${{ env.DB_DRIVER }}://${{ env.DB_USER }}:${{ env.DB_PASS }}@${{ env.DB_HOST }}:${{ job.services.postgres.ports['5432'] }}/${{ env.DB_NAME }}
         run: php ./vendor/bin/phpunit
 #        run: php ./vendor/bin/phpunit --coverage-clover=coverage.xml
 #
