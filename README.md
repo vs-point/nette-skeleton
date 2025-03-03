@@ -82,15 +82,13 @@ docker compose exec php composer install
 
 # run commands
 docker compose exec php ./console nette:cache:purge
-docker compose exec php ./console dbal:database:drop --force
-docker compose exec php ./console dbal:database:create
 docker compose exec php ./console migrations:migrate -n
 docker compose exec php ./console doctrine:fixtures:load -n
 
 # run tests
 docker compose exec php vendor/bin/phpunit
 
-# show code cavarage
+# show code coverage
 docker compose exec php php -d xdebug.mode=coverage ./vendor/bin/phpunit --coverage-text
 docker compose exec php php -d xdebug.mode=coverage ./vendor/bin/phpunit --coverage-html ./tests/.coverage
 
