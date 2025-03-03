@@ -179,11 +179,10 @@ jobs:
       - name: 🧮 PHPUnit
         env:
           DATABASE_URL: ${{ env.DB_DRIVER }}://${{ env.DB_USER }}:${{ env.DB_PASS }}@${{ env.DB_HOST }}:${{ job.services.postgres.ports['5432'] }}/${{ env.DB_NAME }}
-        run: php ./vendor/bin/phpunit
-#        run: php ./vendor/bin/phpunit --coverage-clover=coverage.xml
-#
-#      - name: 'Upload coverage file'
-#        uses: 'actions/upload-artifact@v2'
-#        with:
-#          name: '${{ github.job }}-coverage'
-#          path: 'coverage.xml'
+        run: php ./vendor/bin/phpunit --coverage-text --coverage-clover=clover.xml
+
+      - name: Upload coverage file
+        uses: actions/upload-artifact@v4
+        with:
+          name: '${{ github.job }}-coverage'
+          path: 'clover.xml'
