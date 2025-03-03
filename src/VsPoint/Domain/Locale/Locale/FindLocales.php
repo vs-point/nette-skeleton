@@ -10,7 +10,7 @@ use VsPoint\Entity\Locale\Locale;
 interface FindLocales
 {
   /**
-   * @return Collection<int, Locale>
+   * @return Collection<int<0, max>, Locale>
    */
   public function __invoke(int $limit, int $offset): Collection;
 }

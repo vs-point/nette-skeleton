@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Domain\Acl\User;
 
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException as DoctrineNonUniqueResultException;
 use Doctrine\ORM\NoResultException;
@@ -36,10 +37,7 @@ final readonly class GetUserByEmailQ implements GetUserByEmail
     ;
 
     try {
-      /** @var User $result */
-      $result = $query->getSingleResult();
-
-      return $result;
+      return $query->getSingleResult(AbstractQuery::HYDRATE_OBJECT);
     } catch (DoctrineNonUniqueResultException $e) {
       throw NonUniqueResultException::from($e);
     } catch (NoResultException $e) {

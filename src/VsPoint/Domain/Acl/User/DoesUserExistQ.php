@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Domain\Acl\User;
 
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException as DoctrineNonUniqueResultException;
 use VsPoint\Entity\Acl\User;
@@ -34,7 +35,9 @@ final readonly class DoesUserExistQ implements DoesUserExist
     }
 
     try {
-      return $qb->getQuery()->getOneOrNullResult() !== null;
+      $user = $qb->getQuery()->getOneOrNullResult(AbstractQuery::HYDRATE_OBJECT);
+
+      return $user !== null;
     } catch (DoctrineNonUniqueResultException $e) {
       throw NonUniqueResultException::from($e);
     }

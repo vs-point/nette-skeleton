@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Domain\Locale\Locale;
 
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException as ORMNonUniqueResultException;
 use Doctrine\ORM\NoResultException;
@@ -36,10 +37,7 @@ final readonly class GetLocaleByIdQ implements GetLocaleById
     ;
 
     try {
-      /** @var Locale $result */
-      $result = $query->getSingleResult();
-
-      return $result;
+      return $query->getSingleResult(AbstractQuery::HYDRATE_OBJECT);
     } catch (ORMNonUniqueResultException $e) {
       throw NonUniqueResultException::from($e);
     } catch (NoResultException $e) {
