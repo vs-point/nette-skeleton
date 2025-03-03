@@ -12,25 +12,26 @@ use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 use Laminas\HttpHandlerRunner\RequestHandlerRunner;
 use Laminas\Stratigility\Middleware\ErrorResponseGenerator;
 use Nette\Application\Application;
-use Nette\Configurator;
-use Nette\Utils\Strings;
+use Nette\Bootstrap\Configurator;
 use Psr\Http\Message\ResponseInterface;
 use Relay\Relay;
 use Solcik\Doctrine\DBAL\Type\ZonedDateTimeType;
+use Solcik\Nette\Forms\Controls\ZonedDateTimeInput;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Throwable;
-use VsPoint\Infrastructure\Nette\Forms\ZonedDateTimeInput;
+
+use function getenv;
 
 final class Bootstrap
 {
-  public const TIMEZONE = 'Europe/Prague';
+  public const string TIMEZONE = 'Europe/Prague';
 
   public static function start(): void
   {
     $request = SymfonyRequest::createFromGlobals();
     $uri = $request->getRequestUri();
 
-    if (Strings::startsWith($uri, '/api')) {
+    if (\str_starts_with($uri, '/api')) {
       self::startApi();
 
       return;
@@ -55,7 +56,7 @@ final class Bootstrap
     $relay = $container->getByType(Relay::class);
     $emitter = $container->getByType(EmitterInterface::class);
 
-    $serverRequestFactory = [ServerRequestFactory::class, 'fromGlobals'];
+    $serverRequestFactory = ServerRequestFactory::fromGlobals(...);
 
     $errorResponseGenerator = static function (Throwable $e): ResponseInterface {
       $generator = new ErrorResponseGenerator();
@@ -69,7 +70,7 @@ final class Bootstrap
 
   public static function bootForApi(): Configurator
   {
-    $configurator = self::prepareConfigurator();
+    $configurator = self::prepareConfigurator(enableTracy: false);
     $configurator->addConfig(dirname(__DIR__) . '/config/api/index.neon');
 
     return self::filterDefaultExtensionsFromConfigurator(
@@ -78,9 +79,9 @@ final class Bootstrap
     );
   }
 
-  public static function bootForWeb(): Configurator
+  public static function bootForWeb(bool $enableTracy = true): Configurator
   {
-    $configurator = self::prepareConfigurator();
+    $configurator = self::prepareConfigurator($enableTracy);
     $configurator->addConfig(dirname(__DIR__) . '/config/web/index.neon');
 
     return $configurator;
@@ -88,7 +89,7 @@ final class Bootstrap
 
   public static function bootForCli(): Configurator
   {
-    $configurator = self::prepareConfigurator();
+    $configurator = self::prepareConfigurator(enableTracy: false);
     $configurator->addConfig(dirname(__DIR__) . '/config/console/index.neon');
 
     return self::filterDefaultExtensionsFromConfigurator(
@@ -97,23 +98,30 @@ final class Bootstrap
     );
   }
 
-  private static function prepareConfigurator(): Configurator
+  private static function prepareConfigurator(bool $enableTracy = true): Configurator
   {
     $env = Dotenv::createUnsafeImmutable(dirname(__DIR__, 2));
     $env->safeLoad();
 
     $configurator = new Configurator();
-    $configurator->addParameters(
+    $configurator->addStaticParameters(
       [
         'rootDir' => dirname(__DIR__, 2),
         'wwwDir' => dirname(__DIR__, 2) . '/public',
         'logDir' => dirname(__DIR__, 2) . '/storage/logs',
       ]
     );
-    $configurator->setDebugMode(['172.24.0.1']);
-    // $configurator->setDebugMode(true);
+    $configurator->addDynamicParameters([
+      'env' => getenv(),
+    ]);
+
+    $configurator->setDebugMode(true);
     // $configurator->setDebugMode(false);
-    $configurator->enableTracy(dirname(__DIR__, 2) . '/storage/logs');
+
+    if ($enableTracy) {
+      $configurator->enableTracy(dirname(__DIR__, 2) . '/storage/logs');
+    }
+
     $configurator->setTempDirectory(dirname(__DIR__, 2) . '/storage/temp');
     $configurator->setTimeZone(self::TIMEZONE);
 
@@ -132,9 +140,7 @@ final class Bootstrap
   ): Configurator {
     $configurator->defaultExtensions = array_filter(
       $configurator->defaultExtensions,
-      static function (string $key) use ($extensions): bool {
-        return in_array($key, $extensions, true);
-      },
+      static fn (string $key): bool => in_array($key, $extensions, true),
       ARRAY_FILTER_USE_KEY
     );
 

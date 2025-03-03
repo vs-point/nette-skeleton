@@ -7,20 +7,18 @@ namespace VsPoint\Test\Unit\Domain\Acl\UserRole;
 use Doctrine\ORM\EntityManagerInterface;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Domain\Acl\UserRole\UserRoleDeleteORM;
 use VsPoint\Entity\Acl\UserRole;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Domain\Acl\UserRole\UserRoleDeleteORM
- */
+#[CoversClass(UserRoleDeleteORM::class)]
 final class UserRoleDeleteORMTest extends TestCase
 {
   use MockeryPHPUnitIntegration;
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testConstructor(): void
   {
     $this->expectNotToPerformAssertions();
@@ -30,9 +28,7 @@ final class UserRoleDeleteORMTest extends TestCase
     $userRoleDeleteORM = new UserRoleDeleteORM($emMock);
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testInvoke(): void
   {
     $emMock = Mockery::mock(EntityManagerInterface::class);

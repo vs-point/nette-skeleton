@@ -8,7 +8,7 @@ use Nette\Security\IIdentity;
 use Ramsey\Uuid\UuidInterface;
 use VsPoint\Entity\Acl\User;
 
-final class Identity implements IIdentity
+final readonly class Identity implements IIdentity
 {
   private UuidInterface $id;
 
@@ -52,6 +52,9 @@ final class Identity implements IIdentity
     return $this->email;
   }
 
+  /**
+   * @return array{'email': string}
+   */
   public function getData(): array
   {
     return [

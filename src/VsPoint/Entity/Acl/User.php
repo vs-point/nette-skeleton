@@ -10,8 +10,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\OneToMany;
-use Ds\Sequence;
-use Ds\Vector;
+use loophp\collection\Collection as LoopCollection;
+use loophp\collection\Contract\Collection as CollectionInterface;
 use Nette\Security\Passwords;
 use Nette\Utils\Strings;
 use Ramsey\Uuid\Uuid;
@@ -48,7 +48,7 @@ class User implements HasId, Stringable
   private ?ZonedDateTime $gdpr;
 
   #[ORM\Id]
-  #[ORM\Column(type: 'uuid')]
+  #[Column(type: 'uuid')]
   private UuidInterface $id;
 
   /**
@@ -108,7 +108,17 @@ class User implements HasId, Stringable
     Passwords $service,
     UserCreated $created,
   ): self {
-    return new self($uuid, $email, $password, $expiration, $createdAt, $gdpr, $doesUserExist, $service, $created);
+    return new self(
+      $uuid,
+      $email,
+      $password,
+      $expiration,
+      $createdAt,
+      $gdpr,
+      $doesUserExist,
+      $service,
+      $created
+    );
   }
 
   /**
@@ -156,7 +166,9 @@ class User implements HasId, Stringable
 
     $newUserRoles = new ArrayCollection();
     foreach ($requestedRoles as $requestedRole) {
-      $newUserRoles->add(UserRole::create(Uuid::uuid4(), $this, Role::create($requestedRole), $userRoleCreated));
+      $newUserRoles->add(
+        UserRole::create(Uuid::uuid4(), $this, Role::create($requestedRole), $userRoleCreated)
+      );
     }
     $this->userRoles = $newUserRoles;
 
@@ -167,8 +179,12 @@ class User implements HasId, Stringable
    * @throws InvalidPasswordException
    * @throws UserInactiveException
    */
-  public function logIn(Passwords $service, string $password, ZonedDateTime $timestamp, UserLoggedIn $loggedIn): void
-  {
+  public function logIn(
+    Passwords $service,
+    string $password,
+    ZonedDateTime $timestamp,
+    UserLoggedIn $loggedIn,
+  ): void {
     if (!$service->verify($password, $this->getPasswordHash())) {
       throw new InvalidPasswordException();
     }
@@ -222,40 +238,42 @@ class User implements HasId, Stringable
   }
 
   /**
-   * Returns all user's ACL roles names incl. "user" role
+   * Returns all user's ACL roles names incl. "user" role.
    *
    * @return array<string>
    */
   public function getRoles(): array
   {
-    return array_unique(
-      $this->getUserRoles()->reduce(
-        static function (array $acc, UserRole $userRole): array {
-          $acc[] = $userRole->getRole()->getTitle();
+    /** @var string[] $userRoles */
+    $userRoles = $this->getUserRoles()->reduce(
+      static function (array $acc, UserRole $userRole): array {
+        $acc[] = $userRole->getRole()->getTitle();
 
-          return $acc;
-        },
-        ['user']
-      )
+        return $acc;
+      },
+      ['user']
     );
+
+    return array_unique($userRoles);
   }
 
   /**
-   * @return Sequence<UserRole>
+   * @return CollectionInterface<int, UserRole>
    */
-  public function getUserRoles(): Sequence
+  public function getUserRoles(): CollectionInterface
   {
-    return new Vector($this->userRoles->getIterator());
+    return LoopCollection::fromIterable($this->userRoles);
   }
 
   /**
-   * Returns all user's UserRoles names doesn't incl. "user" role because it is not defined in UserRole table
+   * Returns all user's UserRoles names doesn't incl. "user" role because it is not defined in UserRole table.
    *
    * @return array<string>
    */
   public function getUserRolesList(): array
   {
-    return $this->getUserRoles()->reduce(
+    /** @var string[] $userRoles */
+    $userRoles = $this->getUserRoles()->reduce(
       static function (array $items, UserRole $userRole): array {
         $items[] = $userRole->getRole()->getTitle();
 
@@ -263,6 +281,8 @@ class User implements HasId, Stringable
       },
       []
     );
+
+    return $userRoles;
   }
 
   public function isPasswordCorrect(string $password, Passwords $passwords): bool

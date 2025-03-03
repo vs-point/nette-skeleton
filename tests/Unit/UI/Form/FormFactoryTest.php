@@ -7,27 +7,26 @@ namespace VsPoint\Test\Unit\UI\Form;
 use Contributte\FormsBootstrap\BootstrapForm;
 use Contributte\FormsBootstrap\Enums\RenderMode;
 use Nette\Localization\Translator;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use stdClass;
 use VsPoint\Test\TestCase;
 use VsPoint\UI\Form\FormFactory;
 
-/**
- * @covers \VsPoint\UI\Form\FormFactory
- */
+#[CoversClass(FormFactory::class)]
 final class FormFactoryTest extends TestCase
 {
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testFactoryCreate(): void
   {
     $container = $this->createContainerForWeb();
     $translator = $container->getByType(Translator::class);
 
     $factory = new FormFactory($translator);
-    $form = $factory->create(\stdClass::class);
+    $form = $factory->create(stdClass::class);
 
     self::assertInstanceOf(BootstrapForm::class, $form);
-    self::assertEquals(RenderMode::VERTICAL_MODE, $form->getRenderMode());
+    self::assertSame(RenderMode::VERTICAL_MODE, $form->getRenderMode());
     self::assertSame($translator, $form->getTranslator());
     self::assertFalse($form->isAjax());
   }

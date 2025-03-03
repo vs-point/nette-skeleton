@@ -6,15 +6,17 @@ namespace VsPoint\Http\Web\Admin;
 
 use Nette\Application\BadRequestException;
 use Nette\Application\Request;
+use Override;
 use Throwable;
 
 final class ErrorPresenter extends BasePresenter
 {
-  public const LINK = ':Admin:Error:';
+  public const string LINK = ':Admin:Error:';
 
   /**
    * @throw BadRequestException
    */
+  #[Override]
   public function startup(): void
   {
     parent::startup();

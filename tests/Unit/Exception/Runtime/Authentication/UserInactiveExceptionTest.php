@@ -6,20 +6,18 @@ namespace VsPoint\Test\Unit\Exception\Runtime\Authentication;
 
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Entity\Acl\User;
 use VsPoint\Exception\Runtime\Authentication\UserInactiveException;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Exception\Runtime\Authentication\UserInactiveException
- */
+#[CoversClass(UserInactiveException::class)]
 final class UserInactiveExceptionTest extends TestCase
 {
   use MockeryPHPUnitIntegration;
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testConstructor(): void
   {
     $userMock = Mockery::mock(User::class);

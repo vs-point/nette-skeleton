@@ -8,7 +8,7 @@ use Contributte\Events\Extra\Event\Application\ErrorEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Tracy\ILogger;
 
-final class ErrorLoggerSubscriber implements EventSubscriberInterface
+final readonly class ErrorLoggerSubscriber implements EventSubscriberInterface
 {
   private ILogger $logger;
 
@@ -35,10 +35,10 @@ final class ErrorLoggerSubscriber implements EventSubscriberInterface
     $this->logger->log($e, $level);
 
     // $app = $event->getApplication();
-        // $presenter = $app->getPresenter();
+    // $presenter = $app->getPresenter();
 
-        // if ($presenter instanceof AdminBasePresenter) {
-        //    $app->errorPresenter = trim(AdminErrorPresenter::LINK, ':');
-        //}
+    // if ($presenter instanceof AdminBasePresenter) {
+    //    $app->errorPresenter = trim(AdminErrorPresenter::LINK, ':');
+    // }
   }
 }

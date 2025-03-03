@@ -7,18 +7,19 @@ namespace VsPoint\UI\Form\Acl;
 use Nette\Application\UI\Form;
 use Nette\Localization\Translator;
 use Nette\SmartObject;
+use Stringable;
 use VsPoint\DTO\Acl\UserRolesFormDTO;
 use VsPoint\Entity\Acl\Role;
 use VsPoint\Entity\Acl\UserRole;
 use VsPoint\UI\Form\FormFactory;
 
-final class UserRolesFormFactory
+final readonly class UserRolesFormFactory
 {
   use SmartObject;
 
   public function __construct(
-    private readonly FormFactory $formFactory,
-    private readonly Translator $trans,
+    private FormFactory $formFactory,
+    private Translator $trans,
   ) {
   }
 
@@ -28,16 +29,16 @@ final class UserRolesFormFactory
     $t = 'admin.' . self::class;
 
     $roles = array_map(
-      fn (string $item): string => $this->trans->translate(
+      fn (string $item): string|Stringable => $this->trans->translate(
         sprintf('admin.%s.roles.values.%s', UserRole::class, $item)
       ),
       Role::getAllRoles()
     );
 
     $form
-      ->addCheckboxList($f = 'roles', "${t}.${f}.label", $roles)
+      ->addCheckboxList($f = 'roles', "{$t}.{$f}.label", $roles)
       ->setTranslator(null)
-        ;
+    ;
 
     $form
       ->addSubmit($f = 'submit', 'admin.form.label.submit');

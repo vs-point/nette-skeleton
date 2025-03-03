@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\VO;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Test\TestCase;
 use VsPoint\VO\Html\HtmlVO;
 
-/**
- * @covers \VsPoint\VO\Html\HtmlVO
- */
+#[CoversClass(HtmlVO::class)]
 final class HtmlVOTest extends TestCase
 {
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testInvoke(): void
   {
     $htmlVOTitle = 'html title';

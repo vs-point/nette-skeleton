@@ -7,10 +7,10 @@ namespace VsPoint\Domain\Acl\User;
 use Doctrine\ORM\EntityManagerInterface;
 use VsPoint\Entity\Acl\User;
 
-final class UserORM implements UserCreated, UserEdited, UserLoggedIn
+final readonly class UserORM implements UserCreated, UserEdited, UserLoggedIn
 {
   public function __construct(
-    private readonly EntityManagerInterface $em,
+    private EntityManagerInterface $em,
   ) {
   }
 

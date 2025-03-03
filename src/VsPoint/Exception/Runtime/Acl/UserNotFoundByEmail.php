@@ -9,7 +9,7 @@ use VsPoint\Exception\Runtime\EntityNotFoundException;
 
 final class UserNotFoundByEmail extends EntityNotFoundException
 {
-  private string $email;
+  private readonly string $email;
 
   public function __construct(string $email, Throwable $previous)
   {

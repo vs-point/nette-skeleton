@@ -21,11 +21,11 @@ use VsPoint\Http\Web\Front\HomepagePresenter as FrontHomepagePresenter;
 
 final class AuthorizatorFactory
 {
-  private const ROLE_SYSTEM_GUEST = 'guest';
+  private const string ROLE_SYSTEM_GUEST = 'guest';
 
-  private const ROLE_SYSTEM_AUTHENTICATED = 'authenticated';
+  private const string ROLE_SYSTEM_AUTHENTICATED = 'authenticated';
 
-  private const ROLE_SYSTEM_USER = 'user';
+  private const string ROLE_SYSTEM_USER = 'user';
 
   /**
    * @throws InvalidStateException
@@ -114,7 +114,7 @@ final class AuthorizatorFactory
     // ****************************************************************************************************************
     // POWER USER
 
-    $acl->allow(Role::POWER_USER, Permission::ALL);
+    $acl->allow(Role::POWER_USER, Permission::All);
 
     return $acl;
   }

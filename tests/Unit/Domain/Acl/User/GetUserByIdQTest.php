@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace VsPoint\Test\Unit\Domain\Acl\User;
 
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use Ramsey\Uuid\Uuid;
 use VsPoint\Database\Fixture\InitFixture;
 use VsPoint\Domain\Acl\User\GetUserById;
@@ -12,14 +14,10 @@ use VsPoint\Domain\Acl\User\GetUserByIdQ;
 use VsPoint\Exception\Runtime\Acl\UserNotFound;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Domain\Acl\User\GetUserByIdQ
- */
+#[CoversClass(GetUserByIdQ::class)]
 final class GetUserByIdQTest extends TestCase
 {
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testConstructor(): void
   {
     $container = $this->createContainer();
@@ -33,10 +31,9 @@ final class GetUserByIdQTest extends TestCase
   }
 
   /**
-   * @group unit
-   *
    * @throws UserNotFound
    */
+  #[Group('unit')]
   public function testInvoke(): void
   {
     $container = $this->createContainer();
@@ -50,10 +47,9 @@ final class GetUserByIdQTest extends TestCase
   }
 
   /**
-   * @group unit
-   *
    * @throws UserNotFound
    */
+  #[Group('unit')]
   public function testInvokeNotFound(): void
   {
     $this->expectException(UserNotFound::class);

@@ -4,22 +4,21 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Http\Web\Admin;
 
+use Exception;
 use Nette\Application\BadRequestException;
 use Nette\Application\IPresenterFactory;
 use Nette\Application\Request;
 use Nette\Application\Responses\TextResponse;
 use Nette\Bridges\ApplicationLatte\Template;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Http\Web\Admin\ErrorPresenter;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Http\Web\Admin\ErrorPresenter
- */
+#[CoversClass(ErrorPresenter::class)]
 final class ErrorPresenterTest extends TestCase
 {
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testBadRequestConstructor(): void
   {
     $container = $this->createContainerForWeb();
@@ -44,9 +43,7 @@ final class ErrorPresenterTest extends TestCase
     self::assertInstanceOf(Template::class, $response->getSource());
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testExceptionConstructor(): void
   {
     $container = $this->createContainerForWeb();
@@ -63,7 +60,7 @@ final class ErrorPresenterTest extends TestCase
 
     $request = new Request($presenterName, Request::FORWARD, [
       'action' => 'default',
-      'exception' => new \Exception('New exception', 500),
+      'exception' => new Exception('New exception', 500),
     ]);
     $response = $presenter->run($request);
 

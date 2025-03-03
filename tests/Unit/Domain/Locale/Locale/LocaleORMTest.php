@@ -7,21 +7,19 @@ namespace VsPoint\Test\Unit\Domain\Locale\Locale;
 use Doctrine\ORM\EntityManagerInterface;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Database\Fixture\LocaleFixture;
 use VsPoint\Domain\Locale\Locale\LocaleORM;
 use VsPoint\Entity\Locale\Locale;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Domain\Locale\Locale\LocaleORM
- */
+#[CoversClass(LocaleORM::class)]
 final class LocaleORMTest extends TestCase
 {
   use MockeryPHPUnitIntegration;
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testConstructor(): void
   {
     $this->expectNotToPerformAssertions();
@@ -33,9 +31,7 @@ final class LocaleORMTest extends TestCase
     $localeORM = new LocaleORM($em);
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testInvoke(): void
   {
     $container = $this->createContainer();

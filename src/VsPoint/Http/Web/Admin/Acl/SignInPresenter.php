@@ -15,7 +15,7 @@ use VsPoint\UI\Form\Acl\SignInFormFactory;
 
 final class SignInPresenter extends BasePresenter
 {
-  public const LINK = ':Admin:Acl:SignIn:';
+  public const string LINK = ':Admin:Acl:SignIn:';
 
   public function __construct(
     private readonly SignInFormFactory $signInFormFactory,
@@ -43,10 +43,10 @@ final class SignInPresenter extends BasePresenter
         $securityUser = $this->getUser();
         $securityUser->login($data->email, $data->password);
       } catch (AuthenticationException $e) {
-        if ($e->getCode() === Authenticator::NOT_APPROVED) {
-          $form->addError("${t}.error.userInactive");
+        if ($e->getCode() === Authenticator::NotApproved) {
+          $form->addError("{$t}.error.userInactive");
         } else {
-          $form->addError("${t}.error.authenticationMismatch");
+          $form->addError("{$t}.error.authenticationMismatch");
         }
 
         return;

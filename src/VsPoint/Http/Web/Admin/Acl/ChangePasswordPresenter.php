@@ -17,7 +17,7 @@ use VsPoint\UI\Form\Acl\UserFormFactory;
 
 final class ChangePasswordPresenter extends BasePresenter
 {
-  public const LINK = ':Admin:Acl:ChangePassword:';
+  public const string LINK = ':Admin:Acl:ChangePassword:';
 
   public function __construct(
     private readonly UserFormFactory $userFormFactory,
@@ -48,12 +48,12 @@ final class ChangePasswordPresenter extends BasePresenter
       if (!$user->isPasswordCorrect($data->currentPassword, $this->passwords)) {
         /** @var BaseControl $formEmail */
         $formEmail = $form['currentPassword'];
-        $formEmail->addError("${t}.currentPassword.error.incorrectPassword");
+        $formEmail->addError("{$t}.currentPassword.error.incorrectPassword");
 
         return;
       }
 
-      $this->em->wrapInTransaction(function () use ($user, $data) {
+      $this->em->wrapInTransaction(function () use ($user, $data): void {
         $user->editPassword($data->password, $this->passwords, $this->userEdited);
       });
 

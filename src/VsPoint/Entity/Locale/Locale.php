@@ -17,8 +17,8 @@ class Locale implements Stringable
   public const CZE = 'cze';
 
   #[ORM\Id]
-    #[ORM\Column(type: 'string', length: 3)]
-    private string $id;
+  #[ORM\Column(type: 'string', length: 3)]
+  private string $id;
 
   public function __construct(string $id, LocaleCreated $created)
   {
@@ -34,7 +34,7 @@ class Locale implements Stringable
 
   public static function of(string $id): self
   {
-    $created = new class() implements LocaleCreated {
+    $created = new class implements LocaleCreated {
       public function __invoke(Locale $locale): void
       {
       }

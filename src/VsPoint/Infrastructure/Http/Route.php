@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\Infrastructure\Http;
 
-final class Route
+final readonly class Route
 {
   private string $method;
 

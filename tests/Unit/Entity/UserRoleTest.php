@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace VsPoint\Test\Unit\Entity;
 
 use Nette\Security\Passwords;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use Ramsey\Uuid\Uuid;
 use Solcik\Brick\DateTime\Clock;
 use VsPoint\Domain\Acl\User\DoesUserExist;
@@ -17,15 +19,13 @@ use VsPoint\Entity\Acl\UserRole;
 use VsPoint\Exception\Runtime\Acl\UserAlreadyExistsException;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Entity\Acl\UserRole
- */
+#[CoversClass(UserRole::class)]
 final class UserRoleTest extends TestCase
 {
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testCreate(): void
   {
     $container = $this->createContainer();
@@ -64,13 +64,13 @@ final class UserRoleTest extends TestCase
     // Assert properties
     self::assertTrue($roleId->equals($userRole->getId()));
     self::assertSame($user, $userRole->getUser());
-    self::assertEquals($role->getTitle(), $userRole->getRole()->getTitle());
+    self::assertSame($role->getTitle(), $userRole->getRole()->getTitle());
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testDelete(): void
   {
     $container = $this->createContainer();
@@ -123,9 +123,9 @@ final class UserRoleTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testGetters(): void
   {
     $container = $this->createContainer();
@@ -169,13 +169,13 @@ final class UserRoleTest extends TestCase
 
     // Test getRole()
     $returnedRole = $userRole->getRole();
-    self::assertEquals(Role::POWER_USER, $returnedRole->getTitle());
+    self::assertSame(Role::POWER_USER, $returnedRole->getTitle());
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testUserRoleCreatedEventIsCalled(): void
   {
     // Create mock for UserRoleCreated to verify it's called
@@ -215,7 +215,8 @@ final class UserRoleTest extends TestCase
       ->willReturnCallback(function (UserRole $userRole) use ($user, $roleId) {
         self::assertTrue($roleId->equals($userRole->getId()));
         self::assertSame($user, $userRole->getUser());
-        self::assertEquals(Role::POWER_USER, $userRole->getRole()->getTitle());
+        self::assertSame(Role::POWER_USER, $userRole->getRole()->getTitle());
+
         return null;
       });
 

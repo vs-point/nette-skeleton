@@ -1,4 +1,4 @@
-name: 'QA & Tests & CD'
+name: QA & Tests
 
 on:
   push:
@@ -6,191 +6,137 @@ on:
     - cron: '0 8 * * 1' # At 08:00 on Monday
 
 env:
-  extensions: 'redis, ds, json'
-  cache-version: '1'
-  composer-version: 'v2'
-  composer-install: 'composer install --no-interaction --no-progress --no-suggest --prefer-dist'
-
-  # ENV
-  DB_DRIVER: pdo_pgsql
+  DB_DRIVER: postgresql
   DB_USER: vspoint
   DB_PASS: passw0rd
   DB_NAME: vspoint
   DB_HOST: localhost
   DB_PORT: 5432
+  DOCTRINE_PROXY_AUTOGENERATE: 0
 
-  #SENTRY_DSN: https://423c4eba35b44d179727d14dce34589d@o265030.ingest.sentry.io/5639724
-  SENTRY_ENV: local
-
-  DOCTRINE_PROXY_AUTOGENERATE: 1
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
-  stylelint:
-    name: 'stylelint'
-    runs-on: '${{ matrix.operating-system }}'
-
+  parallel-lint:
+    name: 🔎 Parallel lint
+    runs-on: ${{ matrix.operating-system }}
     strategy:
-      matrix:
-        operating-system: ['ubuntu-20.04']
-        node-version: ['16.x']
       fail-fast: false
-
-    steps:
-      - name: 'Checkout'
-        uses: 'actions/checkout@v2'
-
-      - name: 'Use Node.js ${{ matrix.node-version }}'
-        uses: 'actions/setup-node@v2-beta'
-        with:
-          node-version: '${{ matrix.node-version }}'
-
-      - name: 'Cache Node.js modules'
-        uses: 'actions/cache@v2'
-        with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: '~/.npm'
-          key: "${{ runner.OS }}-node-${{ hashFiles('**/yarn.lock') }}"
-          restore-keys: '${{ runner.OS }}-node-'
-
-      - name: 'Install dependencies'
-        run: 'yarn install --frozen-lockfile'
-
-      - name: 'stylelint'
-        run: 'yarn run stylelint'
-
-  prettier:
-    name: 'Prettier'
-    runs-on: '${{ matrix.operating-system }}'
-
-    strategy:
       matrix:
-        operating-system: ['ubuntu-20.04']
-        node-version: ['16.x']
-      fail-fast: false
-
+        operating-system: [ 'ubuntu-24.04' ]
+        php-versions: [ '8.4' ]
     steps:
-      - name: 'Checkout'
-        uses: 'actions/checkout@v2'
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
 
-      - name: 'Use Node.js ${{ matrix.node-version }}'
-        uses: 'actions/setup-node@v2-beta'
+      - name: 🐘 Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          node-version: '${{ matrix.node-version }}'
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring
+          coverage: none
 
-      - name: 'Cache Node.js modules'
-        uses: 'actions/cache@v2'
+      - name: 📥 Install dependencies
+        uses: ramsey/composer-install@v3
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: '~/.npm'
-          key: "${{ runner.OS }}-node-${{ hashFiles('**/yarn.lock') }}"
-          restore-keys: '${{ runner.OS }}-node-'
+          dependency-versions: 'locked'
 
-      - name: 'Install dependencies'
-        run: 'yarn install --frozen-lockfile'
-
-      - name: 'Prettier'
-        run: 'yarn run prettier'
-
-  eslint:
-    name: 'ESlint'
-    runs-on: '${{ matrix.operating-system }}'
-
-    strategy:
-      matrix:
-        operating-system: ['ubuntu-20.04']
-        node-version: ['16.x']
-      fail-fast: false
-
-    steps:
-      - name: 'Checkout'
-        uses: 'actions/checkout@v2'
-
-      - name: 'Use Node.js ${{ matrix.node-version }}'
-        uses: 'actions/setup-node@v2-beta'
-        with:
-          node-version: '${{ matrix.node-version }}'
-
-      - name: 'Cache Node.js modules'
-        uses: 'actions/cache@v2'
-        with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: '~/.npm'
-          key: "${{ runner.OS }}-node-${{ hashFiles('**/yarn.lock') }}"
-          restore-keys: '${{ runner.OS }}-node-'
-
-      - name: 'Install dependencies'
-        run: 'yarn install --frozen-lockfile'
-
-      - name: 'ESlint'
-        run: 'yarn run eslint'
+      - name: 🔎 Parallel lint
+        run: php ./vendor/bin/parallel-lint --exclude ./.git --exclude ./vendor --exclude ./var .
 
   ecs:
-    name: 'EasyCodingStandard'
-    runs-on: '${{ matrix.operating-system }}'
-
+    name: ✏️️ ECS
+    runs-on: ${{ matrix.operating-system }}
     strategy:
-      matrix:
-        operating-system: ['ubuntu-20.04']
-        php-version: ['8.1']
       fail-fast: false
-
+      matrix:
+        operating-system: [ 'ubuntu-24.04' ]
+        php-versions: [ '8.4' ]
     steps:
-      - name: 'Checkout'
-        uses: 'actions/checkout@v2'
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
 
-      - name: 'Setup PHP cache environment'
-        id: 'extcache'
-        uses: 'shivammathur/cache-extensions@v1'
+      - name: 🐘 Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          php-version: '${{ matrix.php-version }}'
-          extensions: '${{ env.extensions }}'
-          key: '${{ env.cache-version }}'
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring
+          coverage: none
 
-      - name: 'Cache PHP extensions'
-        uses: 'actions/cache@v2'
+      - name: 📥 Install dependencies
+        uses: ramsey/composer-install@v3
         with:
-          path: '${{ steps.extcache.outputs.dir }}'
-          key: '${{ steps.extcache.outputs.key }}'
-          restore-keys: '${{ steps.extcache.outputs.key }}'
+          dependency-versions: 'locked'
 
-      - name: 'Install PHP'
-        uses: 'shivammathur/setup-php@v2'
-        with:
-          php-version: '${{ matrix.php-version }}'
-          extensions: '${{ env.extensions }}'
-          tools: 'composer:${{ env.composer-version }} '
+      - name: ✏️️ ECS
+        run: php ./vendor/bin/ecs
 
-      - name: 'Setup problem matchers for PHP'
-        run: 'echo "::add-matcher::${{ runner.tool_cache }}/php.json"'
-
-      - name: 'Get Composer cache directory'
-        id: 'composercache'
-        run: 'echo "::set-output name=dir::$(composer config cache-files-dir)"'
-
-      - name: 'Cache PHP dependencies'
-        uses: 'actions/cache@v2'
-        with:
-          path: '${{ steps.composercache.outputs.dir }}'
-          key: "${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}"
-          restore-keys: '${{ runner.os }}-composer-'
-
-      - name: 'Install dependencies'
-        run: '${{ env.composer-install }}'
-
-      - name: 'EasyCodingStandard'
-        run: './vendor/bin/ecs check'
-
-  static-analysis:
-    name: 'PHPStan'
-    runs-on: '${{ matrix.operating-system }}'
-
+  phpstan:
+    name: 🟩️️ PHPStan
+    runs-on: ${{ matrix.operating-system }}
     strategy:
-      matrix:
-        operating-system: ['ubuntu-20.04']
-        php-version: ['8.1']
-        postgres-version: ['13']
       fail-fast: false
+      matrix:
+        operating-system: [ 'ubuntu-24.04' ]
+        php-versions: [ '8.4' ]
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
 
+      - name: 🐘 Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring
+          coverage: none
+
+      - name: 📥 Install dependencies
+        uses: ramsey/composer-install@v3
+        with:
+          dependency-versions: 'locked'
+
+      - name: 🟩️️ PHPStan
+        run: php ./vendor/bin/phpstan --ansi
+
+  rector:
+    name: 🛠️ Rector
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      fail-fast: false
+      matrix:
+        operating-system: [ 'ubuntu-24.04' ]
+        php-versions: [ '8.4' ]
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
+
+      - name: 🐘 Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring
+          coverage: none
+
+      - name: 📥 Install dependencies
+        uses: ramsey/composer-install@v3
+        with:
+          dependency-versions: 'locked'
+
+      - name: 🛠️ Rector
+        run: php ./vendor/bin/rector process --dry-run --ansi
+
+  phpunit:
+    name: 🧮 PHPUnit
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      fail-fast: false
+      matrix:
+        operating-system: [ 'ubuntu-24.04' ]
+        php-versions: [ '8.4' ]
+        postgres-version: [ '17.4-alpine' ]
+    # Docs: https://docs.github.com/en/actions/using-containerized-services
     services:
       postgres:
         image: 'postgres:${{ matrix.postgres-version }}'
@@ -199,210 +145,44 @@ jobs:
           POSTGRES_PASSWORD: '${{env.DB_PASS}}'
           POSTGRES_DB: '${{env.DB_NAME}}'
         ports:
-          - '5432:5432'
+          - 5432/tcp
         options: >-
-          --health-cmd "pg_isready"
-
+          --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 3
     steps:
-      - name: 'Checkout'
-        uses: 'actions/checkout@v2'
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
 
-      - name: 'Setup PHP cache environment'
-        id: 'extcache'
-        uses: 'shivammathur/cache-extensions@v1'
+      - name: 🐘 Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          php-version: '${{ matrix.php-version }}'
-          extensions: '${{ env.extensions }}'
-          key: '${{ env.cache-version }}'
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, intl, pdo_sqlite, pgsql
+          coverage: xdebug
+          # ini-values: post_max_size=256M, max_execution_time=180
 
-      - name: 'Cache PHP extensions'
-        uses: 'actions/cache@v2'
+      - name: Setup problem matchers for PHPUnit
+        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+      - name: 📥 Install dependencies
+        uses: ramsey/composer-install@v3
         with:
-          path: '${{ steps.extcache.outputs.dir }}'
-          key: '${{ steps.extcache.outputs.key }}'
-          restore-keys: '${{ steps.extcache.outputs.key }}'
+          dependency-versions: 'locked'
 
-      - name: 'Install PHP'
-        uses: 'shivammathur/setup-php@v2'
-        with:
-          php-version: '${{ matrix.php-version }}'
-          extensions: '${{ env.extensions }}'
-          tools: 'composer:${{ env.composer-version }} '
-
-      - name: 'Setup problem matchers for PHP'
-        run: 'echo "::add-matcher::${{ runner.tool_cache }}/php.json"'
-
-      - name: 'Get Composer cache directory'
-        id: 'composercache'
-        run: 'echo "::set-output name=dir::$(composer config cache-files-dir)"'
-
-      - name: 'Cache PHP dependencies'
-        uses: 'actions/cache@v2'
-        with:
-          path: '${{ steps.composercache.outputs.dir }}'
-          key: "${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}"
-          restore-keys: '${{ runner.os }}-composer-'
-
-      - name: 'Install dependencies'
-        run: '${{ env.composer-install }}'
-
-      - name: 'PHPStan'
-        run: './vendor/bin/phpstan analyse'
-
-  tests:
-    name: 'Tests'
-    runs-on: '${{ matrix.operating-system }}'
-
-    strategy:
-      matrix:
-        operating-system: ['ubuntu-20.04']
-        php-version: ['8.1']
-        postgres-version: ['13']
-      fail-fast: false
-
-    services:
-      postgres:
-        image: 'postgres:${{ matrix.postgres-version }}'
+      - name: 💾 Prepare database + run migration
         env:
-          POSTGRES_USER: '${{env.DB_USER}}'
-          POSTGRES_PASSWORD: '${{env.DB_PASS}}'
-          POSTGRES_DB: '${{env.DB_NAME}}'
-        ports:
-          - '5432:5432'
-        options: >-
-          --health-cmd "pg_isready"
-
-    steps:
-      - name: 'Checkout'
-        uses: 'actions/checkout@v2'
-
-      - name: 'Setup PHP cache environment'
-        id: 'extcache'
-        uses: 'shivammathur/cache-extensions@v1'
-        with:
-          php-version: '${{ matrix.php-version }}'
-          extensions: '${{ env.extensions }}'
-          key: '${{ env.cache-version }}'
-
-      - name: 'Cache PHP extensions'
-        uses: 'actions/cache@v2'
-        with:
-          path: '${{ steps.extcache.outputs.dir }}'
-          key: '${{ steps.extcache.outputs.key }}'
-          restore-keys: '${{ steps.extcache.outputs.key }}'
-
-      - name: 'Install PHP'
-        uses: 'shivammathur/setup-php@v2'
-        with:
-          php-version: '${{ matrix.php-version }}'
-          extensions: '${{ env.extensions }}'
-          tools: 'composer:${{ env.composer-version }} '
-
-      - name: 'Setup problem matchers for PHP'
-        run: 'echo "::add-matcher::${{ runner.tool_cache }}/php.json"'
-
-      - name: 'Get Composer cache directory'
-        id: 'composercache'
-        run: 'echo "::set-output name=dir::$(composer config cache-files-dir)"'
-
-      - name: 'Cache PHP dependencies'
-        uses: 'actions/cache@v2'
-        with:
-          path: '${{ steps.composercache.outputs.dir }}'
-          key: "${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}"
-          restore-keys: '${{ runner.os }}-composer-'
-
-      - name: 'Install dependencies'
-        run: '${{ env.composer-install }}'
-
-      - name: 'Setup problem matchers for PHPUnit'
-        run: 'echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"'
-
-      - name: 'Tests - prepare'
+          DATABASE_URL: ${{ env.DB_DRIVER }}://${{ env.DB_USER }}:${{ env.DB_PASS }}@${{ env.DB_HOST }}:${{ job.services.postgres.ports['5432'] }}/${{ env.DB_NAME }}
         run: |
-          php ./console migrations:migrate
+          php ./console migrations:migrate --no-interaction
+          php ./console doctrine:fixtures:load --no-interaction
+          php ./console orm:generate-proxies
 
-      - name: 'Tests'
-        run: |
-          ./vendor/bin/phpunit --group simple
-
-  tests-code-coverage:
-    name: 'Tests with code coverage'
-    runs-on: '${{ matrix.operating-system }}'
-
-    strategy:
-      matrix:
-        operating-system: ['ubuntu-20.04']
-        php-version: ['8.1']
-        postgres-version: ['13']
-      fail-fast: false
-
-    services:
-      postgres:
-        image: 'postgres:${{ matrix.postgres-version }}'
+      - name: 🧮 PHPUnit
         env:
-          POSTGRES_USER: '${{env.DB_USER}}'
-          POSTGRES_PASSWORD: '${{env.DB_PASS}}'
-          POSTGRES_DB: '${{env.DB_NAME}}'
-        ports:
-          - '5432:5432'
-        options: >-
-          --health-cmd "pg_isready"
+          DATABASE_URL: ${{ env.DB_DRIVER }}://${{ env.DB_USER }}:${{ env.DB_PASS }}@${{ env.DB_HOST }}:${{ job.services.postgres.ports['5432'] }}/${{ env.DB_NAME }}
+        run: php ./vendor/bin/phpunit --coverage-text --coverage-clover=clover.xml
 
-    steps:
-      - name: 'Checkout'
-        uses: 'actions/checkout@v2'
-
-      - name: 'Setup PHP cache environment'
-        id: 'extcache'
-        uses: 'shivammathur/cache-extensions@v1'
-        with:
-          php-version: '${{ matrix.php-version }}'
-          extensions: '${{ env.extensions }}'
-          key: '${{ env.cache-version }}'
-
-      - name: 'Cache PHP extensions'
-        uses: 'actions/cache@v2'
-        with:
-          path: '${{ steps.extcache.outputs.dir }}'
-          key: '${{ steps.extcache.outputs.key }}'
-          restore-keys: '${{ steps.extcache.outputs.key }}'
-
-      - name: 'Install PHP'
-        uses: 'shivammathur/setup-php@v2'
-        with:
-          php-version: '${{ matrix.php-version }}'
-          coverage: 'pcov'
-          extensions: '${{ env.extensions }}'
-          tools: 'composer:${{ env.composer-version }} '
-
-      - name: 'Setup problem matchers for PHP'
-        run: 'echo "::add-matcher::${{ runner.tool_cache }}/php.json"'
-
-      - name: 'Get Composer cache directory'
-        id: 'composercache'
-        run: 'echo "::set-output name=dir::$(composer config cache-files-dir)"'
-
-      - name: 'Cache PHP dependencies'
-        uses: 'actions/cache@v2'
-        with:
-          path: '${{ steps.composercache.outputs.dir }}'
-          key: "${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}"
-          restore-keys: '${{ runner.os }}-composer-'
-
-      - name: 'Install dependencies'
-        run: '${{ env.composer-install }}'
-
-      - name: 'Tests - prepare'
-        run: |
-          php ./console migrations:migrate
-
-      - name: 'Tests'
-        run: |
-          ./vendor/bin/phpunit --group simple --coverage-clover=coverage.xml
-
-      - name: 'Upload coverage file'
-        uses: 'actions/upload-artifact@v2'
+      - name: Upload coverage file
+        uses: actions/upload-artifact@v4
         with:
           name: '${{ github.job }}-coverage'
-          path: 'coverage.xml'
+          path: 'clover.xml'

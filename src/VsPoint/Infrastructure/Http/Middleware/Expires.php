@@ -12,9 +12,9 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Solcik\Brick\DateTime\Clock;
 
-final class Expires implements MiddlewareInterface
+final readonly class Expires implements MiddlewareInterface
 {
-  public const HEADER = 'Expires';
+  public const string HEADER = 'Expires';
 
   private Clock $clock;
 
@@ -26,8 +26,10 @@ final class Expires implements MiddlewareInterface
     $this->minutes = $minutes;
   }
 
-  public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-  {
+  public function process(
+    ServerRequestInterface $request,
+    RequestHandlerInterface $handler,
+  ): ResponseInterface {
     $response = $handler->handle($request);
 
     $timeZone = TimeZone::parse('GMT');

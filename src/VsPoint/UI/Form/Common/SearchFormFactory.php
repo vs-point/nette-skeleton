@@ -24,10 +24,10 @@ final class SearchFormFactory
     $t = 'front.' . self::class;
 
     $form
-      ->addText($f = 'query', "${t}.${f}.label")
+      ->addText($f = 'query', "{$t}.{$f}.label")
       ->setHtmlAttribute('placeholder', $placeholder)
       ->setHtmlAttribute('autofocus', true)
-        ;
+    ;
 
     $form
       ->addSubmit($f = 'submit', 'common.form.label.search');

@@ -1,24 +1,16 @@
 extensions:
     nettrine.orm: Nettrine\ORM\DI\OrmExtension
-    nettrine.orm.attributes: Nettrine\ORM\DI\OrmAttributesExtension
-    nettrine.orm.cache: Nettrine\ORM\DI\OrmCacheExtension
 
 nettrine.orm:
-    configuration:
-        proxyDir: '%tempDir%/proxy'
-        autoGenerateProxyClasses: %orm.proxy.autogenerate%
-        proxyNamespace: VsPoint\Entity\Proxy
-        customNumericFunctions:
-            random: \VsPoint\Infrastructure\Doctrine\ORM\Query\AST\Functions\RandomFunction
-
-nettrine.orm.attributes:
-    mapping:
-        VsPoint\Entity: %appDir%/Entity
-
-nettrine.orm.cache:
-    # defaultDriver:
-    # queryCache:
-    # hydrationCache:
-    # metadataCache:
-    # resultCache:
-    # secondLevelCache:
+    managers:
+        default:
+            connection: default
+#            proxyDir: %tempDir%/proxy
+            autoGenerateProxyClasses: %orm.proxy.autogenerate%
+            proxyNamespace: VsPoint\Entity\Proxy
+            customNumericFunctions:
+                random: \VsPoint\Infrastructure\Doctrine\ORM\Query\AST\Functions\RandomFunction
+            mapping:
+                VsPoint\Entity:
+                    directories: [%appDir%/Entity]
+                    namespace: VsPoint\Entity

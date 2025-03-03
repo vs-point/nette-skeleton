@@ -7,10 +7,11 @@ namespace VsPoint\Domain\Locale\Locale;
 use Doctrine\ORM\EntityManagerInterface;
 use VsPoint\Entity\Locale\Locale;
 
-final class LocaleORM implements LocaleCreated
+final readonly class LocaleORM implements LocaleCreated
 {
-  public function __construct(private readonly EntityManagerInterface $em)
-  {
+  public function __construct(
+    private EntityManagerInterface $em,
+  ) {
   }
 
   public function __invoke(Locale $locale): void

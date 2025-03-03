@@ -7,14 +7,14 @@ namespace VsPoint\Test\Unit\Infrastructure\Http;
 use FastRoute\Dispatcher;
 use FastRoute\Dispatcher\GroupCountBased;
 use FastRoute\RouteCollector;
+use FastRoute\RouteParser\Std;
 use Nette\Caching\Storages\MemoryStorage;
+use PHPUnit\Framework\Attributes\CoversClass;
 use VsPoint\Infrastructure\Http\DispatcherFactory;
 use VsPoint\Infrastructure\Http\Route;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Infrastructure\Http\DispatcherFactory
- */
+#[CoversClass(DispatcherFactory::class)]
 final class DispatcherFactoryTest extends TestCase
 {
   private DispatcherFactory $dispatcherFactory;
@@ -29,10 +29,7 @@ final class DispatcherFactoryTest extends TestCase
 
   public function testCreateDispatcherWithoutCache(): void
   {
-    $collector = new RouteCollector(
-      new \FastRoute\RouteParser\Std(),
-      new \FastRoute\DataGenerator\GroupCountBased(),
-    );
+    $collector = new RouteCollector(new Std(), new \FastRoute\DataGenerator\GroupCountBased());
 
     $routes = [
       new Route('GET', '/users', 'UserController@index'),

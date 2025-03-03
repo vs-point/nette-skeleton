@@ -10,14 +10,13 @@ use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Query\Expr\Select;
 use Doctrine\ORM\QueryBuilder;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use PHPUnit\Framework\Attributes\CoversClass;
 use VsPoint\Database\Fixture\InitFixture;
 use VsPoint\Entity\Acl\User;
 use VsPoint\Helper\QueryBuilderHelper;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Helper\QueryBuilderHelper
- */
+#[CoversClass(QueryBuilderHelper::class)]
 final class QueryBuilderHelperTest extends TestCase
 {
   use MockeryPHPUnitIntegration;
@@ -37,8 +36,10 @@ final class QueryBuilderHelperTest extends TestCase
 
     $joinDql = $qbLast->getDQLPart('join');
 
+    self::assertIsArray($joinDql);
     self::assertCount(1, $joinDql);
     self::assertArrayHasKey('user', $joinDql);
+    self::assertIsArray($joinDql['user']);
     self::assertCount(1, $joinDql['user']);
     self::assertInstanceOf(Join::class, $joinDql['user'][0]);
   }
@@ -73,6 +74,7 @@ final class QueryBuilderHelperTest extends TestCase
 
     $selectDqlPart = $qbPostFetch->getDQLPart('select');
 
+    self::assertIsArray($selectDqlPart);
     self::assertCount(1, $selectDqlPart);
 
     $selectPartial = $selectDqlPart[0];

@@ -7,21 +7,19 @@ namespace VsPoint\Test\Unit\Domain\Acl\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Database\Fixture\InitFixture;
 use VsPoint\Domain\Acl\User\UserORM;
 use VsPoint\Entity\Acl\User;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Domain\Acl\User\UserORM
- */
+#[CoversClass(UserORM::class)]
 final class UserORMTest extends TestCase
 {
   use MockeryPHPUnitIntegration;
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testConstructor(): void
   {
     $this->expectNotToPerformAssertions();
@@ -33,9 +31,7 @@ final class UserORMTest extends TestCase
     $userORM = new UserORM($em);
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testInvoke(): void
   {
     $container = $this->createContainer();

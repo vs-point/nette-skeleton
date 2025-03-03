@@ -11,10 +11,10 @@ use VsPoint\Entity\Locale\Locale;
 use VsPoint\Exception\Logic\NonUniqueResultException;
 use VsPoint\Exception\Runtime\Locale\Locale\LocaleNotFoundById;
 
-final class GetLocaleByIdQ implements GetLocaleById
+final readonly class GetLocaleByIdQ implements GetLocaleById
 {
   public function __construct(
-    private readonly EntityManagerInterface $em,
+    private EntityManagerInterface $em,
   ) {
   }
 
@@ -33,10 +33,13 @@ final class GetLocaleByIdQ implements GetLocaleById
                     DQL
       )
       ->setParameter('id', $id)
-        ;
+    ;
 
     try {
-      return $query->getSingleResult();
+      /** @var Locale $result */
+      $result = $query->getSingleResult();
+
+      return $result;
     } catch (ORMNonUniqueResultException $e) {
       throw NonUniqueResultException::from($e);
     } catch (NoResultException $e) {

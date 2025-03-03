@@ -10,7 +10,7 @@ use VsPoint\VO\Html\HtmlVO;
 
 final class HomepagePresenter extends BasePresenter
 {
-  public const LINK = ':Front:Homepage:';
+  public const string LINK = ':Front:Homepage:';
 
   public function __construct(
     private readonly Clock $clock,

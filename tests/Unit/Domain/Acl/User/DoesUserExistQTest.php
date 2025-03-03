@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Domain\Acl\User;
 
-use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException as DoctrineNonUniqueResultException;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Database\Fixture\InitFixture;
 use VsPoint\Domain\Acl\User\DoesUserExist;
 use VsPoint\Domain\Acl\User\DoesUserExistQ;
@@ -17,16 +19,12 @@ use VsPoint\Entity\Acl\User;
 use VsPoint\Exception\Logic\NonUniqueResultException;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Domain\Acl\User\DoesUserExistQ
- */
+#[CoversClass(DoesUserExistQ::class)]
 final class DoesUserExistQTest extends TestCase
 {
   use MockeryPHPUnitIntegration;
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testConstructor(): void
   {
     $container = $this->createContainer();
@@ -39,9 +37,7 @@ final class DoesUserExistQTest extends TestCase
     self::assertInstanceOf(DoesUserExist::class, $doesUserExist);
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testExists(): void
   {
     $container = $this->createContainer();
@@ -51,9 +47,7 @@ final class DoesUserExistQTest extends TestCase
     self::assertTrue($doesUserExist->__invoke(InitFixture::USER_EMAIL_DAVID_SOLC_VS_POINT_CZ));
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testExistsWithUser(): void
   {
     $container = $this->createContainer();
@@ -67,9 +61,7 @@ final class DoesUserExistQTest extends TestCase
     self::assertFalse($doesUserExist->__invoke(InitFixture::USER_EMAIL_DAVID_SOLC_VS_POINT_CZ, $user));
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testDoesNotExist(): void
   {
     $container = $this->createContainer();
@@ -79,9 +71,7 @@ final class DoesUserExistQTest extends TestCase
     self::assertFalse($doesUserExist->__invoke('random@email.com'));
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testNonUniqueResult(): void
   {
     $this->expectException(NonUniqueResultException::class);
@@ -90,7 +80,7 @@ final class DoesUserExistQTest extends TestCase
 
     $exception = new DoctrineNonUniqueResultException('Non unique mock exception.');
 
-    $queryMock = Mockery::mock(AbstractQuery::class);
+    $queryMock = Mockery::mock(Query::class);
     $queryMock
       ->allows('getOneOrNullResult')
       ->andThrows($exception)

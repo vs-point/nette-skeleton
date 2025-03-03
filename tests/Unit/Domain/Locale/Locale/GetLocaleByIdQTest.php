@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Domain\Locale\Locale;
 
-use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException as ORMNonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\Query;
+use Exception;
+use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Database\Fixture\LocaleFixture;
 use VsPoint\Domain\Locale\Locale\GetLocaleByIdQ;
 use VsPoint\Entity\Locale\Locale;
@@ -16,18 +20,15 @@ use VsPoint\Exception\Logic\NonUniqueResultException;
 use VsPoint\Exception\Runtime\Locale\Locale\LocaleNotFoundById;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Domain\Locale\Locale\GetLocaleByIdQ
- */
+#[CoversClass(GetLocaleByIdQ::class)]
 class GetLocaleByIdQTest extends TestCase
 {
   use MockeryPHPUnitIntegration;
 
   /**
-   * @group unit
-   *
    * @throws LocaleNotFoundById
    */
+  #[Group('unit')]
   public function testGet(): void
   {
     $container = $this->createContainer();
@@ -39,9 +40,9 @@ class GetLocaleByIdQTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws LocaleNotFoundById
    */
+  #[Group('unit')]
   public function testNonUniqueResult(): void
   {
     $this->expectException(NonUniqueResultException::class);
@@ -53,9 +54,9 @@ class GetLocaleByIdQTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws LocaleNotFoundById
    */
+  #[Group('unit')]
   public function testNoResult(): void
   {
     $this->expectException(LocaleNotFoundById::class);
@@ -66,11 +67,11 @@ class GetLocaleByIdQTest extends TestCase
     $getLocaleById->__invoke(LocaleFixture::ENG);
   }
 
-  private function setMockery(\Exception $exception): EntityManagerInterface
+  private function setMockery(Exception $exception): EntityManagerInterface
   {
-    $emMock = \Mockery::mock(EntityManagerInterface::class);
+    $emMock = Mockery::mock(EntityManagerInterface::class);
 
-    $queryMock = \Mockery::mock(AbstractQuery::class);
+    $queryMock = Mockery::mock(Query::class);
     $queryMock
       ->allows('setParameter')->andReturnSelf()
     ;

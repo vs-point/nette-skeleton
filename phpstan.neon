@@ -1,5 +1,4 @@
 includes:
-    - vendor/pepakriz/phpstan-exception-rules/extension.neon
     - vendor/phpstan/phpstan-deprecation-rules/rules.neon
     - vendor/phpstan/phpstan-doctrine/extension.neon
     - vendor/phpstan/phpstan-doctrine/rules.neon
@@ -18,14 +17,10 @@ includes:
     - ./phpstan-ignore.neon
 
 parameters:
-    level: 8
+    level: max
     paths:
         - %currentWorkingDirectory%/src
         - %currentWorkingDirectory%/tests
-    checkMissingIterableValueType: false
-    checkGenericClassInNonGenericObjectType: false
-    universalObjectCratesClasses:
-        - SimpleXMLElement
     earlyTerminatingMethodCalls:
         Nette\Application\UI\Presenter:
             - redirect

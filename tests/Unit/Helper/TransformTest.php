@@ -6,14 +6,13 @@ namespace VsPoint\Test\Unit\Helper;
 
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Ramsey\Uuid\Uuid;
 use VsPoint\Entity\Acl\User;
 use VsPoint\Helper\Transform;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Helper\Transform
- */
+#[CoversClass(Transform::class)]
 final class TransformTest extends TestCase
 {
   use MockeryPHPUnitIntegration;

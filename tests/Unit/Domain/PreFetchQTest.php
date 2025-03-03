@@ -4,37 +4,44 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Domain;
 
-use Ds\Vector;
+use loophp\collection\Collection as LoopCollection;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Domain\PreFetch;
+use VsPoint\Domain\PreFetchQ;
+use VsPoint\Entity\Acl\User;
+use VsPoint\Entity\Acl\UserRole;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Domain\PreFetchQ
- */
+#[CoversClass(PreFetchQ::class)]
 final class PreFetchQTest extends TestCase
 {
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testForUsers(): void
   {
     $container = $this->createContainer();
 
     $preFetch = $container->getByType(PreFetch::class);
-    $preFetchUsers = $preFetch->forUsers(new Vector());
+
+    /** @var LoopCollection<int, User> $users */
+    $users = LoopCollection::empty();
+
+    $preFetchUsers = $preFetch->forUsers($users);
 
     self::assertCount(0, $preFetchUsers->toArray());
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testForUserRoles(): void
   {
     $container = $this->createContainer();
 
     $preFetch = $container->getByType(PreFetch::class);
-    $preFetchUserRoles = $preFetch->forUserRoles(new Vector());
+
+    /** @var LoopCollection<int, UserRole> $userRoles */
+    $userRoles = LoopCollection::empty();
+
+    $preFetchUserRoles = $preFetch->forUserRoles($userRoles);
 
     self::assertCount(0, $preFetchUserRoles->toArray());
   }

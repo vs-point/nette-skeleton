@@ -4,18 +4,16 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Exception\Runtime\Acl;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use Ramsey\Uuid\Uuid;
 use VsPoint\Exception\Runtime\Acl\UserNotFound;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Exception\Runtime\Acl\UserNotFound
- */
+#[CoversClass(UserNotFound::class)]
 final class UserNotFoundTest extends TestCase
 {
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testConstructor(): void
   {
     $uuid = Uuid::uuid4();

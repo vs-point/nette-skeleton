@@ -5,18 +5,16 @@ declare(strict_types=1);
 namespace VsPoint\Test\Unit\Domain\Acl\User;
 
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Domain\Acl\User\FindUsers;
 use VsPoint\Domain\Acl\User\FindUsersQ;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Domain\Acl\User\FindUsersQ
- */
+#[CoversClass(FindUsersQ::class)]
 final class FindUsersQTest extends TestCase
 {
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testConstructor(): void
   {
     $container = $this->createContainer();
@@ -29,9 +27,7 @@ final class FindUsersQTest extends TestCase
     self::assertInstanceOf(FindUsers::class, $findUsersQ);
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testInvoke(): void
   {
     $container = $this->createContainer();

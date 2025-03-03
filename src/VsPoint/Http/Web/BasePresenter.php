@@ -8,6 +8,7 @@ use Nette\Application\Attributes\Persistent;
 use Nette\Application\Helpers;
 use Nette\Application\UI\Presenter;
 use Nette\DI\Attributes\Inject;
+use Override;
 use VsPoint\Domain\Acl\User\GetUserById;
 use VsPoint\Entity\Acl\User;
 use VsPoint\Exception\Logic\InvalidStateException;
@@ -18,25 +19,26 @@ use VsPoint\Infrastructure\Nette\Security\Identity;
 abstract class BasePresenter extends Presenter
 {
   #[Persistent]
-    public string $locale = 'cs';
+  public string $locale = 'cs';
 
   #[Persistent]
-    public string $backlink = '';
+  public string $backlink = '';
 
   #[Inject]
-    public GetUserById $getUserById;
+  public GetUserById $getUserById;
 
   private ?User $loggedUser = null;
 
   /**
    * @return string[]
    */
+  #[Override]
   public function formatTemplateFiles(): array
   {
-    /** @var string $name */
     $name = $this->getName();
-    /** @var string $filename */
+    assert(is_string($name));
     $filename = self::getReflection()->getFileName();
+    assert(is_string($filename));
 
     [, $presenter] = Helpers::splitName($name);
     $dir = dirname($filename);
@@ -44,9 +46,10 @@ abstract class BasePresenter extends Presenter
     return [sprintf('%s/%s.latte', $dir, $presenter)];
   }
 
+  #[Override]
   public function isModuleCurrent(string $module): bool
   {
-    return strpos($this->getAction(true), $module) !== false;
+    return str_contains($this->getAction(true), $module);
   }
 
   public function actionOut(): void

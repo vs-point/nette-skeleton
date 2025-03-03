@@ -5,40 +5,37 @@ declare(strict_types=1);
 namespace VsPoint\Test\Unit\UI\VO\PreFetch;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Ds\Set;
-use Ds\Vector;
+use loophp\collection\Collection as LoopCollection;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use Ramsey\Uuid\Uuid;
 use VsPoint\Database\Fixture\InitFixture;
+use VsPoint\Entity\Acl\User;
 use VsPoint\Test\TestCase;
 use VsPoint\VO\PreFetch\PreFetchUsers;
 
-/**
- * @covers \VsPoint\VO\PreFetch\PreFetchUsers
- */
+#[CoversClass(PreFetchUsers::class)]
 final class PreFetchUsersTest extends TestCase
 {
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testConstructor(): void
   {
     $container = $this->createContainer();
 
     $em = $container->getByType(EntityManagerInterface::class);
 
-    $users = new Vector();
+    /** @var LoopCollection<int, User> $users */
+    $users = LoopCollection::empty();
     $preFetchUsers = new PreFetchUsers($em, $users);
 
     self::assertCount(0, $preFetchUsers->toArray());
 
-    $sequence = $preFetchUsers->toSequence();
+    $sequence = $preFetchUsers->toCollection();
 
     self::assertCount(0, $sequence);
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testByIds(): void
   {
     $container = $this->createContainer();
@@ -46,19 +43,17 @@ final class PreFetchUsersTest extends TestCase
     $em = $container->getByType(EntityManagerInterface::class);
 
     $userId01 = Uuid::fromString(InitFixture::USER_01);
-    $userIds = new Set([$userId01]);
+    $userIds = LoopCollection::fromIterable([$userId01]);
     $preFetchUsers = PreFetchUsers::byIds($em, $userIds);
 
     self::assertCount(1, $preFetchUsers->toArray());
 
-    $sequence = $preFetchUsers->toSequence();
+    $sequence = $preFetchUsers->toCollection();
 
     self::assertCount(1, $sequence);
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testWithUserRoles(): void
   {
     $container = $this->createContainer();
@@ -66,7 +61,7 @@ final class PreFetchUsersTest extends TestCase
     $em = $container->getByType(EntityManagerInterface::class);
 
     $userId01 = Uuid::fromString(InitFixture::USER_01);
-    $userIds = new Set([$userId01]);
+    $userIds = LoopCollection::fromIterable([$userId01]);
     $preFetchUsers = PreFetchUsers::byIds($em, $userIds);
 
     $preFetchUserRoles = $preFetchUsers->withUserRoles();

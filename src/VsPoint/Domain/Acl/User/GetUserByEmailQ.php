@@ -12,10 +12,10 @@ use VsPoint\Entity\Acl\User;
 use VsPoint\Exception\Logic\NonUniqueResultException;
 use VsPoint\Exception\Runtime\Acl\UserNotFoundByEmail;
 
-final class GetUserByEmailQ implements GetUserByEmail
+final readonly class GetUserByEmailQ implements GetUserByEmail
 {
   public function __construct(
-    private readonly EntityManagerInterface $em,
+    private EntityManagerInterface $em,
   ) {
   }
 
@@ -33,10 +33,13 @@ final class GetUserByEmailQ implements GetUserByEmail
                     DQL
       )
       ->setParameter('email', Strings::lower($email))
-        ;
+    ;
 
     try {
-      return $query->getSingleResult();
+      /** @var User $result */
+      $result = $query->getSingleResult();
+
+      return $result;
     } catch (DoctrineNonUniqueResultException $e) {
       throw NonUniqueResultException::from($e);
     } catch (NoResultException $e) {

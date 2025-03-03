@@ -18,7 +18,7 @@ use VsPoint\UI\Form\Common\SearchFormFactory;
 
 final class HomepagePresenter extends BasePresenter
 {
-  public const LINK = ':Admin:Homepage:';
+  public const string LINK = ':Admin:Homepage:';
 
   #[Persistent]
   public string $q = '';

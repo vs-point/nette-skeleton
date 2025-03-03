@@ -14,8 +14,10 @@ use Tracy\Debugger;
 
 final class Ping implements MiddlewareInterface
 {
-  public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-  {
+  public function process(
+    ServerRequestInterface $request,
+    RequestHandlerInterface $handler,
+  ): ResponseInterface {
     $query = $request->getQueryParams();
     $format = $query['format'] ?? 'html';
 

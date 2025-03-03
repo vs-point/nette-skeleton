@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace VsPoint\Test\Unit\Infrastructure\Http\Nette\Security;
 
 use Nette\Security\Permission;
+use PHPUnit\Framework\Attributes\CoversClass;
 use VsPoint\Entity\Acl\Role;
 use VsPoint\Http\Web\Admin\Acl\ChangePasswordPresenter;
 use VsPoint\Http\Web\Admin\Acl\SignInPresenter;
@@ -16,6 +17,7 @@ use VsPoint\Http\Web\Front\HomepagePresenter as FrontHomepagePresenter;
 use VsPoint\Infrastructure\Nette\Security\AuthorizatorFactory;
 use VsPoint\Test\TestCase;
 
+#[CoversClass(AuthorizatorFactory::class)]
 final class AuthorizatorFactoryTest extends TestCase
 {
   public function testCreateReturnsPermissionInstance(): void
@@ -63,6 +65,6 @@ final class AuthorizatorFactoryTest extends TestCase
     // Power user permissions
     self::assertTrue($acl->isAllowed(Role::POWER_USER, HomepagePresenter::class));
     self::assertTrue($acl->isAllowed(Role::POWER_USER, UserOverviewPresenter::class));
-    self::assertTrue($acl->isAllowed(Role::POWER_USER, Permission::ALL));
+    self::assertTrue($acl->isAllowed(Role::POWER_USER, Permission::All));
   }
 }

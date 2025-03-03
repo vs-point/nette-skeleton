@@ -10,7 +10,7 @@ use FastRoute\RouteCollector;
 use Nette\Caching\Cache;
 use Nette\Caching\Storage;
 
-final class DispatcherFactory
+final readonly class DispatcherFactory
 {
   private Cache $cache;
 
@@ -42,7 +42,7 @@ final class DispatcherFactory
 
       if (!$this->debugMode) {
         $this->cache->save('routes', $data, [
-          Cache::FILES => [__DIR__ . '/../../../config/api/config/routes.php'],
+          Cache::Files => [__DIR__ . '/../../../config/api/config/routes.php'],
         ]);
       }
     }

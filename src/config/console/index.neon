@@ -2,9 +2,7 @@ includes:
     - ./ext/contributte.console.extra.neon
     - ./ext/contributte.console.neon
     - ./ext/nette.neon
-    - ./ext/nettrine.dbal.neon
     - ./ext/nettrine.migrations.neon
-    - ./ext/nettrine.orm.neon
 
     - ../common/index.neon
 

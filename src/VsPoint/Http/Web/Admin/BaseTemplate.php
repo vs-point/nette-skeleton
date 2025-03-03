@@ -9,5 +9,5 @@ use VsPoint\Http\Web\BaseTemplate as BBaseTemplate;
 
 abstract class BaseTemplate extends BBaseTemplate
 {
-  public ?User $aclUser;
+  public ?User $aclUser = null;
 }

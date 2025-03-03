@@ -6,37 +6,16 @@ nettrine.dbal:
         panel: %debugMode%
     # configuration:
     #     sqlLogger: Nettrine\DBAL\Logger\PsrLogger
-    connection:
-        driver: %database.driver%
-        host: %database.host%
-        port: %database.port%
-        user: %database.username%
-        password: %database.password%
-        dbname: %database.dbname%
-        serverVersion: '14.2'
-        charset: UTF8
-        types:
-            uuid:
-                class: Ramsey\Uuid\Doctrine\UuidType
-                commented: true
-            BigDecimal:
-                class: Brick\Doctrine\Types\Math\BigDecimalType
-                commented: true
-            BigInteger:
-                class: Brick\Doctrine\Types\Math\BigIntegerType
-                commented: true
-            brick_localdate:
-                class: Solcik\Doctrine\DBAL\Type\LocalDateType
-                commented: true
-            brick_localdatetime:
-                class: Solcik\Doctrine\DBAL\Type\LocalDateTimeType
-                commented: true
-            brick_zoneddatetime:
-                class: Solcik\Doctrine\DBAL\Type\ZonedDateTimeType
-                commented: true
-            brick_localtime:
-                class: Solcik\Doctrine\DBAL\Type\LocalTimeType
-                commented: true
-            brick_yearmonth:
-                class: Solcik\Doctrine\DBAL\Type\YearMonthType
-                commented: true
+    connections:
+        default:
+            url: %database.url%
+            charset: UTF8
+    types:
+        uuid: Ramsey\Uuid\Doctrine\UuidType
+        BigDecimal: Solcik\Doctrine\DBAL\Type\BigDecimalType
+        BigInteger: Solcik\Doctrine\DBAL\Type\BigIntegerType
+        brick_localdate: Solcik\Doctrine\DBAL\Type\LocalDateType
+        brick_localdatetime: Solcik\Doctrine\DBAL\Type\LocalDateTimeType
+        brick_zoneddatetime: Solcik\Doctrine\DBAL\Type\ZonedDateTimeType
+        brick_localtime: Solcik\Doctrine\DBAL\Type\LocalTimeType
+        brick_yearmonth: Solcik\Doctrine\DBAL\Type\YearMonthType

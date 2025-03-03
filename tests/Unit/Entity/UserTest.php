@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace VsPoint\Test\Unit\Entity;
 
 use Nette\Security\Passwords;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use Ramsey\Uuid\Uuid;
 use Solcik\Brick\DateTime\Clock;
 use VsPoint\Domain\Acl\User\DoesUserExist;
@@ -20,16 +22,13 @@ use VsPoint\Exception\Runtime\Authentication\InvalidPasswordException;
 use VsPoint\Exception\Runtime\Authentication\UserInactiveException;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Entity\Acl\User
- */
+#[CoversClass(User::class)]
 final class UserTest extends TestCase
 {
   /**
-   * @group unit
-   *
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testCreate(): void
   {
     $container = $this->createContainer();
@@ -44,7 +43,17 @@ final class UserTest extends TestCase
     $pass = 'MFD_mpb3vjw8wcb.tvqa';
     $userEmail = 'test@email.com';
 
-    $user = User::create($uuid, $userEmail, $pass, null, $now, $now, $doesUserExist, $passwords, $userCreated);
+    $user = User::create(
+      $uuid,
+      $userEmail,
+      $pass,
+      null,
+      $now,
+      $now,
+      $doesUserExist,
+      $passwords,
+      $userCreated
+    );
 
     self::assertSame($userEmail, $user->getEmail());
     self::assertTrue($passwords->verify($pass, $user->getPassword()));
@@ -54,9 +63,9 @@ final class UserTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testGetters(): void
   {
     $container = $this->createContainer();
@@ -86,7 +95,7 @@ final class UserTest extends TestCase
     );
 
     // Test all getters
-    self::assertEquals($email, $user->getEmail());
+    self::assertSame($email, $user->getEmail());
     self::assertTrue($passwords->verify($password, $user->getPassword()));
     self::assertEquals($expiration, $user->getExpiration());
     self::assertEquals($now, $user->getCreatedAt());
@@ -121,9 +130,9 @@ final class UserTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testRolesGetters(): void
   {
     $container = $this->createContainer();
@@ -139,7 +148,17 @@ final class UserTest extends TestCase
     $uuid = Uuid::uuid4();
     $email = 'roles-test@example.com';
 
-    $user = User::create($uuid, $email, 'password', null, $now, $now, $doesUserExist, $passwords, $userCreated);
+    $user = User::create(
+      $uuid,
+      $email,
+      'password',
+      null,
+      $now,
+      $now,
+      $doesUserExist,
+      $passwords,
+      $userCreated
+    );
 
     // By default, a new user should only have the 'user' role
     self::assertEquals(['user'], $user->getRoles());
@@ -158,9 +177,9 @@ final class UserTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testEdit(): void
   {
     $container = $this->createContainer();
@@ -190,14 +209,14 @@ final class UserTest extends TestCase
 
     $user->edit($newEmail, $newExpiration, $doesUserExist, $userEdited);
 
-    self::assertEquals($newEmail, $user->getEmail());
+    self::assertSame($newEmail, $user->getEmail());
     self::assertEquals($newExpiration, $user->getExpiration());
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testEditPassword(): void
   {
     $container = $this->createContainer();
@@ -237,9 +256,9 @@ final class UserTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testEditUserRolesRemovesOldRoles(): void
   {
     $container = $this->createContainer();
@@ -279,11 +298,11 @@ final class UserTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    * @throws InvalidPasswordException
    * @throws UserInactiveException
    */
+  #[Group('unit')]
   public function testLogIn(): void
   {
     $this->expectNotToPerformAssertions();
@@ -317,11 +336,11 @@ final class UserTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    * @throws UserInactiveException
    * @throws InvalidPasswordException
    */
+  #[Group('unit')]
   public function testLogInInvalidPassword(): void
   {
     $container = $this->createContainer();
@@ -354,11 +373,11 @@ final class UserTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    * @throws UserInactiveException
    * @throws InvalidPasswordException
    */
+  #[Group('unit')]
   public function testLogInInactiveUser(): void
   {
     $container = $this->createContainer();
@@ -379,7 +398,7 @@ final class UserTest extends TestCase
       'expired-user@example.com',
       $password,
       $now->minusDays(1), // Expired
-            $now,
+      $now,
       $now,
       $doesUserExist,
       $passwords,
@@ -392,11 +411,11 @@ final class UserTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    * @throws UserInactiveException
-   *@throws InvalidPasswordException
+   * @throws InvalidPasswordException
    */
+  #[Group('unit')]
   public function testLogInCallsUserLoggedInEvent(): void
   {
     $container = $this->createContainer();
@@ -435,9 +454,9 @@ final class UserTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testToString(): void
   {
     $container = $this->createContainer();
@@ -451,16 +470,26 @@ final class UserTest extends TestCase
     $uuid = Uuid::uuid4();
     $email = 'string-test@example.com';
 
-    $user = User::create($uuid, $email, 'password', null, $now, $now, $doesUserExist, $passwords, $userCreated);
+    $user = User::create(
+      $uuid,
+      $email,
+      'password',
+      null,
+      $now,
+      $now,
+      $doesUserExist,
+      $passwords,
+      $userCreated
+    );
 
     // Test __toString method returns email
-    self::assertEquals($email, (string) $user);
+    self::assertSame($email, (string) $user);
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testCreateThrowsExceptionWhenUserExists(): void
   {
     $container = $this->createContainer();
@@ -493,9 +522,9 @@ final class UserTest extends TestCase
   }
 
   /**
-   * @group unit
    * @throws UserAlreadyExistsException
    */
+  #[Group('unit')]
   public function testEditThrowsExceptionWhenEmailExists(): void
   {
     $container = $this->createContainer();

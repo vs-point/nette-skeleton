@@ -21,7 +21,7 @@ use function sprintf;
 
 final class UserEditPasswordPresenter extends BasePresenter
 {
-  public const LINK = ':Admin:Acl:UserEditPassword:';
+  public const string LINK = ':Admin:Acl:UserEditPassword:';
 
   private User $aclUser;
 
@@ -39,7 +39,7 @@ final class UserEditPasswordPresenter extends BasePresenter
     try {
       $uuid = Uuid::fromString($id);
       $this->aclUser = $this->getUserById->__invoke($uuid);
-    } catch (InvalidUuidStringException | UserNotFound) {
+    } catch (InvalidUuidStringException|UserNotFound) {
       $this->flashMessage(sprintf('admin.%s.flash.userNotFound', self::class), 'error');
       $this->redirect(UserOverviewPresenter::LINK);
     }
@@ -60,7 +60,7 @@ final class UserEditPasswordPresenter extends BasePresenter
     $form = $this->userFormFactory->createEditPassword();
 
     $form->onSuccess[] = function (Form $form, PasswordFormDTO $data): void {
-      $this->em->wrapInTransaction(function () use ($data) {
+      $this->em->wrapInTransaction(function () use ($data): void {
         $this->aclUser->editPassword($data->password, $this->passwords, $this->userEdited);
       });
 

@@ -9,7 +9,7 @@ use VsPoint\Exception\Runtime\RuntimeException;
 
 final class UserInactiveException extends RuntimeException
 {
-  private User $user;
+  private readonly User $user;
 
   public function __construct(User $user)
   {

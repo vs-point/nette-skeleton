@@ -12,8 +12,10 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 final class Pong implements MiddlewareInterface
 {
-  public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-  {
+  public function process(
+    ServerRequestInterface $request,
+    RequestHandlerInterface $handler,
+  ): ResponseInterface {
     $body = $request->getParsedBody();
 
     return new JsonResponse($body);

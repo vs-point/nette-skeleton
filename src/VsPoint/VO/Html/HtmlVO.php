@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\VO\Html;
 
-final class HtmlVO
+final readonly class HtmlVO
 {
   private string $title;
 
@@ -19,6 +19,10 @@ final class HtmlVO
     $this->metadata = $metadata;
   }
 
+  /**
+   * @param string[] $keywords
+   * @param string[] $gtmEvents
+   */
   public static function create(
     string $title,
     string $description,

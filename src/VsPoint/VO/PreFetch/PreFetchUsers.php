@@ -5,23 +5,21 @@ declare(strict_types=1);
 namespace VsPoint\VO\PreFetch;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Ds\Map;
-use Ds\Sequence;
-use Ds\Set;
-use Ds\Vector;
+use loophp\collection\Collection as LoopCollection;
+use loophp\collection\Contract\Collection;
 use Ramsey\Uuid\UuidInterface;
 use VsPoint\Entity\Acl\User;
 use VsPoint\Entity\Acl\UserRole;
 use VsPoint\Helper\Transform;
 
-final class PreFetchUsers
+final readonly class PreFetchUsers
 {
   /**
-   * @param Sequence<User> $users
+   * @param Collection<int, User> $users
    */
   public function __construct(
-    private readonly EntityManagerInterface $em,
-    private readonly Sequence $users,
+    private EntityManagerInterface $em,
+    private Collection $users,
   ) {
   }
 
@@ -30,21 +28,21 @@ final class PreFetchUsers
    */
   public function toArray(): array
   {
-    return $this->users->toArray();
+    return $this->users->all();
   }
 
   /**
-   * @return Sequence<User>
+   * @return Collection<int, User>
    */
-  public function toSequence(): Sequence
+  public function toCollection(): Collection
   {
     return $this->users;
   }
 
   /**
-   * @param Set<UuidInterface> $ids
+   * @param Collection<int, UuidInterface> $ids
    */
-  public static function byIds(EntityManagerInterface $em, Set $ids): self
+  public static function byIds(EntityManagerInterface $em, Collection $ids): self
   {
     /** @var User[] $users */
     $users = $em
@@ -55,11 +53,11 @@ final class PreFetchUsers
         WHERE user.id IN (:ids)
         DQL
       )
-      ->setParameter('ids', Transform::fromUuidsToStringUuids($ids->toArray()))
+      ->setParameter('ids', Transform::fromUuidsToStringUuids($ids->all()))
       ->getResult()
     ;
 
-    return new self($em, new Vector($users));
+    return new self($em, LoopCollection::fromIterable($users));
   }
 
   public function withUserRoles(): PreFetchUserRoles
@@ -77,27 +75,20 @@ final class PreFetchUsers
       ->getResult()
     ;
 
-    /** @var Map<UuidInterface, UserRole> $userRoles */
+    /** @var Collection<int, UserRole> $userRoles */
     $userRoles = $this
-      ->toSequence()
+      ->toCollection()
       ->reduce(
-        static function (Map $acc, User $user): Map {
-          return $user
-            ->getUserRoles()
-            ->reduce(
-              static function (Map $acc, UserRole $userRole): Map {
-                $acc->put($userRole->getId(), $userRole);
-
-                return $acc;
-              },
-              $acc
-            )
-          ;
-        },
-        new Map()
+        static fn (Collection $acc, User $user): Collection => $user
+          ->getUserRoles()
+          ->reduce(
+            static fn (Collection $acc, UserRole $userRole): Collection => $acc->append($userRole),
+            $acc
+          ),
+        LoopCollection::empty()
       )
     ;
 
-    return new PreFetchUserRoles($this->em, $userRoles->values());
+    return new PreFetchUserRoles($this->em, $userRoles);
   }
 }

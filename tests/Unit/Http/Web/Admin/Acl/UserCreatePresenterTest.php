@@ -8,17 +8,15 @@ use Nette\Application\IPresenterFactory;
 use Nette\Application\Request;
 use Nette\Application\Responses\TextResponse;
 use Nette\Bridges\ApplicationLatte\Template;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Http\Web\Admin\Acl\UserCreatePresenter;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Http\Web\Admin\Acl\UserCreatePresenter
- */
+#[CoversClass(UserCreatePresenter::class)]
 final class UserCreatePresenterTest extends TestCase
 {
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testConstructor(): void
   {
     $container = $this->createContainerForWeb();

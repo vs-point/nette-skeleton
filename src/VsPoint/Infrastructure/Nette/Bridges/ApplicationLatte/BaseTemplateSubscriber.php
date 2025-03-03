@@ -16,14 +16,14 @@ use VsPoint\Exception\Runtime\Acl\UserNotFound;
 use VsPoint\Http\Web\BaseTemplate;
 use VsPoint\Infrastructure\Nette\Security\Identity;
 
-final class BaseTemplateSubscriber implements EventSubscriberInterface
+final readonly class BaseTemplateSubscriber implements EventSubscriberInterface
 {
   public function __construct(
-    private readonly NetteTranslator $translator,
-    private readonly IRequest $request,
-    private readonly Clock $clock,
-    private readonly User $user,
-    private readonly GetUserById $getUserById,
+    private NetteTranslator $translator,
+    private IRequest $request,
+    private Clock $clock,
+    private User $user,
+    private GetUserById $getUserById,
   ) {
   }
 

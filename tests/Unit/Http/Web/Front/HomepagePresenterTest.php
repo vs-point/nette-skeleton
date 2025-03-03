@@ -8,17 +8,15 @@ use Nette\Application\IPresenterFactory;
 use Nette\Application\Request;
 use Nette\Application\Responses\TextResponse;
 use Nette\Bridges\ApplicationLatte\Template;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Http\Web\Front\HomepagePresenter;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Http\Web\Front\HomepagePresenter
- */
+#[CoversClass(HomepagePresenter::class)]
 final class HomepagePresenterTest extends TestCase
 {
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testConstructor(): void
   {
     $container = $this->createContainerForWeb();
@@ -40,5 +38,6 @@ final class HomepagePresenterTest extends TestCase
 
     self::assertInstanceOf(TextResponse::class, $response);
     self::assertInstanceOf(Template::class, $response->getSource());
+    // self::assertStringContainsString('javascript', (string) $response->getSource());
   }
 }

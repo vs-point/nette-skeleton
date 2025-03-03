@@ -4,18 +4,16 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\VO;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Test\TestCase;
 use VsPoint\VO\Html\PictureSourceVO;
 use VsPoint\VO\Html\PictureVO;
 
-/**
- * @covers \VsPoint\VO\Html\PictureVO
- */
+#[CoversClass(PictureVO::class)]
 final class PictureVOTest extends TestCase
 {
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testInvoke(): void
   {
     $pictureSourceVO1 = new PictureSourceVO('srcSet1', 'image');

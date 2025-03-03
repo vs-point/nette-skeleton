@@ -1,4 +1,5 @@
 .idea
+.phpunit.cache
 node_modules
 vendor
 

@@ -3,13 +3,15 @@ parameters:
         name: vspoint/web
         url: ::getenv(APP_URL)
 
-    database:
-        driver: ::getenv(DB_DRIVER)
-        host: ::getenv(DB_HOST)
-        port: ::getenv(DB_PORT)
-        username: ::getenv(DB_USER)
-        password: ::getenv(DB_PASS)
-        dbname: ::getenv(DB_NAME)
+#    database:
+#        driver: %env.DB_DRIVER%
+#        url: ::getenv(DATABASE_URL)
+#        url: %env.DATABASE_URL%
+#        host: %env.DB_HOST%
+#        port: %env.DB_PORT%
+#        username: %env.DB_USER%
+#        password: %env.DB_PASS%
+#        dbname: %env.DB_NAME%
 
     languages:
         - cs

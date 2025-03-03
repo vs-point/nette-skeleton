@@ -21,7 +21,7 @@ use function sprintf;
 
 final class UserRolesEditPresenter extends BasePresenter
 {
-  public const LINK = ':Admin:Acl:UserRolesEdit:';
+  public const string LINK = ':Admin:Acl:UserRolesEdit:';
 
   private User $aclUser;
 
@@ -66,7 +66,7 @@ final class UserRolesEditPresenter extends BasePresenter
     $form = $this->userRolesFormFactory->create();
 
     $form->onSuccess[] = function (Form $form, UserRolesFormDTO $data): void {
-      $this->em->wrapInTransaction(function () use ($data) {
+      $this->em->wrapInTransaction(function () use ($data): void {
         $this->aclUser->editUserRoles($data->roles, $this->userRoleCreated, $this->userRoleDeleted);
       });
 

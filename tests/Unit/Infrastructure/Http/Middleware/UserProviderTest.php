@@ -10,6 +10,8 @@ use Laminas\Diactoros\ServerRequest;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Nette\Security\Passwords;
+use PHPUnit\Framework\Attributes\CoversClass;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Ramsey\Uuid\Uuid;
 use Solcik\Brick\DateTime\Clock;
@@ -23,13 +25,15 @@ use VsPoint\Exception\Runtime\Acl\UserNotFound;
 use VsPoint\Infrastructure\Http\Middleware\UserProvider;
 use VsPoint\Test\TestCase;
 
+use function Safe\json_decode;
+
+#[CoversClass(UserProvider::class)]
 final class UserProviderTest extends TestCase
 {
   use MockeryPHPUnitIntegration;
 
   /**
    * @throws UserAlreadyExistsException
-   * @covers \VsPoint\Infrastructure\Http\Middleware\UserProvider
    */
   public function testProcessWithValidUser(): void
   {
@@ -48,11 +52,11 @@ final class UserProviderTest extends TestCase
     ]);
 
     $handlerMock = Mockery::mock(RequestHandlerInterface::class);
-    $handlerMock->shouldReceive('handle')
-      ->withArgs(function ($req) use ($userMock) {
-        return $req->getAttribute(UserProvider::ATTR_USER) === $userMock;
-      })
-      ->andReturn(new Response());
+    $handlerMock->allows('handle')
+      ->withArgs(
+        fn (ServerRequestInterface $req): bool => $req->getAttribute(UserProvider::ATTR_USER) === $userMock
+      )
+      ->andReturns(new Response());
 
     $response = $middleware->process($request, $handlerMock);
 
@@ -81,7 +85,13 @@ final class UserProviderTest extends TestCase
     self::assertInstanceOf(JsonResponse::class, $response);
     self::assertSame(401, $response->getStatusCode());
 
-    $data = \Safe\json_decode((string) $response->getBody(), true);
+    $data = json_decode((string) $response->getBody(), true);
+
+    self::assertIsArray($data);
+    self::assertArrayHasKey('error', $data);
+    self::assertIsArray($data['error']);
+    self::assertArrayHasKey('message', $data['error']);
+    self::assertIsString($data['error']['message']);
     self::assertStringStartsWith('User was not found for id: ', $data['error']['message']);
   }
 
@@ -93,9 +103,9 @@ final class UserProviderTest extends TestCase
     $request = new ServerRequest(); // Žádný JWT atribut
 
     $handlerMock = Mockery::mock(RequestHandlerInterface::class);
-    $handlerMock->shouldReceive('handle')
+    $handlerMock->allows('handle')
       ->with($request)
-      ->andReturn(new Response());
+      ->andReturns(new Response());
 
     $response = $middleware->process($request, $handlerMock);
 

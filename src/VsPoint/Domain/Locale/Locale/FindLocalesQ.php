@@ -5,20 +5,21 @@ declare(strict_types=1);
 namespace VsPoint\Domain\Locale\Locale;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Ds\Sequence;
-use Ds\Vector;
+use loophp\collection\Collection as LoopCollection;
+use loophp\collection\Contract\Collection;
 use VsPoint\Entity\Locale\Locale;
 
-final class FindLocalesQ implements FindLocales
+final readonly class FindLocalesQ implements FindLocales
 {
-  public function __construct(private readonly EntityManagerInterface $em)
-  {
+  public function __construct(
+    private EntityManagerInterface $em,
+  ) {
   }
 
   /**
-   * @return Sequence<Locale>
+   * @return Collection<int, Locale>
    */
-  public function __invoke(int $limit, int $offset): Sequence
+  public function __invoke(int $limit, int $offset): Collection
   {
     $query = $this->em
       ->createQuery(
@@ -29,8 +30,11 @@ final class FindLocalesQ implements FindLocales
       )
       ->setFirstResult($offset)
       ->setMaxResults($limit)
-        ;
+    ;
 
-    return new Vector($query->getResult());
+    /** @var Locale[] $result */
+    $result = $query->getResult();
+
+    return LoopCollection::fromIterable($result);
   }
 }

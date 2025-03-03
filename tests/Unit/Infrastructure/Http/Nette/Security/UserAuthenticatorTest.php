@@ -10,6 +10,7 @@ use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Nette\Security\AuthenticationException;
 use Nette\Security\Passwords;
 use Nette\Security\SimpleIdentity;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Ramsey\Uuid\Uuid;
 use Solcik\Brick\DateTime\Clock;
 use VsPoint\Database\Fixture\InitFixture;
@@ -24,9 +25,7 @@ use VsPoint\Infrastructure\Nette\Security\Identity;
 use VsPoint\Infrastructure\Nette\Security\UserAuthenticator;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Infrastructure\Nette\Security\UserAuthenticator
- */
+#[CoversClass(UserAuthenticator::class)]
 final class UserAuthenticatorTest extends TestCase
 {
   use MockeryPHPUnitIntegration;

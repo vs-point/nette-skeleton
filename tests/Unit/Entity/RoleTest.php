@@ -4,18 +4,16 @@ declare(strict_types=1);
 
 namespace VsPoint\Test\Unit\Entity;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use VsPoint\Entity\Acl\Role;
 use VsPoint\Exception\Logic\InvalidStateException;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Entity\Acl\Role
- */
+#[CoversClass(Role::class)]
 final class RoleTest extends TestCase
 {
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testInvoke(): void
   {
     $roleTitle = Role::POWER_USER;
@@ -24,9 +22,7 @@ final class RoleTest extends TestCase
     self::assertSame($roleTitle, $role->getTitle());
   }
 
-  /**
-   * @group unit
-   */
+  #[Group('unit')]
   public function testInvalidRoleThrowsException(): void
   {
     $this->expectException(InvalidStateException::class);

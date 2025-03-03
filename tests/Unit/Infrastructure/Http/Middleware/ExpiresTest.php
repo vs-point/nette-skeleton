@@ -6,18 +6,18 @@ namespace VsPoint\Test\Unit\Infrastructure\Http\Middleware;
 
 use Brick\DateTime\TimeZone;
 use Brick\DateTime\ZonedDateTime;
+use DateTimeInterface;
 use Laminas\Diactoros\Response;
 use Laminas\Diactoros\ServerRequest;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Psr\Http\Server\RequestHandlerInterface;
 use Solcik\Brick\DateTime\Clock;
 use VsPoint\Infrastructure\Http\Middleware\Expires;
 use VsPoint\Test\TestCase;
 
-/**
- * @covers \VsPoint\Infrastructure\Http\Middleware\Expires
- */
+#[CoversClass(Expires::class)]
 final class ExpiresTest extends TestCase
 {
   use MockeryPHPUnitIntegration;
@@ -44,7 +44,7 @@ final class ExpiresTest extends TestCase
     $response = $middleware->process($request, $handlerMock);
 
     $expectedExpires = $futureTime->withTimeZoneSameInstant($timezone)->toNativeDateTimeImmutable()->format(
-      \DateTimeInterface::RFC7231
+      DateTimeInterface::RFC7231
     );
     self::assertSame($expectedExpires, $response->getHeaderLine(Expires::HEADER));
   }

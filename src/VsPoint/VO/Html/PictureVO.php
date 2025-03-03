@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace VsPoint\VO\Html;
 
-final class PictureVO
+final readonly class PictureVO
 {
   private string $url;
 
@@ -15,6 +15,9 @@ final class PictureVO
    */
   private array $sources;
 
+  /**
+   * @param PictureSourceVO[] $sources
+   */
   public function __construct(string $url, string $alt, array $sources = [])
   {
     $this->url = $url;

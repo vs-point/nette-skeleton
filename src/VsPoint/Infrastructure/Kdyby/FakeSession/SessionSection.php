@@ -7,6 +7,7 @@ namespace VsPoint\Infrastructure\Kdyby\FakeSession;
 use ArrayIterator;
 use Iterator;
 use Nette\Http\Session as NetteSession;
+use Override;
 
 class SessionSection extends \Nette\Http\SessionSection
 {
@@ -20,33 +21,32 @@ class SessionSection extends \Nette\Http\SessionSection
     parent::__construct($session, $name);
   }
 
-  /**
-   * @param mixed $value
-   */
-  public function __set(string $name, $value): void
+  #[Override]
+  public function __set(string $name, mixed $value): void
   {
     $this->data[$name] = $value;
   }
 
+  #[Override]
   public function __isset(string $name): bool
   {
     return isset($this->data[$name]);
   }
 
+  #[Override]
   public function __unset(string $name): void
   {
     unset($this->data[$name]);
   }
 
+  #[Override]
   public function getIterator(): Iterator
   {
     return new ArrayIterator($this->data);
   }
 
-  /**
-   * @return mixed
-   */
-  public function &__get(string $name)
+  #[Override]
+  public function &__get(string $name): mixed
   {
     if ($this->warnOnUndefined && !array_key_exists($name, $this->data)) {
       trigger_error(sprintf("The variable '%s' does not exist in session section", $name), E_USER_NOTICE);
@@ -56,23 +56,23 @@ class SessionSection extends \Nette\Http\SessionSection
   }
 
   /**
-   * @param null|string $time
-   * @param null|string|string[] $variables list of variables / single variable to expire
-   *
-   * @return static
+   * @param string|string[]|null $variables list of variables / single variable to expire
    */
-  public function setExpiration($time, $variables = null): self
+  #[Override]
+  public function setExpiration(?string $expire, string|array|null $variables = null): static
   {
     return $this;
   }
 
   /**
-   * @param null|string|string[] $variables list of variables / single variable to expire
+   * @param string|string[]|null $variables list of variables / single variable to expire
    */
+  #[Override]
   public function removeExpiration($variables = null): void
   {
   }
 
+  #[Override]
   public function remove($name = null): void
   {
     $this->data = [];

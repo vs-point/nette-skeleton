@@ -10,7 +10,7 @@ use VsPoint\Exception\Runtime\RuntimeException;
 final class UserInactiveException extends RuntimeException
 {
   public function __construct(
-    private User $user,
+    private readonly User $user,
   ) {
     parent::__construct('User inactive.');
   }

@@ -9,7 +9,7 @@ use Nette\Application\Responses\TextResponse;
 
 final class LandingPresenter extends BasePresenter
 {
-  public const LINK = ':Admin:Landing:';
+  public const string LINK = ':Admin:Landing:';
 
   public function __construct()
   {

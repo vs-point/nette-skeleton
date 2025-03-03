@@ -5,6 +5,8 @@ declare(strict_types=1);
 /** @var string $doctrineProxyAutogenerate */
 $doctrineProxyAutogenerate = getenv('DOCTRINE_PROXY_AUTOGENERATE');
 
+$dbUrl = getenv('DATABASE_URL');
+
 $redisUri = getenv('REDIS_DSN');
 $redisSentinel = (bool) getenv('REDIS_SENTINEL');
 $redisPass = getenv('REDIS_PASS');
@@ -31,6 +33,9 @@ return [
     'redis' => [
       'uri' => $redisUri,
       'options' => $redisOptions,
+    ],
+    'database' => [
+      'url' => $dbUrl,
     ],
     'orm' => [
       'proxy' => [

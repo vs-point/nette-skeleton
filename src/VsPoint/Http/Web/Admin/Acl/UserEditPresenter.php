@@ -26,7 +26,7 @@ use function sprintf;
 
 final class UserEditPresenter extends BasePresenter
 {
-  public const LINK = ':Admin:Acl:UserEdit:';
+  public const string LINK = ':Admin:Acl:UserEdit:';
 
   private User $aclUser;
 
@@ -81,7 +81,7 @@ final class UserEditPresenter extends BasePresenter
       $t = 'admin.' . UserFormFactory::class;
 
       try {
-        $this->em->wrapInTransaction(function () use ($data) {
+        $this->em->wrapInTransaction(function () use ($data): void {
           $timestamp = $this->clock->createZonedDateTime();
           $expiration = $data->expiration?->atTime(LocalTime::max())->atTimeZone($timestamp->getTimeZone());
 
@@ -90,7 +90,7 @@ final class UserEditPresenter extends BasePresenter
       } catch (UserAlreadyExistsException) {
         /** @var BaseControl $formEmail */
         $formEmail = $form['email'];
-        $formEmail->addError("${t}.email.error.alreadyExists");
+        $formEmail->addError("{$t}.email.error.alreadyExists");
 
         return;
       }

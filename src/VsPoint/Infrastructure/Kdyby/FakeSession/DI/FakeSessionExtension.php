@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace VsPoint\Infrastructure\Kdyby\FakeSession\DI;
 
-use Nette;
 use Nette\DI\CompilerExtension;
+use Nette\DI\Definitions\ServiceDefinition;
 use Nette\Http\Session as NetteSession;
 use Nette\Schema\Expect;
+use Nette\Schema\Schema;
+use Override;
 use VsPoint\Infrastructure\Kdyby\FakeSession\Session;
 
 use function assert;
@@ -20,7 +22,8 @@ class FakeSessionExtension extends CompilerExtension
   {
   }
 
-  public function getConfigSchema(): Nette\Schema\Schema
+  #[Override]
+  public function getConfigSchema(): Schema
   {
     return Expect::structure(
       [
@@ -39,7 +42,7 @@ class FakeSessionExtension extends CompilerExtension
     $original = $builder->getDefinition($originalServiceName);
     $builder->removeDefinition($originalServiceName);
 
-    assert($original instanceof Nette\DI\Definitions\ServiceDefinition);
+    assert($original instanceof ServiceDefinition);
 
     $backupOriginalName = $this->prefix('original');
     $builder
