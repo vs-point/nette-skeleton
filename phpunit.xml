@@ -13,20 +13,24 @@
          failOnWarning="true"
          colors="true"
 >
-    <php>
-        <ini name="memory_limit" value="256M"/>
-        <server name="BCRYPT_ROUNDS" value="4"/>
-    </php>
+  <php>
+    <ini name="memory_limit" value="256M"/>
+    <server name="BCRYPT_ROUNDS" value="4"/>
+  </php>
 
-    <testsuites>
-        <testsuite name="VS">
-            <directory>tests</directory>
-        </testsuite>
-    </testsuites>
+  <testsuites>
+    <testsuite name="VS">
+      <directory>tests</directory>
+    </testsuite>
+  </testsuites>
 
-    <source ignoreIndirectDeprecations="true" restrictNotices="true" restrictWarnings="true">
-        <include>
-            <directory suffix=".php">src</directory>
-        </include>
-    </source>
+  <source ignoreIndirectDeprecations="true" restrictNotices="true" restrictWarnings="true">
+    <include>
+      <directory suffix=".php">src</directory>
+    </include>
+  </source>
+
+  <extensions>
+    <bootstrap class="\Solcik\Mockery\Adapter\PHPUnit\MockeryPHPUnitExtension"/>
+  </extensions>
 </phpunit>
